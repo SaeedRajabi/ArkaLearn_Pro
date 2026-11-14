@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	
+	
+	<ItemGroup>
+		<PackageReference Include="ArkaSoftware.Extensions.Translations.Abstractions" Version="1.0.0" />
+		<PackageReference Include="FluentValidation" Version="11.11.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="6.0.0-preview.4.21253.5" />
+	</ItemGroup>
+	
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\ArkaSoftwarePro.Src.Core.Domain\ArkaSoftwarePro.Src.Core.Domain.csproj" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.Domain\Framework.Src.Core.Domain.csproj" />
+		<ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.RequestResponse\Framework.Src.Core.RequestResponse.csproj" />
+		<ProjectReference Include="..\..\..\..\Framework\SRC\01.Utilities\Framework.Src.Utilities.OutService\Framework.Src.Utilities.OutService.csproj" />
+	</ItemGroup>
+	
+	
+	<ItemGroup>
+	  <Folder Include="Orders\Queries\" />
+	  <Folder Include="Students\Queries\" />
+	  <Folder Include="Teachers\Queries\" />
+	</ItemGroup>
+
+</Project>

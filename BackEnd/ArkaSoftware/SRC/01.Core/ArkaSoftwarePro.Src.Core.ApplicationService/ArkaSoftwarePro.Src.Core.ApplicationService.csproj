@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="ArkaSoftware.Extensions.Caching.Distributed.Redis" Version="1.0.1" />
+		<PackageReference Include="ArkaSoftware.Extensions.DependentyInjection.Abstractions" Version="1.0.1" />
+		<PackageReference Include="Snowflake.Core" Version="2.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <InternalsVisibleTo Include="ArkaSoftwarePro.Tests" />
+    </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\ArkaSoftwarePro.Src.Core.Contracts\ArkaSoftwarePro.Src.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\ArkaSoftwarePro.Src.Core.Domain\ArkaSoftwarePro.Src.Core.Domain.csproj" />
+	  <ProjectReference Include="..\ArkaSoftwarePro.Src.Core.RequestResponse\ArkaSoftwarePro.Src.Core.RequestResponse.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.ApplicationService\Framework.Src.Core.ApplicationService.csproj" />
+	  <ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.Contracts\Framework.Src.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.Domain\Framework.Src.Core.Domain.csproj" />
+	  <ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.RequestResponse\Framework.Src.Core.RequestResponse.csproj" />
+	  <ProjectReference Include="..\..\..\..\Framework\SRC\01.Utilities\Framework.Src.Utilities.OutService\Framework.Src.Utilities.OutService.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="OrdersServices\Commands\" />
+	  <Folder Include="StudentServices\Queries\" />
+	  <Folder Include="TeacherServices\Queries\" />
+	</ItemGroup>
+	
+</Project>

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Folder Include="BasketAggregate\Events\" />
+    <Folder Include="ClassScheduleAggregate\Events\" />
+    <Folder Include="ClassScheduleAggregate\ValueOBJs\" />
+    <Folder Include="EnrollmentAggregate\ValueOBJs\" />
+    <Folder Include="StudentAggregate\Events\" />
+  </ItemGroup>
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.Domain\Framework.Src.Core.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

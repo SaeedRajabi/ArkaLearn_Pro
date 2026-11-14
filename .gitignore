@@ -148,14 +148,6 @@ lerna-debug.log*
 !.env.sample
 !.env.template
 
-# Yarn
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-!.yarn/sdks
-
 # pnpm
 .pnpm-store/
 
@@ -196,11 +188,6 @@ $RECYCLE.BIN/
 .LSOverride
 ._*
 
-# Linux
-*~
-.fuse_hidden*
-.directory
-
 
 # =========================================================
 # 10. TEMPORARY FILES
@@ -224,20 +211,3 @@ coverage/
 *.lcov
 
 
-# =========================================================
-# 11. DOCKER / DEPLOYMENT TEMPORARY FILES
-# =========================================================
-
-docker-compose.override.yml
-.docker/
-
-# Keep Dockerfile and docker-compose.yml tracked.
-
-
-# =========================================================
-# 12. MISCELLANEOUS
-# =========================================================
-
-*.stackdump
-*.dmp
-*.core

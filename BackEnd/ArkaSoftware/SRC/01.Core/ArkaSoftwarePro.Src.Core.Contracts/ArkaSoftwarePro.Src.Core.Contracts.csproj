@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ArkaSoftwarePro.Src.Core.Domain\ArkaSoftwarePro.Src.Core.Domain.csproj" />
+		<ProjectReference Include="..\ArkaSoftwarePro.Src.Core.RequestResponse\ArkaSoftwarePro.Src.Core.RequestResponse.csproj" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.Contracts\Framework.Src.Core.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.Domain\Framework.Src.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.RequestResponse\Framework.Src.Core.RequestResponse.csproj" />
+  </ItemGroup>
+
+  
+
+</Project>
