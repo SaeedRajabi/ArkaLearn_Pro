@@ -161,58 +161,6 @@ lerna-debug.log*
 
 # Package manager temporary files
 .npmrc.local
-
-
-# =========================================================
-# 5. FRONTEND PROJECTS - ARKA
-# =========================================================
-
-# Admin Dashboard
-/FrontEnds/AdminDashboard/node_modules/
-/FrontEnds/AdminDashboard/.next/
-/FrontEnds/AdminDashboard/out/
-/FrontEnds/AdminDashboard/dist/
-/FrontEnds/AdminDashboard/build/
-/FrontEnds/AdminDashboard/.env
-/FrontEnds/AdminDashboard/.env.*
-!/FrontEnds/AdminDashboard/.env.example
-
-# Client Website
-/FrontEnds/ClientWebSite/node_modules/
-/FrontEnds/ClientWebSite/.next/
-/FrontEnds/ClientWebSite/out/
-/FrontEnds/ClientWebSite/dist/
-/FrontEnds/ClientWebSite/build/
-/FrontEnds/ClientWebSite/.env
-/FrontEnds/ClientWebSite/.env.*
-!/FrontEnds/ClientWebSite/.env.example
-
-
-# =========================================================
-# 6. BACKEND PROJECTS - ARKA
-# =========================================================
-
-/BackEnd/ArkaSoftware/bin/
-/BackEnd/ArkaSoftware/obj/
-/BackEnd/ArkaSoftware/logs/
-/BackEnd/ArkaSoftware/Logs/
-
-/BackEnd/Framework/bin/
-/BackEnd/Framework/obj/
-/BackEnd/Framework/logs/
-/BackEnd/Framework/Logs/
-
-
-# =========================================================
-# 7. WPF PROJECT - ARKA LEARN DESKTOP
-# =========================================================
-
-/FrontEnds/WinAPPs/ArkaLearnDesktop/bin/
-/FrontEnds/WinAPPs/ArkaLearnDesktop/obj/
-/FrontEnds/WinAPPs/ArkaLearnDesktop/.vs/
-/FrontEnds/WinAPPs/ArkaLearnDesktop/publish/
-
-
 # =========================================================
 # 8. ENVIRONMENT / SECRETS
 # =========================================================
