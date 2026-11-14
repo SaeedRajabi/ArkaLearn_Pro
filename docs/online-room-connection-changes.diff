@@ -1,0 +1,340 @@
+--- before/FrontEnds/AdminDashboard/src/hooks/use-webrtc.ts
++++ after/FrontEnds/AdminDashboard/src/hooks/use-webrtc.ts
+@@ -1298,6 +1298,9 @@
+     if (!user || !meetingId) return;
+ 
+     let cancelled = false;
++    let startingHub = true;
++    let recoveringHub = false;
++    setIsHubReconnecting(false);
+     const hubUrl = getMeetingHubUrl();
+     const hubBuilder = new signalR.HubConnectionBuilder();
+     if (isProxiedMeetingHubUrl(hubUrl)) {
+@@ -1857,6 +1860,31 @@
+       }
+     };
+ 
++    const finishConnection = async (reconnected: boolean) => {
++      await joinCurrentConnection();
++      if (cancelled) return;
++      if (connection.state !== signalR.HubConnectionState.Connected) {
++        throw new Error('Hub disconnected while joining the room.');
++      }
++      setIsConnected(true);
++      setIsHubReconnecting(false);
++      setHubConnectionId(connection.connectionId ?? null);
++      if (reconnected) {
++        roomOptionsRef.current?.onHubReconnected?.();
++        extraHandlersRef?.current?.onHubReconnected?.();
++      }
++    };
++
++    const reportConnectionFailure = () => {
++      if (cancelled) return;
++      setIsConnected(false);
++      setIsHubReconnecting(false);
++      setHubConnectionId(null);
++      setWaitingForTeacher(false);
++      roomOptionsRef.current?.onHubConnectionFailed?.();
++      extraHandlersRef?.current?.onHubConnectionFailed?.();
++    };
++
+     connection.onreconnecting(() => {
+       setIsConnected(false);
+       setIsHubReconnecting(true);
+@@ -1866,47 +1894,50 @@
+ 
+     connection.onreconnected(() => {
+       if (cancelled) return;
+-      setIsHubReconnecting(false);
+-      setIsConnected(true);
+-      setHubConnectionId(connection.connectionId ?? null);
+-      roomOptionsRef.current?.onHubReconnected?.();
+-      extraHandlersRef?.current?.onHubReconnected?.();
+       // Drop stale mesh peers from the previous SignalR connection id before rejoin sync.
+       tearDownRoomMedia();
+       void (async () => {
+         try {
+-          await joinCurrentConnection();
++          await finishConnection(true);
+         } catch (err: unknown) {
++          if (cancelled) return;
+           console.error('SignalR rejoin failed: ', err);
+-          roomOptionsRef.current?.onHubConnectionFailed?.();
+-          extraHandlersRef?.current?.onHubConnectionFailed?.();
++          reportConnectionFailure();
+         }
+       })();
+     });
+ 
+     connection.onclose(() => {
+-      if (cancelled) return;
++      // A failed start can also close the transport. Its retry belongs to startHub.
++      if (cancelled || startingHub || recoveringHub) return;
++      recoveringHub = true;
+       setIsConnected(false);
++      setIsHubReconnecting(true);
+       setHubConnectionId(null);
++      tearDownRoomMedia();
+       void (async () => {
+-        for (let attempt = 0; attempt < 12 && !cancelled; attempt++) {
+-          if (connection.state === signalR.HubConnectionState.Connected) return;
+-          if (connection.state === signalR.HubConnectionState.Reconnecting) return;
+-          const delayMs = Math.min(1000 * (attempt + 1), 15000);
+-          await new Promise<void>((r) => setTimeout(r, delayMs));
+-          if (cancelled) return;
+-          try {
+-            await connection.start();
++        try {
++          for (let attempt = 0; attempt < 12 && !cancelled; attempt++) {
++            if (connection.state === signalR.HubConnectionState.Reconnecting) return;
++            const delayMs = Math.min(1000 * (attempt + 1), 15000);
++            await new Promise<void>((r) => setTimeout(r, delayMs));
+             if (cancelled) return;
+-            setIsConnected(true);
+-            setHubConnectionId(connection.connectionId ?? null);
+-            await joinCurrentConnection();
+-            return;
+-          } catch (err: unknown) {
+-            if (!isBenignSignalTransportError(String(err)) && process.env.NODE_ENV === 'development') {
+-              console.debug('[SignalR] manual reconnect failed', err);
++            try {
++              if (connection.state !== signalR.HubConnectionState.Connected) {
++                await connection.start();
++              }
++              if (cancelled) return;
++              await finishConnection(true);
++              return;
++            } catch (err: unknown) {
++              if (!isBenignSignalTransportError(String(err)) && process.env.NODE_ENV === 'development') {
++                console.debug('[SignalR] manual reconnect failed', err);
++              }
+             }
+           }
++          reportConnectionFailure();
++        } finally {
++          recoveringHub = false;
+         }
+       })();
+     });
+@@ -1914,11 +1945,11 @@
+     const startHub = async (attempt = 0): Promise<void> => {
+       if (cancelled) return;
+       try {
+-        await connection.start();
++        if (connection.state !== signalR.HubConnectionState.Connected) {
++          await connection.start();
++        }
+         if (cancelled) return;
+-        setIsConnected(true);
+-        setHubConnectionId(connection.connectionId ?? null);
+-        await joinCurrentConnection();
++        await finishConnection(false);
+       } catch (err: unknown) {
+         if (cancelled || (err instanceof Error && err.name === 'AbortError')) return;
+         const maxAttempts = 6;
+@@ -1931,17 +1962,16 @@
+           return startHub(attempt + 1);
+         }
+         console.error('SignalR Connection Error: ', err);
+-        setWaitingForTeacher(false);
+-        roomOptionsRef.current?.onHubConnectionFailed?.();
+-        extraHandlersRef?.current?.onHubConnectionFailed?.();
++        reportConnectionFailure();
+       }
+     };
+ 
+-    void startHub();
++    void startHub().finally(() => { startingHub = false; });
+ 
+     return () => {
+       cancelled = true;
+       setIsConnected(false);
++      setIsHubReconnecting(false);
+       setHubConnectionId(null);
+       setWaitingForTeacher(false);
+       setRoomScreenSharerId(null);
+--- before/FrontEnds/AdminDashboard/src/hooks/__tests__/use-webrtc.test.tsx
++++ after/FrontEnds/AdminDashboard/src/hooks/__tests__/use-webrtc.test.tsx
+@@ -97,6 +97,12 @@
+ 
+   beforeEach(() => {
+     jest.clearAllMocks();
++    const connection = new signalR.HubConnectionBuilder().build();
++    Object.assign(connection, { state: signalR.HubConnectionState.Disconnected });
++    (connection.start as jest.Mock).mockReset().mockImplementation(async () => {
++      Object.assign(connection, { state: signalR.HubConnectionState.Connected });
++    });
++    (connection.invoke as jest.Mock).mockReset().mockResolvedValue(undefined);
+     MockRTCPeerConnection.instances = [];
+     // @ts-expect-error test polyfill
+     global.RTCPeerConnection = MockRTCPeerConnection;
+@@ -110,6 +116,124 @@
+     };
+   });
+ 
++  afterEach(() => {
++    jest.useRealTimers();
++    jest.restoreAllMocks();
++  });
++
++  it('clears the reconnecting overlay after recovery through onclose', async () => {
++    jest.useFakeTimers();
++    const onHubReconnected = jest.fn();
++    const { result } = renderHook(() => useWebRTC('meeting-1', mockUser, null, null, {
++      ...mockOptions, onHubReconnected,
++    }));
++    await act(async () => {});
++    const connection = new signalR.HubConnectionBuilder().build();
++    act(() => {
++      Object.assign(connection, { state: signalR.HubConnectionState.Disconnected });
++      (connection.onreconnecting as jest.Mock).mock.calls[0][0]();
++      (connection.onclose as jest.Mock).mock.calls[0][0]();
++    });
++    expect(result.current.isHubReconnecting).toBe(true);
++    await act(async () => { await jest.advanceTimersByTimeAsync(1000); });
++    expect(result.current.isConnected).toBe(true);
++    expect(result.current.isHubReconnecting).toBe(false);
++    expect(onHubReconnected).toHaveBeenCalledTimes(1);
++    expect((connection.invoke as jest.Mock).mock.calls.filter(([method]) => method === 'JoinMeeting')).toHaveLength(2);
++  });
++
++  it('waits for rejoining the room before reporting a recovered connection', async () => {
++    const onHubReconnected = jest.fn();
++    const { result } = renderHook(() => useWebRTC('meeting-1', mockUser, null, null, {
++      ...mockOptions, onHubReconnected,
++    }));
++    await act(async () => {});
++    const connection = new signalR.HubConnectionBuilder().build();
++    let finishJoin!: () => void;
++    (connection.invoke as jest.Mock).mockImplementationOnce(() => new Promise<void>(resolve => {
++      finishJoin = resolve;
++    }));
++    await act(async () => {
++      (connection.onreconnecting as jest.Mock).mock.calls[0][0]();
++      (connection.onreconnected as jest.Mock).mock.calls[0][0]();
++    });
++    expect(result.current.isConnected).toBe(false);
++    expect(result.current.isHubReconnecting).toBe(true);
++    expect(onHubReconnected).not.toHaveBeenCalled();
++    await act(async () => { finishJoin(); });
++    expect(result.current.isConnected).toBe(true);
++    expect(result.current.isHubReconnecting).toBe(false);
++    expect(onHubReconnected).toHaveBeenCalledTimes(1);
++  });
++
++  it('shows failure instead of a connected room when rejoining is rejected', async () => {
++    jest.spyOn(console, 'error').mockImplementation(() => {});
++    const onHubConnectionFailed = jest.fn();
++    const onHubReconnected = jest.fn();
++    const { result } = renderHook(() => useWebRTC('meeting-1', mockUser, null, null, {
++      ...mockOptions, onHubConnectionFailed, onHubReconnected,
++    }));
++    await act(async () => {});
++    const connection = new signalR.HubConnectionBuilder().build();
++    (connection.invoke as jest.Mock).mockRejectedValueOnce(new Error('Join ticket rejected.'));
++    await act(async () => {
++      (connection.onreconnecting as jest.Mock).mock.calls[0][0]();
++      (connection.onreconnected as jest.Mock).mock.calls[0][0]();
++    });
++    expect(result.current.isConnected).toBe(false);
++    expect(result.current.isHubReconnecting).toBe(false);
++    expect(result.current.hubConnectionId).toBeNull();
++    expect(onHubConnectionFailed).toHaveBeenCalledTimes(1);
++    expect(onHubReconnected).not.toHaveBeenCalled();
++  });
++
++  it('reports failure after all manual recovery attempts fail', async () => {
++    jest.useFakeTimers();
++    const onHubConnectionFailed = jest.fn();
++    const { result } = renderHook(() => useWebRTC('meeting-1', mockUser, null, null, {
++      ...mockOptions, onHubConnectionFailed,
++    }));
++    await act(async () => {});
++    const connection = new signalR.HubConnectionBuilder().build();
++    (connection.start as jest.Mock).mockRejectedValue(new Error('network error'));
++    act(() => {
++      Object.assign(connection, { state: signalR.HubConnectionState.Disconnected });
++      (connection.onclose as jest.Mock).mock.calls[0][0]();
++    });
++    for (let attempt = 0; attempt < 12; attempt++) {
++      await act(async () => { await jest.advanceTimersByTimeAsync(1000 * (attempt + 1)); });
++    }
++    expect(connection.start).toHaveBeenCalledTimes(13);
++    expect(onHubConnectionFailed).toHaveBeenCalledTimes(1);
++    expect(result.current.isConnected).toBe(false);
++    expect(result.current.isHubReconnecting).toBe(false);
++  });
++
++  it('keeps a single startup retry loop when a failed start also fires onclose', async () => {
++    jest.useFakeTimers();
++    const connection = new signalR.HubConnectionBuilder().build();
++    (connection.start as jest.Mock).mockImplementationOnce(async () => {
++      (connection.onclose as jest.Mock).mock.calls[0][0]();
++      throw new Error('network error');
++    });
++    const { result } = renderHook(() => useWebRTC('meeting-1', mockUser, null, null, mockOptions));
++    await act(async () => { await jest.advanceTimersByTimeAsync(1500); });
++    expect(connection.start).toHaveBeenCalledTimes(2);
++    expect(result.current.isConnected).toBe(true);
++    expect(result.current.isHubReconnecting).toBe(false);
++  });
++
++  it('connects a student without requesting microphone or camera access', async () => {
++    const getUserMedia = jest.spyOn(navigator.mediaDevices, 'getUserMedia')
++      .mockRejectedValue(new DOMException('Permission denied', 'NotAllowedError'));
++    const { result } = renderHook(() => useWebRTC('meeting-1', {
++      ...mockUser, role: 'participant' as const,
++    }, null, null, { ...mockOptions, canPublishMedia: false, isModerator: false }));
++    await act(async () => {});
++    expect(result.current.isConnected).toBe(true);
++    expect(getUserMedia).not.toHaveBeenCalled();
++  });
++
+   it('should initialize and start SignalR connection', async () => {
+     const { result } = renderHook(() =>
+       useWebRTC('meeting-1', mockUser, null, null, mockOptions)
+@@ -125,7 +249,7 @@
+     expect(mockConnection.start).toHaveBeenCalled();
+   });
+ 
+-  it('shows the teacher-first lobby immediately for a student', () => {
++  it('shows the teacher-first lobby immediately for a student', async () => {
+     const studentOptions = {
+       teacherEntersFirst: true,
+       canPublishMedia: false,
+@@ -138,6 +262,7 @@
+     );
+ 
+     expect(result.current.waitingForTeacher).toBe(true);
++    await act(async () => {});
+   });
+ 
+   it('should handle incoming chat messages', async () => {
+--- before/FrontEnds/AdminDashboard/src/components/seminar/seminar-room.tsx
++++ after/FrontEnds/AdminDashboard/src/components/seminar/seminar-room.tsx
+@@ -1359,6 +1359,9 @@
+           : t('seminar_kicked_description'),
+       });
+       void finalizeRoomExitRef.current({ kicked: true, redirect: true });
++    },
++    onHubReconnected: () => {
++      setHubConnectionFailed(false);
+     },
+     onHubConnectionFailed: () => {
+       setHubConnectionFailed(true);
+--- before/BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Extensions/HostingExtension.cs
++++ after/BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Extensions/HostingExtension.cs
+@@ -628,7 +628,11 @@
+             app.UseBlockedAccountGuard();
+             app.UseAuthorization();
+             app.MapControllers();//.RequireAuthorization();
+-            app.MapHub<MeetingHub>("/meetingHub").RequireCors("AllowAll");
++            app.MapHub<MeetingHub>("/meetingHub", options =>
++            {
++                // Finish idle polls before intermediary proxies expire the HTTP request.
++                options.LongPolling.PollTimeout = TimeSpan.FromSeconds(20);
++            }).RequireCors("AllowAll");
+             app.MapHub<ChatHub>("/hubs/chat").RequireCors("AllowAll");
+             app.MapHub<ProjectQaHub>("/hubs/project-qa").RequireCors("AllowAll");
+             app.MapHub<CommunityQaHub>("/hubs/community-qa").RequireCors("AllowAll");

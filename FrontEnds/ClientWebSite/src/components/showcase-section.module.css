@@ -1,0 +1,236 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0 5rem;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 5.5rem 0 6.5rem;
+  }
+}
+
+.bgBase {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 55% at 10% 0%, hsl(262 83% 58% / 0.14), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 95% 15%, hsl(199 89% 48% / 0.12), transparent 50%),
+    radial-gradient(ellipse 60% 45% at 50% 100%, hsl(24 95% 53% / 0.08), transparent 55%),
+    linear-gradient(180deg, hsl(var(--muted) / 0.35) 0%, hsl(var(--background)) 42%, hsl(var(--muted) / 0.22) 100%);
+}
+
+:global(.dark) .bgBase {
+  background:
+    radial-gradient(ellipse 80% 55% at 10% 0%, hsl(262 83% 58% / 0.22), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 95% 15%, hsl(199 89% 48% / 0.16), transparent 50%),
+    radial-gradient(ellipse 60% 45% at 50% 100%, hsl(24 95% 53% / 0.1), transparent 55%),
+    linear-gradient(180deg, hsl(var(--background)) 0%, hsl(222 47% 7%) 50%, hsl(var(--background)) 100%);
+}
+
+.bgArticles {
+  background:
+    radial-gradient(ellipse 75% 50% at 92% 8%, hsl(199 89% 48% / 0.16), transparent 52%),
+    radial-gradient(ellipse 70% 55% at 8% 12%, hsl(262 83% 58% / 0.13), transparent 50%),
+    radial-gradient(ellipse 60% 45% at 50% 100%, hsl(152 69% 40% / 0.07), transparent 55%),
+    linear-gradient(180deg, hsl(var(--muted) / 0.32) 0%, hsl(var(--background)) 42%, hsl(var(--muted) / 0.2) 100%);
+}
+
+:global(.dark) .bgArticles {
+  background:
+    radial-gradient(ellipse 75% 50% at 92% 8%, hsl(199 89% 48% / 0.2), transparent 52%),
+    radial-gradient(ellipse 70% 55% at 8% 12%, hsl(262 83% 58% / 0.18), transparent 50%),
+    radial-gradient(ellipse 60% 45% at 50% 100%, hsl(152 69% 40% / 0.09), transparent 55%),
+    linear-gradient(180deg, hsl(var(--background)) 0%, hsl(222 47% 7%) 50%, hsl(var(--background)) 100%);
+}
+
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(hsl(var(--border) / 0.45) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.45) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 20%, transparent 78%);
+}
+
+.bgOrb1,
+.bgOrb2 {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  pointer-events: none;
+}
+
+.bgOrb1 {
+  top: -4rem;
+  inset-inline-start: -3rem;
+  width: 18rem;
+  height: 18rem;
+  background: hsl(262 83% 58% / 0.28);
+}
+
+.bgOrb2 {
+  bottom: -5rem;
+  inset-inline-end: -2rem;
+  width: 22rem;
+  height: 22rem;
+  background: hsl(199 89% 48% / 0.22);
+}
+
+.orbArticles1 {
+  background: hsl(199 89% 48% / 0.26);
+}
+
+.orbArticles2 {
+  background: hsl(152 69% 40% / 0.2);
+}
+
+.bgCourses {
+  background:
+    radial-gradient(ellipse 78% 52% at 6% 10%, hsl(262 83% 58% / 0.15), transparent 52%),
+    radial-gradient(ellipse 72% 48% at 94% 6%, hsl(24 95% 53% / 0.14), transparent 50%),
+    radial-gradient(ellipse 62% 46% at 48% 100%, hsl(199 89% 48% / 0.09), transparent 55%),
+    linear-gradient(180deg, hsl(var(--muted) / 0.34) 0%, hsl(var(--background)) 42%, hsl(var(--muted) / 0.21) 100%);
+}
+
+:global(.dark) .bgCourses {
+  background:
+    radial-gradient(ellipse 78% 52% at 6% 10%, hsl(262 83% 58% / 0.21), transparent 52%),
+    radial-gradient(ellipse 72% 48% at 94% 6%, hsl(24 95% 53% / 0.18), transparent 50%),
+    radial-gradient(ellipse 62% 46% at 48% 100%, hsl(199 89% 48% / 0.11), transparent 55%),
+    linear-gradient(180deg, hsl(var(--background)) 0%, hsl(222 47% 7%) 50%, hsl(var(--background)) 100%);
+}
+
+.orbCourses1 {
+  background: hsl(262 83% 58% / 0.3);
+}
+
+.orbCourses2 {
+  background: hsl(24 95% 53% / 0.24);
+}
+
+.waveTop,
+.waveBottom {
+  position: absolute;
+  pointer-events: none;
+  color: hsl(var(--primary) / 0.12);
+}
+
+.waveTop {
+  top: -2rem;
+  inset-inline-start: -6rem;
+  width: 52rem;
+  height: 18rem;
+  display: none;
+}
+
+.waveBottom {
+  bottom: -3rem;
+  inset-inline-end: -6rem;
+  width: 52rem;
+  height: 18rem;
+  color: hsl(24 95% 53% / 0.2);
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .waveTop,
+  .waveBottom {
+    display: block;
+  }
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .inner {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    padding-inline: 2rem;
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--primary) / 0.25);
+  background: hsl(var(--background) / 0.72);
+  padding: 0.35rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: hsl(var(--primary));
+  backdrop-filter: blur(10px);
+}
+
+.headerRow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .headerRow {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.title {
+  margin-top: 0.75rem;
+  font-family: var(--font-headline), sans-serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: hsl(var(--foreground));
+}
+
+.subtitle {
+  margin-top: 0.85rem;
+  max-width: 38rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: hsl(var(--muted-foreground));
+}
+
+.viewAllBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background) / 0.82);
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.viewAllBtn:hover {
+  transform: translateY(-2px);
+  border-color: hsl(var(--primary) / 0.45);
+  box-shadow: 0 12px 28px -14px hsl(var(--primary) / 0.55);
+}

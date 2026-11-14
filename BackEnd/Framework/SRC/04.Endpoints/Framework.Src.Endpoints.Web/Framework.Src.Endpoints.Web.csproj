@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="ArkaSoftware.Extensions.DependentyInjection.Abstractions" Version="1.0.1" />
+		<PackageReference Include="ArkaSoftware.Extensions.Logger.Abstractions" Version="1.0.0" />
+		<PackageReference Include="ArkaSoftware.Extensions.Serializers.Abstractions" Version="1.0.0" />
+		<PackageReference Include="ArkaSoftware.Extensions.Translations.Abstractions" Version="1.0.0" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="6.0.0-preview.4.21253.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.6" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
+		<PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="8.0.6" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.6" />
+		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.0" />
+		<PackageReference Include="Scrutor" Version="4.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\01.Utilities\Framework.Src.Utilities.OutService\Framework.Src.Utilities.OutService.csproj" />
+	  <ProjectReference Include="..\..\02.Core\Framework.Src.Core.ApplicationService\Framework.Src.Core.ApplicationService.csproj" />
+	  <ProjectReference Include="..\..\02.Core\Framework.Src.Core.Contracts\Framework.Src.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\..\02.Core\Framework.Src.Core.Domain\Framework.Src.Core.Domain.csproj" />
+	  <ProjectReference Include="..\..\02.Core\Framework.Src.Core.RequestResponse\Framework.Src.Core.RequestResponse.csproj" />
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.17.1" />
+  </ItemGroup>
+</Project>

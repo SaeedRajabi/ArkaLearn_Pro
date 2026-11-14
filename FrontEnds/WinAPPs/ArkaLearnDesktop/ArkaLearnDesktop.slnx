@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ArkaLearnDesktop.App/ArkaLearnDesktop.App.csproj" />
+    <Project Path="src/ArkaLearnDesktop.Application/ArkaLearnDesktop.Application.csproj" />
+    <Project Path="src/ArkaLearnDesktop.Domain/ArkaLearnDesktop.Domain.csproj" />
+    <Project Path="src/ArkaLearnDesktop.Infrastructure/ArkaLearnDesktop.Infrastructure.csproj" />
+  </Folder>
+</Solution>

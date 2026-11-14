@@ -1,0 +1,146 @@
+.professor-dashboard {
+  --professor-banner-fallback: linear-gradient(135deg, #1e3a5f 0%, #0f2744 45%, #162d4f 100%);
+  background: hsl(var(--background));
+}
+
+.professor-dashboard__hero-wrap {
+  padding-top: 1rem;
+  padding-bottom: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .professor-dashboard__hero-wrap {
+    padding-top: 1.5rem;
+  }
+}
+
+.professor-dashboard__banner {
+  aspect-ratio: 4 / 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.professor-dashboard__banner--fallback {
+  background: var(--professor-banner-fallback);
+}
+
+.professor-dashboard__banner-image {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.professor-dashboard__banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08) 0, transparent 42%),
+    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.06) 0, transparent 35%),
+    radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.05) 0, transparent 40%);
+  pointer-events: none;
+}
+
+.professor-dashboard__banner--image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.28) 100%);
+  pointer-events: none;
+}
+
+.professor-dashboard__banner--preview {
+  border: 1px solid hsl(var(--border));
+}
+
+.professor-dashboard__add-course {
+  background: #22c55e;
+  color: #fff;
+}
+
+.professor-dashboard__add-course:hover {
+  background: #16a34a;
+  color: #fff;
+}
+
+.professor-dashboard__stat-card {
+  border-radius: 1rem;
+  border: 1px solid hsl(var(--border));
+  padding: 1.25rem;
+  background: hsl(var(--card));
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.professor-dashboard__stat-card--cyan {
+  background: color-mix(in srgb, #06b6d4 10%, hsl(var(--card)));
+}
+
+.professor-dashboard__stat-card--violet {
+  background: color-mix(in srgb, #8b5cf6 10%, hsl(var(--card)));
+}
+
+.professor-dashboard__stat-card--amber {
+  background: color-mix(in srgb, #f59e0b 10%, hsl(var(--card)));
+}
+
+.dark .professor-dashboard__stat-card--cyan {
+  background: color-mix(in srgb, #06b6d4 18%, hsl(var(--card)));
+}
+
+.dark .professor-dashboard__stat-card--violet {
+  background: color-mix(in srgb, #8b5cf6 18%, hsl(var(--card)));
+}
+
+.dark .professor-dashboard__stat-card--amber {
+  background: color-mix(in srgb, #f59e0b 18%, hsl(var(--card)));
+}
+
+.professor-dashboard__stat-icon {
+  display: flex;
+  height: 3rem;
+  width: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.9rem;
+  background: hsl(var(--background) / 0.72);
+}
+
+.professor-dashboard__chart-card {
+  border-radius: 1rem;
+}
+
+.professor-dashboard__sidebar {
+  position: sticky;
+  top: 6rem;
+}
+
+.professor-dashboard__sidebar-group + .professor-dashboard__sidebar-group {
+  margin-top: 0.15rem;
+}
+
+.professor-dashboard__sidebar-group-items {
+  padding-inline-start: 0.65rem;
+  border-inline-start: 2px solid hsl(var(--border));
+  margin-inline-start: 1.15rem;
+}
+
+.professor-dashboard__sidebar-sublink {
+  font-size: 0.8125rem;
+}
+
+.professor-dashboard__profile-info {
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .professor-dashboard__profile-info {
+    margin-top: 0;
+    padding-bottom: 0.25rem;
+  }
+}
+
+.professor-dashboard__avatar {
+  flex-shrink: 0;
+}

@@ -1,0 +1,366 @@
+[
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.ApplicationService/ArkaSoftwarePro.Src.Core.ApplicationService.csproj",
+    "sha256": "e6e8b0c23bd7de80316ca4a987ee9744090b0e418ef52f825671256136e09ffa"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.ApplicationService/InvoicesServices/Events/InvoicePaidEventHandler.cs",
+    "sha256": "e7ea722c223b9ec59cd1617045ed344cf13d587d1c41589bd855388cd3f15f3d"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.ApplicationService/InvoicesServices/Events/InvoicePaidTeacherFinanceEventHandler.cs",
+    "sha256": "07f1cc2676ed1261dd91fd1cd91395f8c62e5cfb3c9c4089fc75207fa2973fcf"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.ApplicationService/RemoteAssistServices/RemoteAssistSecurity.cs",
+    "sha256": "2f27296022ddb8e64ba4fce1311647fe82e13ff0ee514e511bf1acbc9569995d"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.ApplicationService/RoomsServices/Commands/LoginUserIntoRoomCommandHandler.cs",
+    "sha256": "93debad95b1d7d8dcbff9e7e5cc30f67c7d39ed9b3b22e01a8b7e37b5e6b4631"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.ApplicationService/RoomsServices/Commands/LogoutUserFromRoomCommandHandler.cs",
+    "sha256": "9e4010105162eb48088492a728fd95419da4e4f95fa0ef36ba95468c68a8c9af"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.ApplicationService/RoomsServices/Commands/SendMessageCommandHandler.cs",
+    "sha256": "63d7399f120c13ed3a4a0d9344c96d855361ca2cb69cba36be0c182dd7132a7a"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.ApplicationService/RoomsServices/Commands/UpdateUserStatusCommandHandler.cs",
+    "sha256": "c3bb48392dbe8b167b5b3891f42b6354cb19c015bebbc70042c0cbeff9a211bf"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.ApplicationService/RoomsServices/Queries/GetAllMessageWithRoomIdQueryHandler.cs",
+    "sha256": "3c874294c19b4416ef9251f7992ca06edf3f3d93ead2b3b9ef8a3f21a8283e3a"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.ApplicationService/TeacherServices/TeacherFinanceService.cs",
+    "sha256": "da5d0884bf71738b99bafe7bbbeabfaeef2408511e771a4acbe7798b2c1940a6"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.ApplicationService/WalletServices/UserWalletService.cs",
+    "sha256": "05cdabf5ae5f5f73b5af9fcd694d43cba87bbf979d889ab15073151b5f4b97d4"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.Contracts/ArkaSoftwarePro.Src.Core.Contracts.csproj",
+    "sha256": "b20696e987a62ca7396a0cc987f0d4309940e54959ed5fbd0ba549473d444726"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.Contracts/Finance/IBusinessTransactionRunner.cs",
+    "sha256": "665fa0c22b08bc7b544f12eed0e37ab5df62cfca5ca2d582fcdd0d2122cecf5a"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.Contracts/Finance/IPaymentAttemptStore.cs",
+    "sha256": "3d0a1b6b5b4ddbf0b06a66c02ebda1a33d6173e2e56cff02680a57eb272f9676"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.Contracts/Rooms/IRoomAccessService.cs",
+    "sha256": "69f0b91bb40293754ca56f89cc879028c29be319b17d3e1712e254a013573249"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.Domain/ArkaSoftwarePro.Src.Core.Domain.csproj",
+    "sha256": "8d47811819280d87ed8dab6e920bd0753d8466e1126401bcc50ee0fc9617030b"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.Domain/FinanceAggregate/Entities/PaymentAttempt.cs",
+    "sha256": "165090d1974ea96aca902ea69c807278d63cb259820f3c2e0b6afc5355947a40"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.Domain/RoomAggregate/Entities/Room.cs",
+    "sha256": "bbd66953237f234fcf764e1aa05ce79b11431f7c2e2c37eaa92d49d931d8b1ee"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.Domain/RoomAggregate/Entities/RoomUser.cs",
+    "sha256": "613a13394acdd739d2770945c0b81e8d0abaa5f6b8fc657e44d117cc2d2d019a"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.Domain/UsersAggregate/Entities/User.cs",
+    "sha256": "eafdb980436b9190f3cf7e660096df61baf46e12300119c83b8fe1478c97ca76"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.Domain/UsersAggregate/ValueOBJs/Password.cs",
+    "sha256": "d8309ae4eff1d7c5eb37f9fa4279256029a23e487562ae5031c48fab1b2a28ea"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/01.Core/ArkaSoftwarePro.Src.Core.RequestResponse/ArkaSoftwarePro.Src.Core.RequestResponse.csproj",
+    "sha256": "5b68763d7729a44cbd92a7eb85b9e39dee50bfec997d237d8e6b8f60711a832d"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands.csproj",
+    "sha256": "385c8c10d6e59ee329da1a606a3aa1f98d51949f9fa020341ae50c5e6eccef48"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Common/ArkaSoftwareDesignTimeDbContextFactory.cs",
+    "sha256": "dc3ad82241b765177e8f95908ff3dc1039858dd7a359a2ccd556b588e226e764"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Configurations/Finance/PaymentAttemptConfiguration.cs",
+    "sha256": "2894f055eb90c925549d289754f1742bfcde17ee4de9a5a09307e939a6bf68f9"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Configurations/FinanceConfigure/TeacherFinanceConfigurations.cs",
+    "sha256": "800839564a981178de85c225af1a8a6b80d30b63ff3d17525e4c20b99a9121a5"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20261025120000_AddTrackedPaymentAttempts.cs",
+    "sha256": "cbcc42e1f6156251921ae5cea1f0ba287f88ef60f7c179e865761f9e8c8660a1"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/ArkaSoftwareCommandDbContextModelSnapshot.cs",
+    "sha256": "49331769dcf657ce4a2680564002d3b0486d6659c37d69ef072dfbedc3d0d469"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Repositories/PaymentAttemptStore.cs",
+    "sha256": "de46fc8ed489634d8661fe71c65fe5ccd8e6acefd3c2d71947ebd6e1247411d5"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Services/BusinessTransactionRunner.cs",
+    "sha256": "0395652c61f97a8bf83ae1070a9f668d4b5a6e5dd6abdd67f5ed12849d7ac607"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Services/RoomAccessService.cs",
+    "sha256": "675cd105ccd58b5f293ac5117151e0ff171481ff8e940aaab7e766821829a9be"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.csproj",
+    "sha256": "1bddb23ea6274f8bc7ffa3e0ad8e851d1142786fd432d2c6a2ca931b8801cb91"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries/Repositories/BasketQueryRepository.cs",
+    "sha256": "3be97beaf207b496c2a70d47f739d0bd55e5d5c682e71ebd58762ad1dc4603a6"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries/Repositories/RoomQueryRepository.cs",
+    "sha256": "d6594f42a5de6e82352d80c3460b7a3735cfc83518e3a49a779078349209b569"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/Redis/ArkaSoftwarePro.Src.Infrastructure.Data.Redis.Queries/ArkaSoftwarePro.Src.Infrastructure.Data.Redis.Queries.csproj",
+    "sha256": "b688023e329fcc396dea96b4e391b072081eabc9447469d5866d428144c6c633"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Security/ArkaSoftwarePro.Src.Infrastructure.Secutiry.IMP/ArkaSoftwarePro.Src.Infrastructure.Security.IMP.csproj",
+    "sha256": "2954fc388e3ed70ee1ad21b8eb099b751ec63628cd3828fb5f3f3635dd19915d"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Security/ArkaSoftwarePro.Src.Infrastructure.Secutiry.IMP/Services/JwtGenerator.cs",
+    "sha256": "7f402751530898776ae1c877af7fe995b35f1df5dbe3ac7500192f4af6835c3b"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/appsettings.Development.json",
+    "sha256": "f7a1448ee1e609185c093e9f49ae371b70c6ecf91bebe99ac0059abbd6cdf26a"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/appsettings.Production.json",
+    "sha256": "155222cc7a1006ea2cd3413d380a13804fefae10d1261dcc6f7ea8ed63bd1b41"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/ArkaSoftwarePro.Src.Endpoints.API.csproj",
+    "sha256": "f88590f9e53c0e5720d4af83fc09746df638b3ac73dde55235e7e5abf28fd853"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Controllers/AccountController.cs",
+    "sha256": "8d3c702fbd37e2ef5c819cbdbaf90f85eda74907b804bd50b26fb08ad04e1706"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Controllers/MessageController.cs",
+    "sha256": "041cf206ec97b35fa99006f1d8d16a810535b28f1dbf013b968cb742b25e69dc"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Controllers/PaymentController.cs",
+    "sha256": "52b9644933fc1b6b5cd986ea8252f937fdd7361a167196750fe6844f2eeff296"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Extensions/HostingExtension.cs",
+    "sha256": "390d8fc75d9b7e1bc3789f93e1dc9532e8399c85c8c8dba12b21419ecde42edd"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Hubs/ChatHub.cs",
+    "sha256": "7f5dbf98015bd059bdb076abee6372b73f81cf5445a31521d3dba7a10cee75ea"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Hubs/MeetingHub.cs",
+    "sha256": "e0d697efb9c2ffe6bca554fdf141b07a6c52f9b2eb13445cc2e199ac101d288c"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/DesktopDrm/ContentKeyVault.cs",
+    "sha256": "c0af522be5e785b55664c8e2371d41f998986b55a80af935053a56fdec722fd1"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Email/EmailSettingsProvider.cs",
+    "sha256": "5a86d04867c716a338824988ff09bfeb973b111f08cb23b2f43e4633a67655d5"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Email/SmtpEmailOptions.cs",
+    "sha256": "5e11034428092e87882a7b2af2b0103ba9699c30766e4eec8648a55ead78e08b"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Mapping/AutoMapperAdapter.cs",
+    "sha256": "e2af2906ba9d66f23d518eb2c0488e7bf19ad98d1ac7a3f365298ca7fe80a4d0"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Mapping/MappingRegistration.cs",
+    "sha256": "5ba172d9ecb45c9abbae66c4f4b958ab1e4ce2506b47c6cfea9dd707a608abaa"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/MeetingLifecycleService.cs",
+    "sha256": "39bea63796b7ed0c43c528bafa3947e0f4a3e50d29ef8ac103f26d3df239aa77"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Outbox/OutboxDomainEventBackgroundService.cs",
+    "sha256": "1b0504cd74e55101366c2c3bd9a7a25a797b84b45de6711ca1359b3b996d3611"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Payments/IClientPaymentGateway.cs",
+    "sha256": "d4be9c79d7e8cfabc083ece1a1682c9efa895eda12f2b1eb0296bdb108c84d4d"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Payments/IdPayGatewayService.cs",
+    "sha256": "30530cec8479fc8f216593d62aa29e3cd73a019259f96abc05af21c868ca5d4a"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Payments/TrackedPaymentService.cs",
+    "sha256": "8f6a5ba772690e5896156441375d373af72079ee32526d9663e30a84fd38a71e"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Payments/ZibalGatewayService.cs",
+    "sha256": "88d868eaae4371fd576048c560729cce2cd4469bba2245c285ec34fb1089a7a4"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/RoomJoinTicketService.cs",
+    "sha256": "737293a030106d288f99338ba216a816706fd6c346a86e564ecab87c831a411c"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/RoomMeetingCoordinator.cs",
+    "sha256": "6edeffec5bfffc60e736c594d76d53d19426a8e01deaca823d2c7eb67682c810"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/RoomSeatLivePresence.cs",
+    "sha256": "a3238ee97a60c4908619c2f0787494d1626a9e17d359a4e0f0ceaa0a440b50a4"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Security/AesSecretProtector.cs",
+    "sha256": "6e37b46b12763bcec6c9ed38e691ad63684624ebded051ec44f3339215798049"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Security/RoomSeatTokenScope.cs",
+    "sha256": "8c4078c6547e32ac0587de38390d81949e6515f35f680b186764c23ab11fc8eb"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Services/Security/SecretCipher.cs",
+    "sha256": "3a675b59fca666b53565595f6f8c67a0d90ea5fd90d346d38d2c39e13a972937"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Domain/PasswordSecurityTests.cs",
+    "sha256": "167631080d3aa6acf39d62cefa87eaca87ad459fdd3eb0cf99c7b10d27b1a611"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Email/EmailServiceRegistrationTests.cs",
+    "sha256": "7ae3363b60e3e2c4c16204cab9cca893273ac8dfc866bc7b3d8a4703fb78abdd"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Email/ExternalSmtpFactAttribute.cs",
+    "sha256": "5785b709171598e70868701caf6188fb313fba3827e6d230a5fe0d324050b757"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Email/PleskSmtpLiveTests.cs",
+    "sha256": "4a8bdce7803d94ffb802eeeae343b605f07e99855db69249dba8c98c5617e805"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Email/SmtpEmailServiceTests.cs",
+    "sha256": "bd69828ec081fc627d0a663c891b1eb74aebaa60273e7113dd6edf8d3480d912"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Hubs/ChatHubSecurityTests.cs",
+    "sha256": "5bc6b5a83cc5c6257f26cbe2bc3f287a2f75c49089193f1bf7c1bd34a98ca170"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Hubs/MeetingHubTests.cs",
+    "sha256": "49320a9d4cfedfbb5f488591b3d9f4a429081ef60f57ea9fe64315e96b4f4cdb"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Services/ImageDimensionValidationTests.cs",
+    "sha256": "7f0dfbb5a1c3417ec0c088f37d688aa5e10413ef9cd8c613435df914ec4f84ae"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Services/MappingRegistrationTests.cs",
+    "sha256": "3e8d3fde255faf22054ad7e286309e224597c02be737ad7b09fbfc692c729e3a"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Services/RoomJoinTicketSecurityTests.cs",
+    "sha256": "c6e13e9faac063ba546c0269baf3dd441d92a9a52f6fc8c6ab7c140934c4f3a9"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Services/RoomMeetingCoordinatorTests.cs",
+    "sha256": "9e67ad9c20f086f291850d533f7d352bc838e589d0bdb9c73991c7ddc4ed48a5"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Services/RoomSeatStatusPermissionTests.cs",
+    "sha256": "60b6ad60a6c2f4df43ca0d4cbed269fdf18ec753533f73a1e7d9e17e161669a7"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Services/RoomSeatTokenScopeTests.cs",
+    "sha256": "27a63d707dcd83144d68d5f0b6831f442423b2168b5a4f21decf138501c09efd"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/Services/SecretCipherTests.cs",
+    "sha256": "1f7ee2c0797664a5ff5d9330240001cabe76994c92228af8b4cc70f7cd74b9bd"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests/UnitTest1.cs",
+    "sha256": "12b8ef3e6271374e9b03dedfd0da850ad82e7982598e8c488ae0394cee81abb6"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests.Integration/ArkaSoftwarePro.Tests.Integration.csproj",
+    "sha256": "2ebee2868464e21d33cce8878015701bf5de4935fc919d2f9fb24abb7725d82a"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests.Integration/Class1.cs",
+    "sha256": "9e07972dfa5a530e6835a17d26acf9c6138571957b07d8a70a4c6244683a967b"
+  },
+  {
+    "path": "BackEnd/ArkaSoftware/Tests/ArkaSoftwarePro.Tests.Integration/TrackedPaymentTests.cs",
+    "sha256": "e008fec6b8e25d3b2ad65134d2b2ac9aa97f361e749c19d6ee1f8566dd8e8ba4"
+  },
+  {
+    "path": "BackEnd/Framework/SRC/01.Utilities/Framework.Src.Utilities.OutService/Extensions/FormFileExtensions.cs",
+    "sha256": "8efff7a3c2cab2c933c871c290077ac56478fcbe2498f5fb9e315de35b525232"
+  },
+  {
+    "path": "BackEnd/Framework/SRC/01.Utilities/Framework.Src.Utilities.OutService/Framework.Src.Utilities.OutService.csproj",
+    "sha256": "8545c4ac9667d803c90a514d6f8efe48b0e6384445a399fe39702ad5c2ad50fe"
+  },
+  {
+    "path": "BackEnd/Framework/SRC/02.Core/Framework.Src.Core.ApplicationService/Events/EventDispatcher.cs",
+    "sha256": "d7e9786016d930cf27c9b70c90bfd73b6cc4624fd69a0936a3d2a6d84ba456b4"
+  },
+  {
+    "path": "BackEnd/Framework/SRC/02.Core/Framework.Src.Core.ApplicationService/Events/EventDispatcherDomainExceptionHandlerDecorator.cs",
+    "sha256": "d5671e14a7aca60ee91e95407ddb25c2471dbbbf7a7fc14b0b877d4aeccd8f9c"
+  },
+  {
+    "path": "BackEnd/Framework/SRC/02.Core/Framework.Src.Core.ApplicationService/Events/EventDispatcherValidationDecorator.cs",
+    "sha256": "3d432f64fa98c290a91b4c5bc4301bd2f77947a3bee89ea190ca9395b8f86072"
+  },
+  {
+    "path": "BackEnd/Framework/SRC/03.Infrastructure/Data/Framework.Src.Infrastructure.Data.MSSQL.Commands/Common/BaseCommandDbContext.cs",
+    "sha256": "6ff1f28f51023ccd94cca5b61a7317c5e3ad11943e4cdd00e0b3d86c3b0d992e"
+  },
+  {
+    "path": "BackEnd/Framework/SRC/03.Infrastructure/Data/Framework.Src.Infrastructure.Data.MSSQL.Commands/Common/BaseOutboxCommandDbContext.cs",
+    "sha256": "e8224308e221e334e32e5a195ae65efbf5cbc0c3089d0ff3f38fdb40b7ab24c5"
+  },
+  {
+    "path": "BackEnd/Framework/SRC/03.Infrastructure/Data/Framework.Src.Infrastructure.Data.MSSQL.Commands/Framework.Src.Infrastructure.Data.MSSQL.Commands.csproj",
+    "sha256": "4b8c170ec730ab01b0669a0a3966da0f7721b1471c4930ca8faa75c65699e7f6"
+  },
+  {
+    "path": "BackEnd/Framework/SRC/03.Infrastructure/Data/Framework.Src.Infrastructure.Data.MSSQL.Queries/Framework.Src.Infrastructure.Data.MSSQL.Queries.csproj",
+    "sha256": "61e8d97290094767067745e50e567ba14701bfac053ed1763c17a05ad4acf1cf"
+  },
+  {
+    "path": "BackEnd/Framework/SRC/04.Endpoints/Framework.Src.Endpoints.Web/Framework.Src.Endpoints.Web.csproj",
+    "sha256": "b8d8ead5921cc80507196294293294cfb7d17dbf2149575aa64e4348ee88f7ff"
+  }
+]

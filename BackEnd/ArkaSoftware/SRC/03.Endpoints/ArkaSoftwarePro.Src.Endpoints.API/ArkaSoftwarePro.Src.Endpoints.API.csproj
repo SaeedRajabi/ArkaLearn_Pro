@@ -1,0 +1,101 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<UserSecretsId>arkasoftware-api-email-smtp</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ArkaSoftware.Extensions.Caching.Distributed.InMemory" Version="1.0.2" />
+		<PackageReference Include="ArkaSoftware.Extensions.Caching.Distributed.Redis" Version="1.0.1" />
+		<PackageReference Include="ArkaSoftware.Extensions.DependentyInjection.Abstractions" Version="1.0.1" />
+		<PackageReference Include="ArkaSoftware.Extensions.Serializers.Microsoft" Version="1.0.1" />
+		<PackageReference Include="ArkaSoftware.Extensions.UsersManagement" Version="1.0.0" />
+		<PackageReference Include="ArkaSoftware.Extensions.Translations.Parrot" Version="2.0.0" />
+		<PackageReference Include="ArkaSoftware.Utilities.Authentication.APIAuthentication" Version="1.0.0" />
+		<PackageReference Include="ArkaSoftware.Utilities.SeriLogRegisteration" Version="1.0.0" />
+		<PackageReference Include="ArkaSoftware.Utilities.Swagger.Registration" Version="1.0.0" />
+		<PackageReference Include="Dapper" Version="2.1.66" />
+		<PackageReference Include="FluentFTP" Version="52.1.0" />
+		<PackageReference Include="MailKit" Version="4.17.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="9.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.2" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
+		<PackageReference Include="Serilog" Version="4.2.0" />
+		<PackageReference Include="Scrutor" Version="6.0.1" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageReference Include="StackExchange.Redis" Version="2.8.31" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="ArkaSoftwarePro.Tests" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="DI\IdentityServer\Options\" />
+		<Folder Include="Logs\" />
+		<Folder Include="wwwroot\users\files\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\02.Infrastructure\Integrations\ArkaSoftwarePro.Src.Infrastructure.Integrations\ArkaSoftwarePro.Src.Infrastructure.Integrations.csproj" />
+		<ProjectReference Include="..\..\01.Core\ArkaSoftwarePro.Src.Core.ApplicationService\ArkaSoftwarePro.Src.Core.ApplicationService.csproj" />
+		<ProjectReference Include="..\..\01.Core\ArkaSoftwarePro.Src.Core.Contracts\ArkaSoftwarePro.Src.Core.Contracts.csproj" />
+		<ProjectReference Include="..\..\01.Core\ArkaSoftwarePro.Src.Core.Domain\ArkaSoftwarePro.Src.Core.Domain.csproj" />
+		<ProjectReference Include="..\..\02.Infrastructure\Data\MSSQL\ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands\ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands.csproj" />
+		<ProjectReference Include="..\..\02.Infrastructure\Data\MSSQL\ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries\ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.csproj" />
+		<ProjectReference Include="..\..\02.Infrastructure\Security\ArkaSoftwarePro.Src.Infrastructure.Secutiry.IMP\ArkaSoftwarePro.Src.Infrastructure.Security.IMP.csproj" />
+		<ProjectReference Include="..\..\..\..\Framework\SRC\03.Infrastructure\Payments\Framework.Src.Infrastructure.Payments.ZarinPal\Framework.Src.Infrastructure.Payments.ZarinPal.csproj" />
+		<ProjectReference Include="..\..\..\..\Framework\SRC\03.Infrastructure\Payments\Framework.Src.Infrastructure.Payments.Zibal\Framework.Src.Infrastructure.Payments.Zibal.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="appsettings.Development.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="appsettings.Production.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.ApplicationService\Framework.Src.Core.ApplicationService.csproj" />
+		<ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.Contracts\Framework.Src.Core.Contracts.csproj" />
+		<ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.Domain\Framework.Src.Core.Domain.csproj" />
+		<ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.RequestResponse\Framework.Src.Core.RequestResponse.csproj" />
+		<ProjectReference Include="..\..\..\..\Framework\SRC\04.Endpoints\Framework.Src.Endpoints.Web\Framework.Src.Endpoints.Web.csproj" />
+		<ProjectReference Include="..\..\..\..\Framework\SRC\03.Infrastructure\Data\Framework.Src.Infrastructure.Data.MSSQL.Commands\Framework.Src.Infrastructure.Data.MSSQL.Commands.csproj" />
+		<ProjectReference Include="..\..\..\..\Framework\SRC\03.Infrastructure\Data\Framework.Src.Infrastructure.Data.MSSQL.Queries\Framework.Src.Infrastructure.Data.MSSQL.Queries.csproj" />
+	</ItemGroup>
+
+
+	<ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.155.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.13" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.2.0" />
+    <!-- Parrot 2.0 declares this obsolete DI package transitively. It is never loaded or used. -->
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" ExcludeAssets="all" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

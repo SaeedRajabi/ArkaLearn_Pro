@@ -1,0 +1,120 @@
+<UserControl x:Class="ArkaLearnDesktop.App.Views.Management.TeachersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BgPrimaryBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="مدیریت اساتید"
+                       FontSize="24"
+                       FontWeight="SemiBold"
+                       Foreground="{StaticResource TextPrimaryBrush}" />
+            <TextBlock Margin="0,6,0,12"
+                       Text="جستجو، مشاهده وضعیت و فعال/مسدود کردن حساب اساتید"
+                       Foreground="{StaticResource TextMutedBrush}"
+                       TextWrapping="Wrap" />
+
+            <Grid Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="0,0,8,0"
+                         Padding="10,8"
+                         Background="{StaticResource BgSurfaceBrush}"
+                         Foreground="{StaticResource TextPrimaryBrush}"
+                         BorderBrush="{StaticResource BorderSubtleBrush}" />
+                <Button Grid.Column="1"
+                        Content="جستجو"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding SearchCommand}"
+                        Margin="0,0,8,0" />
+                <Button Grid.Column="2"
+                        Style="{StaticResource RefreshIconButtonStyle}"
+                        Command="{Binding RefreshCommand}" />
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                <Button Content="فعال‌سازی"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding EnableAccountCommand}"
+                        Margin="0,0,8,0" />
+                <Button Content="مسدودسازی"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding BlockAccountCommand}"
+                        Margin="0,0,8,0" />
+                <Button Content="کپی شناسه کاربر"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding CopyUserIdCommand}"
+                        Margin="0,0,8,0" />
+                <Button Content="صفحه قبل"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding PreviousPageCommand}"
+                        Margin="0,0,8,0" />
+                <Button Content="صفحه بعد"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding NextPageCommand}"
+                        Margin="0,0,8,0" />
+                <TextBlock Margin="8,6,0,0"
+                           VerticalAlignment="Center"
+                           Text="{Binding PageLabel}"
+                           Foreground="{StaticResource TextMutedBrush}" />
+            </StackPanel>
+
+            <TextBlock Text="{Binding StatusMessage}"
+                       TextWrapping="Wrap"
+                       Foreground="{StaticResource TextMutedBrush}" />
+        </StackPanel>
+
+        <Border Grid.Row="1"
+                Background="{StaticResource BgSurfaceBrush}"
+                BorderBrush="{StaticResource BorderSubtleBrush}"
+                BorderThickness="1"
+                CornerRadius="12"
+                Padding="12">
+            <ListBox ItemsSource="{Binding Teachers}"
+                     SelectedItem="{Binding SelectedTeacher}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Foreground="{StaticResource TextPrimaryBrush}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold" />
+                                <TextBlock FontSize="12"
+                                           Foreground="{StaticResource TextMutedBrush}">
+                                    <Run Text="{Binding Email, Mode=OneWay}" />
+                                    <Run Text=" — @" />
+                                    <Run Text="{Binding UserName, Mode=OneWay}" />
+                                </TextBlock>
+                                <TextBlock FontSize="11"
+                                           Foreground="{StaticResource TextMutedBrush}">
+                                    <Run Text="شناسه کاربر:" />
+                                    <Run Text="{Binding UserIdLabel, Mode=OneWay}" />
+                                    <Run Text=" — دوره‌های منتشرشده:" />
+                                    <Run Text="{Binding PublishedCourseCountLabel, Mode=OneWay}" />
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding StatusLabel}"
+                                       VerticalAlignment="Center"
+                                       Margin="12,0,0,0" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+    </Grid>
+</UserControl>

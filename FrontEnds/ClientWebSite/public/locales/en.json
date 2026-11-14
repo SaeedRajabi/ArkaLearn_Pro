@@ -1,0 +1,51 @@
+
+{
+  "header": {
+    "courses": "Courses",
+    "seminars": "Seminars",
+    "articles": "Articles",
+    "projects": "Projects",
+    "about": "About Us",
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "hero": {
+    "headline1": "Build Your Future with",
+    "highlight": "ArkaLearn Pro",
+    "subheadline": "Master the most in-demand programming languages and technologies with our expert-led courses. Your journey to becoming a tech professional starts here.",
+    "ctaPrimary": "Explore Courses",
+    "ctaSecondary": "View Seminars"
+  },
+  "home": {
+    "featuredCourses": "Featured Courses",
+    "featuredCoursesSubtitle": "Hand-picked courses to kickstart your learning journey.",
+    "free": "Free"
+  },
+  "footer": {
+    "about": "ArkaLearn Pro is a product of ArkaSoftware, dedicated to providing high-quality online education in technology.",
+    "rights": "All rights reserved."
+  },
+  "projectsPage": {
+    "title": "Projects",
+    "subtitle": "Explore ArkaSoftware portfolio and software products built with modern technologies.",
+    "home": "Home",
+    "searchPlaceholder": "Search projects, tags, or technologies...",
+    "filterByTag": "Filter by tag",
+    "filterByTechnology": "Filter by technology",
+    "allTags": "All tags",
+    "allTechnologies": "All technologies",
+    "showingResults": "Showing {count} results",
+    "clearFilters": "Clear filters",
+    "filters": "Filters",
+    "noResults": "No projects match your criteria."
+  },
+  "coursesSection": {
+    "title": "Explore Our Courses",
+    "subtitle": "Find the best learning materials tailored for you. Choose from our newest, most popular, or bestselling courses.",
+    "newest": "Newest",
+    "popular": "Most Popular",
+    "bestsellers": "Bestsellers"
+  }
+}

@@ -1,0 +1,75 @@
+ARKASOFTWARE DESKTOP — GETTING STARTED (AFTER INSTALLATION)
+
+Installation completed successfully.
+
+
+1. START THE APPLICATION
+
+- Open ArkaSoftware Desktop from the Start Menu or Desktop shortcut.
+- Sign in with your ArkaSoftware account (username/email and password).
+- An internet connection is required for first login and for most features.
+
+
+2. FIRST LOGIN NOTES
+
+- Your login creates an exclusive active session on THIS computer.
+- You will not be able to sign in on another PC until you sign out here
+  (open Settings → Sign out / Log out).
+- If login fails with a message that the account is already signed in elsewhere,
+  go to the other computer, open the app, and sign out, then try again.
+
+
+3. MAIN FEATURES OVERVIEW
+
+- Secure Player: Watch desktop-licensed / encrypted course videos.
+- Messenger / Support Chat: Communicate with teachers or support (role-dependent).
+- Downloads: Manage locally cached encrypted media files.
+- Remote Assist: Share your screen / receive help after you grant consent.
+- Settings: Theme, API URL (admins only), start with Windows, device ID, sign out.
+
+
+4. COURSE / VIDEO LICENSES
+
+- Licensed courses appear after successful authentication and enrollment.
+- Activating a course license binds it to this physical PC.
+- Same PC after Windows reinstall: usually OK (hardware identity persists).
+- Different PC: not allowed for the same bound license without admin transfer.
+
+
+5. WINDOW CLOSE VS FULL EXIT
+
+- Closing the main window may keep the app running in the system tray
+  so remote-assist and background readiness can continue.
+- To fully quit: use the tray icon menu → Exit / Full exit.
+- Optional: enable “Start with Windows” in Settings so the app can start in the tray after reboot.
+
+
+6. REMOTE ASSISTANCE
+
+- When a helper requests access, you will see a consent dialog.
+- You can approve or deny permissions (for example remote control).
+- Keep the app signed in (and preferably tray-ready) if you expect assistance requests.
+
+
+7. UPDATES
+
+- The app may require a mandatory update before continuing.
+- Install updates when prompted to keep licensing and security features working.
+
+
+8. TROUBLESHOOTING
+
+- Cannot log in on a second PC: sign out from the first PC first.
+- Cannot play a course on a new PC: the license may already be bound to another machine — contact support/admin.
+- Playback/login errors: check internet connection and server/API availability.
+- Forgot to sign out and lost access to the old PC: contact ArkaSoftware support/admin for assistance according to organization policy.
+
+
+9. UNINSTALL
+
+- Windows Settings → Apps → ArkaSoftware Desktop → Uninstall
+  (or use the uninstaller created by Setup).
+
+
+Thank you for using ArkaSoftware Desktop.
+For help, use in-app support channels or contact ArkaSoftware support.

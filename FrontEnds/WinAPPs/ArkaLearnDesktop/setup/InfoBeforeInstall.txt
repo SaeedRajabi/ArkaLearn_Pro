@@ -1,0 +1,68 @@
+ARKASOFTWARE DESKTOP — INFORMATION BEFORE INSTALLATION
+
+Thank you for choosing ArkaSoftware Desktop.
+
+Please read this information carefully before you continue.
+
+
+1. WHAT THIS APPLICATION IS
+
+ArkaSoftware Desktop is a Windows (WPF) client for ArkaSoftware learners and teachers. It provides secure access to desktop-licensed courses and videos, messaging/support chat, downloads/cache management, settings, and optional remote assistance.
+
+
+2. SYSTEM REQUIREMENTS
+
+- Windows 10 or later (64-bit recommended)
+- Stable internet connection for login, license checks, updates, messaging, and protected video playback
+- Sufficient free disk space for the application and optional encrypted media cache
+- Administrator permission may be required to install into Program Files
+
+
+3. IMPORTANT POLICIES (PLEASE UNDERSTAND BEFORE INSTALLING)
+
+A) One active desktop login per account
+- Your account can be signed in on only one Windows PC at a time.
+- To use another PC, sign out from the previous PC first (Settings → Sign out).
+
+B) One physical machine per course/video license
+- Desktop course/video licenses bind to the first computer that activates them.
+- Reinstalling Windows on the SAME computer is OK.
+- Using the same license on a DIFFERENT computer is NOT allowed unless an administrator regenerates/transfers the license.
+
+C) Content protection
+- Videos may be encrypted and protected against unauthorized copying/capture.
+- Do not attempt to bypass DRM or security features.
+
+
+4. WHAT THE INSTALLER WILL DO
+
+- Install ArkaSoftware Desktop on this computer
+- Create Start Menu / Desktop shortcuts (if selected in the wizard)
+- Register an uninstaller in Windows Apps & Features
+
+Optional after install (in the app):
+- Run at Windows startup (tray / background readiness)
+- Stay running in the system tray when the window is closed (similar to remote-support tools)
+
+
+5. BEFORE YOU INSTALL — CHECKLIST
+
+- Close any older version of ArkaSoftware Desktop if it is running
+- Make sure you know your ArkaSoftware username/email and password
+- If you were previously signed in on another PC, sign out there first
+- If this is a new PC and your course licenses were already activated elsewhere, contact support/admin before expecting playback to work
+
+
+6. NETWORK AND SERVER DEPENDENCY
+
+Most features require connection to the ArkaSoftware API/services. Offline use is limited and still depends on previously issued grants/policies. Without network access you may be unable to sign in, refresh licenses, or start protected playback.
+
+
+7. PRIVACY / DEVICE DATA
+
+During registration and licensing, the app may send a hardware-based device identifier, machine name, OS version, and app version to enforce single-device login and license binding.
+
+
+If you do not accept these terms and policies, cancel the installation now.
+
+Click Next to continue.

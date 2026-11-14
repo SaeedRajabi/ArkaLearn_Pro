@@ -1,0 +1,36 @@
+{
+  "review_date": "2026-11-11",
+  "scope": "MeetingHub connection and reconnect recovery only",
+  "frontend_hook_tests_passed": 14,
+  "frontend_typecheck": "succeeded",
+  "frontend_production_build": "succeeded",
+  "backend_release_tests_passed": 82,
+  "backend_live_smtp_tests_skipped": 4,
+  "public_transport_probe_seconds": 95,
+  "public_transport_probe_origins_successful": 2,
+  "public_idle_poll_observed_ms": [
+    90097,
+    90129
+  ],
+  "student_network_failure_reproduced": false,
+  "authenticated_room_join_and_browser_media_tested": false,
+  "production_deployed": false,
+  "files": [
+    {
+      "path": "FrontEnds/AdminDashboard/src/hooks/use-webrtc.ts",
+      "sha256": "23faac401ae94b125d95356624bdfb1c5b05830b8149a9170a43fa05afdbdc8f"
+    },
+    {
+      "path": "FrontEnds/AdminDashboard/src/hooks/__tests__/use-webrtc.test.tsx",
+      "sha256": "3eef591643656034cf447f0058be01ee5c7486a74ba922e828e5c8a601750847"
+    },
+    {
+      "path": "FrontEnds/AdminDashboard/src/components/seminar/seminar-room.tsx",
+      "sha256": "9c84c30cd748f0ff50a4cc4e7d8be4542c6554e9b2dcf62fb85f1334c62abb4c"
+    },
+    {
+      "path": "BackEnd/ArkaSoftware/SRC/03.Endpoints/ArkaSoftwarePro.Src.Endpoints.API/Extensions/HostingExtension.cs",
+      "sha256": "390d8fc75d9b7e1bc3789f93e1dc9532e8399c85c8c8dba12b21419ecde42edd"
+    }
+  ]
+}

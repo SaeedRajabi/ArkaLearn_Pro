@@ -1,0 +1,78 @@
+<Window x:Class="ArkaLearnDesktop.App.Views.Messenger.ImageLightboxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="مشاهده تصویر"
+        WindowStartupLocation="CenterOwner"
+        WindowState="Maximized"
+        Background="#E6000000"
+        KeyDown="Window_OnKeyDown"
+        ShowInTaskbar="False">
+    <Grid x:Name="Backdrop" MouseLeftButtonDown="Backdrop_OnMouseLeftButtonDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Margin="16,12" LastChildFill="True">
+            <Button DockPanel.Dock="Left"
+                    Content="بستن"
+                    Padding="14,8"
+                    Cursor="Hand"
+                    Click="Close_OnClick"
+                    Background="#33FFFFFF"
+                    Foreground="White"
+                    BorderThickness="0" />
+            <TextBlock x:Name="TitleText"
+                       Text="برای بزرگ‌نمایی از اسکرول ماوس یا دکمه‌ها استفاده کنید"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="#E5E7EB"
+                       FontSize="13" />
+        </DockPanel>
+
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto"
+                      Background="Transparent">
+            <Image x:Name="PreviewImage"
+                   Stretch="Uniform"
+                   MaxWidth="1600"
+                   MaxHeight="900"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Cursor="Hand"
+                   MouseWheel="PreviewImage_OnMouseWheel" />
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,18">
+            <Button Content="−"
+                    Width="44"
+                    Height="36"
+                    Margin="4"
+                    Cursor="Hand"
+                    Click="ZoomOut_OnClick" />
+            <TextBlock x:Name="ZoomLabel"
+                       Text="100%"
+                       Width="64"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="White"
+                       FontWeight="SemiBold" />
+            <Button Content="+"
+                    Width="44"
+                    Height="36"
+                    Margin="4"
+                    Cursor="Hand"
+                    Click="ZoomIn_OnClick" />
+            <Button Content="بازنشانی"
+                    Padding="12,8"
+                    Margin="8,4,4,4"
+                    Cursor="Hand"
+                    Click="ResetZoom_OnClick" />
+        </StackPanel>
+    </Grid>
+</Window>

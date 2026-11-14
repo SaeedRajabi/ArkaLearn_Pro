@@ -1,0 +1,53 @@
+
+{
+  "users": [
+    {
+      "id": "USR-001",
+      "name": "Alice Johnson",
+      "email": "alice.j@example.com",
+      "avatarUrl": "/placeholder-images/avatar-1.jpeg",
+      "initials": "AJ",
+      "status": "Active",
+      "registrationDate": "2023-01-15T00:00:00.000Z",
+      "lastLogin": "2024-07-22T00:00:00.000Z"
+    },
+    {
+      "id": "USR-002",
+      "name": "Bob Smith",
+      "email": "bob.smith@example.com",
+      "avatarUrl": "/placeholder-images/avatar-3.jpeg",
+      "initials": "BS",
+      "status": "Active",
+      "registrationDate": "2023-02-20T00:00:00.000Z",
+      "lastLogin": "2024-07-21T00:00:00.000Z"
+    },
+    {
+      "id": "USR-003",
+      "name": "Charlie Brown",
+      "email": "charlie.b@example.com",
+      "initials": "CB",
+      "status": "Blocked",
+      "registrationDate": "2023-03-10T00:00:00.000Z",
+      "lastLogin": "2024-06-30T00:00:00.000Z"
+    },
+    {
+      "id": "USR-004",
+      "name": "Diana Prince",
+      "email": "diana.p@example.com",
+      "avatarUrl": "/placeholder-images/avatar-4.jpeg",
+      "initials": "DP",
+      "status": "Active",
+      "registrationDate": "2023-04-05T00:00:00.000Z",
+      "lastLogin": "2024-07-20T00:00:00.000Z"
+    },
+    {
+      "id": "USR-005",
+      "name": "Ethan Hunt",
+      "email": "ethan.h@example.com",
+      "initials": "EH",
+      "status": "Active",
+      "registrationDate": "2023-05-01T00:00:00.000Z",
+      "lastLogin": "2024-07-19T00:00:00.000Z"
+    }
+  ]
+}

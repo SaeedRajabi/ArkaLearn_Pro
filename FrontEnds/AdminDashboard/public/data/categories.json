@@ -1,0 +1,60 @@
+{
+  "categories": [
+    {
+      "id": "CAT-001",
+      "name": "Web Development",
+      "description": "Courses on building websites and web applications.",
+      "courseCount": 5,
+      "createdAt": "2023-01-15T10:00:00Z"
+    },
+    {
+      "id": "CAT-002",
+      "name": "Design",
+      "description": "Courses on UI/UX, graphic design, and creative tools.",
+      "courseCount": 8,
+      "createdAt": "2023-01-20T11:30:00Z"
+    },
+    {
+      "id": "CAT-003",
+      "name": "Productivity",
+      "description": "Courses on tools and techniques to improve your workflow.",
+      "courseCount": 5,
+      "createdAt": "2023-02-01T09:00:00Z"
+    },
+    {
+      "id": "CAT-004",
+      "name": "DevOps",
+      "description": "Courses covering CI/CD, cloud infrastructure, and automation.",
+      "courseCount": 7,
+      "createdAt": "2023-02-10T14:00:00Z"
+    },
+    {
+      "id": "CAT-005",
+      "name": "Data Science",
+      "description": "Learn data analysis, machine learning, and big data technologies.",
+      "courseCount": 10,
+      "createdAt": "2023-03-05T16:45:00Z"
+    },
+    {
+      "id": "CAT-006",
+      "name": "Mobile Development",
+      "description": "Courses for building native and cross-platform mobile apps.",
+      "courseCount": 6,
+      "createdAt": "2023-03-12T11:00:00Z"
+    },
+    {
+      "id": "CAT-007",
+      "name": "Cybersecurity",
+      "description": "Protect systems and data from digital attacks.",
+      "courseCount": 9,
+      "createdAt": "2023-04-01T08:20:00Z"
+    },
+    {
+      "id": "CAT-008",
+      "name": "Business",
+      "description": "Courses on entrepreneurship, finance, and management.",
+      "courseCount": 15,
+      "createdAt": "2023-04-18T13:00:00Z"
+    }
+  ]
+}

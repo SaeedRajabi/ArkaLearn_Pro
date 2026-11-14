@@ -1,0 +1,10 @@
+--- a/node_modules/next-themes/package.json
++++ b/node_modules/next-themes/package.json
+@@ -43,6 +43,6 @@
+   },
+   "peerDependencies": {
+-    "react": "^16.8 || ^17 || ^18"
++    "react": "^16.8 || ^17 || ^18 || ^19"
+   },
+   "dependencies": {
+     "react-wrap-balancer": "^1.1.0"

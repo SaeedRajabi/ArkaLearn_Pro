@@ -1,0 +1,37 @@
+{
+  "review_date": "2026-11-11",
+  "test_projects_successful": 2,
+  "passed_tests": 82,
+  "skipped_live_smtp_tests": 4,
+  "failed_tests": 0,
+  "ef_model_matches_snapshot": true,
+  "payment_migration_sql_generated_offline": true,
+  "release_build": "succeeded",
+  "image_dimension_validation": "SkiaSharp 4.155.0; no Six Labors dependency",
+  "tests_configuration": "Release",
+  "runtime_security_update_pending": {
+    "api_net9_minimum_patched": "9.0.23",
+    "tests_net10_minimum_patched": "10.0.15"
+  },
+  "production_migrations_applied": false,
+  "production_deployed": false,
+  "real_gateway_SQL_Server_WebRTC_end_to_end_validated": false,
+  "online_room_connection": {
+    "review_date": "2026-11-11",
+    "scope": "MeetingHub connection and reconnect recovery only",
+    "frontend_hook_tests_passed": 14,
+    "frontend_typecheck": "succeeded",
+    "frontend_production_build": "succeeded",
+    "backend_release_tests_passed": 82,
+    "backend_live_smtp_tests_skipped": 4,
+    "public_transport_probe_seconds": 95,
+    "public_transport_probe_origins_successful": 2,
+    "public_idle_poll_observed_ms": [
+      90097,
+      90129
+    ],
+    "student_network_failure_reproduced": false,
+    "authenticated_room_join_and_browser_media_tested": false,
+    "production_deployed": false
+  }
+}

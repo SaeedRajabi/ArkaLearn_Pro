@@ -1,0 +1,44 @@
+<UserControl x:Class="ArkaLearnDesktop.App.Views.Updates.MandatoryUpdateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BgPrimaryBrush}">
+    <Grid>
+        <Border Width="480"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="{StaticResource BgSurfaceBrush}"
+                BorderBrush="{StaticResource BorderSubtleBrush}"
+                BorderThickness="1"
+                CornerRadius="12"
+                Padding="32">
+            <StackPanel>
+                <TextBlock Text="{Binding Title}"
+                           FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           HorizontalAlignment="Center" />
+                <TextBlock Text="{Binding Message}"
+                           Margin="0,16,0,0"
+                           TextWrapping="Wrap"
+                           Foreground="{StaticResource TextMutedBrush}"
+                           TextAlignment="Center" />
+                <TextBlock Text="{Binding ReleaseNotes}"
+                           Margin="0,16,0,0"
+                           TextWrapping="Wrap"
+                           Foreground="{StaticResource TextPrimaryBrush}"
+                           Visibility="{Binding ReleaseNotes, Converter={StaticResource NullToVisibilityConverter}}" />
+                <Button Content="دانلود نسخه جدید"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding OpenInstallerCommand}"
+                        Margin="0,24,0,0"
+                        Height="40" />
+                <TextBlock Text="تا زمان نصب نسخه جدید، برنامه در دسترس نیست."
+                           Margin="0,16,0,0"
+                           FontSize="12"
+                           Foreground="{StaticResource TextMutedBrush}"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

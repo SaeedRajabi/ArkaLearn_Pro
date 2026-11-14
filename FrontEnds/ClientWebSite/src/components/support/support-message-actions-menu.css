@@ -1,0 +1,218 @@
+/* Support message actions — custom menu (no UI library dropdown) */
+
+.support-msg-menu__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: none;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.support-msg-menu__trigger:hover,
+.support-msg-menu__trigger:focus-visible {
+  opacity: 1;
+  background: hsl(var(--muted) / 0.6);
+  color: hsl(var(--foreground));
+  outline: none;
+}
+
+.support-msg-menu__trigger[aria-expanded='true'] {
+  opacity: 1;
+  background: hsl(var(--muted) / 0.8);
+  color: hsl(var(--foreground));
+}
+
+.group:hover .support-msg-menu__trigger {
+  opacity: 1;
+}
+
+/* Desktop / tablet popover */
+.support-msg-menu--popover {
+  min-width: 11.5rem;
+  max-width: min(16rem, calc(100vw - 1rem));
+  padding: 0.35rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.625rem;
+  background: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.08),
+    0 10px 24px -4px rgb(0 0 0 / 0.12);
+  animation: support-msg-menu-fade-in 0.14s ease-out;
+}
+
+.support-msg-menu__item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.55rem 0.75rem;
+  border: none;
+  border-radius: 0.45rem;
+  background: transparent;
+  color: inherit;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: start;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.support-msg-menu__item:hover,
+.support-msg-menu__item:focus-visible {
+  background: hsl(var(--muted) / 0.65);
+  outline: none;
+}
+
+.support-msg-menu__item--danger {
+  color: hsl(var(--destructive));
+}
+
+.support-msg-menu__item--danger:hover,
+.support-msg-menu__item--danger:focus-visible {
+  background: hsl(var(--destructive) / 0.1);
+}
+
+.support-msg-menu__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.support-msg-menu__icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.support-msg-menu__sep {
+  height: 1px;
+  margin: 0.25rem 0.5rem;
+  background: hsl(var(--border));
+}
+
+/* Mobile bottom sheet */
+.support-msg-menu__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: rgb(0 0 0 / 0.45);
+  cursor: pointer;
+  animation: support-msg-menu-backdrop-in 0.2s ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.support-msg-menu--sheet {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  max-height: min(70vh, 28rem);
+  padding: 0.5rem 0.75rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  border-radius: 1rem 1rem 0 0;
+  border: 1px solid hsl(var(--border));
+  border-bottom: none;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  box-shadow: 0 -8px 32px rgb(0 0 0 / 0.18);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: support-msg-menu-sheet-in 0.22s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.support-msg-menu__sheet-handle {
+  width: 2.5rem;
+  height: 0.25rem;
+  margin: 0.25rem auto 0.75rem;
+  border-radius: 9999px;
+  background: hsl(var(--muted-foreground) / 0.35);
+}
+
+.support-msg-menu__item--sheet {
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+}
+
+.support-msg-menu__cancel {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.75rem;
+  background: hsl(var(--muted) / 0.35);
+  color: hsl(var(--foreground));
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.support-msg-menu__cancel:hover,
+.support-msg-menu__cancel:focus-visible {
+  background: hsl(var(--muted) / 0.6);
+  outline: none;
+}
+
+@keyframes support-msg-menu-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes support-msg-menu-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes support-msg-menu-sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .support-msg-menu--popover {
+    display: none;
+  }
+}
+
+@media (min-width: 641px) {
+  .support-msg-menu__backdrop,
+  .support-msg-menu--sheet {
+    display: none;
+  }
+}

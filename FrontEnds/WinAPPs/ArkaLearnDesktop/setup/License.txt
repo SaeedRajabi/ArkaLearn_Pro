@@ -1,0 +1,111 @@
+ARKASOFTWARE DESKTOP — END USER LICENSE AGREEMENT (EULA)
+
+IMPORTANT — PLEASE READ CAREFULLY BEFORE INSTALLING OR USING THIS SOFTWARE.
+
+This End User License Agreement ("Agreement") is a legal agreement between you ("User", "you") and ArkaSoftware ("Licensor", "we", "us") regarding the ArkaSoftware Desktop application for Windows ("Software"), including any related documentation, updates, and components.
+
+By installing, copying, or using the Software, you agree to be bound by the terms of this Agreement. If you do not agree, do not install or use the Software.
+
+
+1. LICENSE GRANT
+
+Subject to this Agreement and to a valid account / course enrollment / desktop license issued by ArkaSoftware (or an authorized partner), we grant you a limited, non-exclusive, non-transferable, revocable license to install and use the Software on a personal computer for lawful educational and learning purposes only.
+
+
+2. ACCOUNT AND SINGLE-DEVICE LOGIN
+
+2.1 Access to the Software requires a valid ArkaSoftware user account and an active internet connection for authentication, license validation, updates, and many core features.
+
+2.2 Exclusive desktop session: Your account may maintain an active login on only ONE Windows computer at a time. If you are already signed in on one system, you cannot sign in on another system until you sign out from the previous system.
+
+2.3 You are responsible for keeping your credentials confidential and for all activity under your account.
+
+
+3. COURSE AND VIDEO LICENSES (DEVICE BINDING)
+
+3.1 Desktop course / video licenses may be activated and used on only ONE physical computer per license.
+
+3.2 The first successful activation on a device binds that license to that machine’s hardware identity.
+
+3.3 Reinstalling Windows on the SAME physical computer is allowed; you may continue to use previously bound licenses on that same machine after reinstalling the Software.
+
+3.4 Moving a bound license to a DIFFERENT physical computer is not permitted. If a device transfer is required, contact ArkaSoftware support or an authorized administrator to regenerate or reassign the license according to company policy.
+
+3.5 Sharing, selling, renting, publishing, or redistributing license keys, offline grants, encrypted media, or account credentials is strictly prohibited.
+
+
+4. INTELLECTUAL PROPERTY AND CONTENT PROTECTION
+
+4.1 The Software, branding, documentation, and all related materials are owned by ArkaSoftware or its licensors and are protected by intellectual property laws.
+
+4.2 Course videos and other protected media may be delivered in encrypted form. You may not attempt to copy, rip, capture, reverse-engineer, decrypt, redistribute, or circumvent content protection, DRM, screen-capture protections, or related security mechanisms, except to the limited extent that applicable law expressly prohibits such restriction.
+
+4.3 You may not remove or alter any copyright, trademark, or proprietary notices.
+
+
+5. PERMITTED AND PROHIBITED USE
+
+You may use the Software only in accordance with this Agreement and applicable law.
+
+You must NOT:
+- Use the Software on more devices or accounts than your license allows
+- Share one account across multiple concurrent desktop sessions
+- Attempt to disable security, licensing, device-binding, or anti-capture features
+- Use the Software to harass others, violate privacy, or commit unauthorized remote access
+- Reverse engineer, decompile, or disassemble the Software except where mandatory law allows
+- Redistribute the installer or Software without written permission from ArkaSoftware
+
+
+6. REMOTE ASSISTANCE FEATURE
+
+6.1 The Software may include remote assistance capabilities (screen sharing / remote control with consent).
+
+6.2 Remote sessions require explicit user consent for the requested permissions. You must not misuse remote assistance to access systems or data without authorization.
+
+6.3 The application may continue running in the background (system tray) so that assistance requests can be received. You can fully exit the application from the tray menu.
+
+
+7. UPDATES, NETWORK, AND AVAILABILITY
+
+7.1 The Software may check for mandatory or optional updates. Mandatory updates may be required to continue using the Software.
+
+7.2 Features that depend on ArkaSoftware servers (login, licenses, messaging, remote assist, media keys, etc.) require network connectivity and may be unavailable during maintenance or outages.
+
+7.3 We may modify, suspend, or discontinue features with reasonable notice where practicable.
+
+
+8. PRIVACY AND DATA
+
+8.1 The Software may collect and transmit technical data needed for operation, including device identifiers, machine name, OS/app version, authentication tokens, license/device binding information, usage necessary for DRM and security, and support/remote-assist session metadata.
+
+8.2 Data is processed to provide the service, enforce licenses, secure content, and improve reliability and support, in accordance with ArkaSoftware policies and applicable law.
+
+
+9. DISCLAIMER OF WARRANTIES
+
+THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT, TO THE MAXIMUM EXTENT PERMITTED BY LAW.
+
+
+10. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, ARKASOFTWARE SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF DATA, PROFITS, OR BUSINESS, ARISING FROM YOUR USE OF THE SOFTWARE.
+
+
+11. TERMINATION
+
+This license terminates automatically if you breach this Agreement. Upon termination you must stop using the Software and uninstall it. Provisions that by nature should survive (intellectual property, disclaimers, liability limits) will survive termination.
+
+
+12. GOVERNING LAW
+
+This Agreement is governed by the laws applicable to ArkaSoftware’s principal place of business, unless mandatory local consumer law provides otherwise.
+
+
+13. CONTACT
+
+For license transfers, account issues, or support related to ArkaSoftware Desktop, contact ArkaSoftware support through your official support channels in the product or organization portal.
+
+
+BY CLICKING “I AGREE”, INSTALLING, OR USING THE SOFTWARE, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO THIS AGREEMENT.
+
+© ArkaSoftware. All rights reserved.

@@ -1,0 +1,1032 @@
+<UserControl x:Class="ArkaLearnDesktop.App.Views.Messenger.MessengerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:ArkaLearnDesktop.App.Converters"
+             xmlns:controls="clr-namespace:ArkaLearnDesktop.App.Controls"
+             Background="{StaticResource BgPrimaryBrush}">
+    <UserControl.Resources>
+        <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter" />
+        <converters:DisplayInitialsConverter x:Key="DisplayInitialsConverter" />
+        <converters:NullToCollapsedVisibilityConverter x:Key="NullToCollapsedVisibilityConverter" />
+        <converters:NullToVisibleVisibilityConverter x:Key="NullToVisibleVisibilityConverter" />
+        <converters:StringToUriConverter x:Key="StringToUriConverter" />
+
+        <Style x:Key="ComposeToolbarButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Margin" Value="0,0,4,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                Padding="4,2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource BgElevatedBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="AttachChipButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background" Value="{StaticResource BgElevatedBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderSubtleBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="20"
+                                Width="40"
+                                Height="40">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource BorderSubtleBrush}" />
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Opacity" Value="0.85" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Bd" Property="Opacity" Value="0.4" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MessageActionButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="28" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Margin" Value="4,0,0,0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Width="28"
+                                Height="28">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#33000000" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Fully custom dark menu: removes the default white system icon gutter column. -->
+        <Style x:Key="DarkMessageContextMenuStyle" TargetType="ContextMenu">
+            <Setter Property="Background" Value="{StaticResource BgSurfaceBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderSubtleBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="6" />
+            <Setter Property="HasDropShadow" Value="False" />
+            <Setter Property="FlowDirection" Value="RightToLeft" />
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContextMenu">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="True">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="18" ShadowDepth="4" Opacity="0.45" Direction="270" Color="#000000" />
+                            </Border.Effect>
+                            <StackPanel IsItemsHost="True"
+                                        KeyboardNavigation.DirectionalNavigation="Cycle" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Padding" Value="10,8" />
+                        <Setter Property="OverridesDefaultStyle" Value="True" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="MenuItem">
+                                    <Border x:Name="Bd"
+                                            Background="{TemplateBinding Background}"
+                                            Padding="{TemplateBinding Padding}"
+                                            CornerRadius="8"
+                                            Margin="0,1"
+                                            SnapsToDevicePixels="True">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="28" />
+                                            </Grid.ColumnDefinitions>
+                                            <ContentPresenter Grid.Column="0"
+                                                              ContentSource="Header"
+                                                              VerticalAlignment="Center"
+                                                              RecognizesAccessKey="True" />
+                                            <ContentPresenter Grid.Column="1"
+                                                              ContentSource="Icon"
+                                                              Width="16"
+                                                              Height="16"
+                                                              HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsHighlighted" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource BgElevatedBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.45" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ChatBubbleBorderStyle" TargetType="Border">
+            <Setter Property="Margin" Value="0,4" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="MaxWidth" Value="420" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Background" Value="{StaticResource BgElevatedBrush}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMine}" Value="True">
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                    <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ChatBodyTextStyle" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0,2,0,0" />
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMine}" Value="True">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ChatMetaTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="{StaticResource TextMutedBrush}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMine}" Value="True">
+                    <Setter Property="Foreground" Value="#E5E7EB" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock Text="پیام‌رسان پشتیبانی"
+                       FontSize="24"
+                       TextAlignment="left"
+                       FontWeight="SemiBold"
+                       Foreground="{StaticResource TextPrimaryBrush}" />
+            <TextBlock Margin="0,6,0,0"
+                       TextAlignment="left"
+                       Text="ابتدا استاد/دانشجو را انتخاب کنید، سپس موضوعات و پیام‌ها"
+                       Foreground="{StaticResource TextMutedBrush}" />
+            <Border Margin="0,12,0,0"
+                    Padding="12"
+                    CornerRadius="10"
+                    Background="#FEF3C7"
+                    BorderBrush="#F59E0B"
+                    BorderThickness="1"
+                    Visibility="{Binding VipGateVisibility}">
+                <StackPanel>
+                    <TextBlock Text="اشتراک پشتیبانی فعال نیست"
+                               FontWeight="SemiBold"
+                               Foreground="#92400E"
+                               Margin="0,0,0,6" />
+                    <TextBlock Text="برای ارسال پیام و ایجاد موضوع جدید، ابتدا پنل پشتیبانی را از سایت فعال کنید."
+                               TextWrapping="Wrap"
+                               Foreground="#92400E"
+                               Margin="0,0,0,10" />
+                    <Button Content="برای فعال‌سازی وارد شوید"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding OpenVipActivationCommand}"
+                            HorizontalAlignment="Left"
+                            Padding="12,8"
+                            ToolTip="{Binding VipActivationUrl}" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <Border Grid.Row="1"
+                Margin="0,0,0,12"
+                Background="{StaticResource BgSurfaceBrush}"
+                BorderBrush="{StaticResource BorderSubtleBrush}"
+                BorderThickness="1"
+                CornerRadius="12"
+                Padding="12">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                    <Button Style="{StaticResource RefreshIconButtonStyle}"
+                            Command="{Binding RefreshCommand}"
+                            Margin="0,0,8,0" />
+                    <Button Content="انتشار استوری"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding PublishStoryCommand}"
+                            Visibility="{Binding PublishStoryVisibility}" />
+                </StackPanel>
+                <TextBlock DockPanel.Dock="Bottom"
+                           Text="{Binding StatusMessage}"
+                           Margin="10,0,0,8"
+                           TextAlignment="Left"
+                           TextWrapping="Wrap"
+                           Foreground="{StaticResource TextMutedBrush}" />
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Disabled">
+                    <ItemsControl ItemsSource="{Binding StoryGroups}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Margin="0,0,12,0"
+                                        Padding="0"
+                                        Cursor="Hand"
+                                        ToolTip="{Binding TeacherName}"
+                                        Command="{Binding DataContext.OpenStoryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <StackPanel Width="78" Background="Transparent">
+                                                <Grid Width="78" Height="78" HorizontalAlignment="Center">
+                                                    <!-- White hover ring (only the circle outline) -->
+                                                    <Ellipse x:Name="HoverRing"
+                                                             Width="78"
+                                                             Height="78"
+                                                             Stroke="White"
+                                                             StrokeThickness="2.5"
+                                                             Opacity="0"
+                                                             IsHitTestVisible="False" />
+                                                    <Border Width="72"
+                                                            Height="72"
+                                                            CornerRadius="36"
+                                                            Padding="3"
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"
+                                                            x:Name="StoryRing">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border">
+                                                                <Setter Property="Background" Value="{StaticResource BorderSubtleBrush}" />
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding HasUnseen}" Value="True">
+                                                                        <Setter Property="Background">
+                                                                            <Setter.Value>
+                                                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                                                    <GradientStop Color="#FF833AB4" Offset="0" />
+                                                                                    <GradientStop Color="#FFE1306C" Offset="0.5" />
+                                                                                    <GradientStop Color="#FFF77737" Offset="1" />
+                                                                                </LinearGradientBrush>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                        <Border Background="{StaticResource BgSurfaceBrush}"
+                                                                CornerRadius="33"
+                                                                Padding="2">
+                                             <Grid>
+                                                                <Ellipse Fill="{StaticResource BgElevatedBrush}" />
+                                                                <TextBlock Text="{Binding TeacherName, Converter={StaticResource DisplayInitialsConverter}}"
+                                                                           HorizontalAlignment="Center"
+                                                                           VerticalAlignment="Center"
+                                                                           FontWeight="SemiBold"
+                                                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                                                           Visibility="{Binding AvatarUrl, Converter={StaticResource NullToVisibleVisibilityConverter}}" />
+                                                                <Image Stretch="UniformToFill"
+                                                                       Source="{Binding AvatarUrl, Converter={StaticResource StringToImageSourceConverter}}"
+                                                                       Visibility="{Binding AvatarUrl, Converter={StaticResource NullToCollapsedVisibilityConverter}}">
+                                                                    <Image.Clip>
+                                                                        <EllipseGeometry Center="32,32" RadiusX="32" RadiusY="32" />
+                                                                    </Image.Clip>
+                                                                </Image>
+                                                            </Grid>
+                                                        </Border>
+                                                    </Border>
+                                                </Grid>
+                                                <TextBlock Text="{Binding TeacherName}"
+                                                           Margin="0,4,0,0"
+                                                           FontSize="11"
+                                                           TextAlignment="Center"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           Foreground="{StaticResource TextPrimaryBrush}" />
+                                            </StackPanel>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="HoverRing" Property="Opacity" Value="0.92" />
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter TargetName="HoverRing" Property="Opacity" Value="1" />
+                                                    <Setter TargetName="HoverRing" Property="StrokeThickness" Value="3" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Margin="0,0,12,0"
+                    Background="{StaticResource BgSurfaceBrush}"
+                    BorderBrush="{StaticResource BorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="8">
+                <DockPanel>
+                    <Border DockPanel.Dock="Top"
+                            Margin="0,0,0,8"
+                            Padding="8,8,8,10"
+                            CornerRadius="10"
+                            Background="{StaticResource BgElevatedBrush}"
+                            BorderBrush="{StaticResource BorderSubtleBrush}"
+                            BorderThickness="1">
+                        <StackPanel>
+                            <DockPanel LastChildFill="True">
+                                <!-- Visual left of title (RTL end side) -->
+                                <Button DockPanel.Dock="Right"
+                                        Width="34"
+                                        Height="34"
+                                        Margin="8,0,0,0"
+                                        Padding="0"
+                                        Cursor="Hand"
+                                        ToolTip="افزودن موضوع"
+                                        Command="{Binding NewTopicCommand}"
+                                        Visibility="{Binding NewTopicVisibility}"
+                                        Background="{StaticResource AccentBrush}"
+                                        BorderThickness="0"
+                                        VerticalAlignment="Center">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="Bd"
+                                                    Background="{TemplateBinding Background}"
+                                                    CornerRadius="8"
+                                                    Width="34"
+                                                    Height="34">
+                                                <Path Width="14" Height="14"
+                                                      Stretch="Uniform"
+                                                      Fill="White"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Data="M11,2 H13 V11 H22 V13 H13 V22 H11 V13 H2 V11 H11 Z" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bd" Property="Opacity" Value="0.9" />
+                                                </Trigger>
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter TargetName="Bd" Property="Opacity" Value="0.4" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Button DockPanel.Dock="Left"
+                                        Width="34"
+                                        Height="34"
+                                        Margin="0,0,8,0"
+                                        Padding="0"
+                                        Cursor="Hand"
+                                        ToolTip="بازگشت به طرف‌های گفتگو"
+                                        Command="{Binding BackToPeersCommand}"
+                                        Visibility="{Binding TopicsVisibility}"
+                                        VerticalAlignment="Center"
+                                        Background="{StaticResource BgPrimaryBrush}"
+                                        BorderBrush="{StaticResource BorderSubtleBrush}"
+                                        BorderThickness="1">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="Bd"
+                                                    Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="8"
+                                                    Width="34"
+                                                    Height="34">
+                                                <Path Width="14" Height="14"
+                                                      Stretch="Uniform"
+                                                      Fill="{StaticResource TextPrimaryBrush}"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Data="M8.59,16.59L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.59Z" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background" Value="{StaticResource BorderSubtleBrush}" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock Text="{Binding SidebarTitle}"
+                                           FontWeight="SemiBold"
+                                           TextAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           TextWrapping="Wrap"
+                                           Foreground="{StaticResource TextPrimaryBrush}" />
+                            </DockPanel>
+                            <TextBlock Margin="0,6,0,0"
+                                       Text="{Binding SidebarHint}"
+                                       FontSize="12"
+                                       TextAlignment="Left"
+                                       TextWrapping="Wrap"
+                                       Foreground="{StaticResource TextMutedBrush}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="{StaticResource BgPrimaryBrush}"
+                            CornerRadius="10"
+                            BorderBrush="{StaticResource BorderSubtleBrush}"
+                            BorderThickness="1"
+                            Padding="4"
+                            MinHeight="120">
+                        <Grid>
+                            <ListBox ItemsSource="{Binding Peers}"
+                                     SelectedItem="{Binding SelectedPeer}"
+                                     Visibility="{Binding PeersVisibility}"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                     Foreground="{StaticResource TextPrimaryBrush}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        <Setter Property="Padding" Value="2" />
+                                        <Setter Property="Margin" Value="0,1" />
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource BgElevatedBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource BgSurfaceBrush}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="10,8" CornerRadius="8">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Width="40" Height="40" Margin="0,0,10,0" VerticalAlignment="Top">
+                                                    <Ellipse Fill="{StaticResource BgElevatedBrush}" />
+                                                    <TextBlock Text="{Binding DisplayName, Converter={StaticResource DisplayInitialsConverter}}"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="{StaticResource TextPrimaryBrush}"
+                                                               Visibility="{Binding AvatarUrl, Converter={StaticResource NullToVisibleVisibilityConverter}}" />
+                                                    <Image Stretch="UniformToFill"
+                                                           Source="{Binding AvatarUrl, Converter={StaticResource StringToImageSourceConverter}}"
+                                                           Visibility="{Binding AvatarUrl, Converter={StaticResource NullToCollapsedVisibilityConverter}}">
+                                                        <Image.Clip>
+                                                            <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
+                                                        </Image.Clip>
+                                                    </Image>
+                                                </Grid>
+                                                <Grid Grid.Column="1">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <DockPanel LastChildFill="True">
+                                                        <Border DockPanel.Dock="Right"
+                                                                Margin="8,0,0,0"
+                                                                Padding="8,2"
+                                                                CornerRadius="10"
+                                                                Background="{StaticResource BgElevatedBrush}"
+                                                                BorderBrush="{StaticResource BorderSubtleBrush}"
+                                                                BorderThickness="1"
+                                                                VerticalAlignment="Center">
+                                                            <TextBlock Text="{Binding TopicCountLabel}"
+                                                                       FontSize="11"
+                                                                       Foreground="{StaticResource TextMutedBrush}" />
+                                                        </Border>
+                                                        <TextBlock Text="{Binding DisplayName}"
+                                                                   FontWeight="SemiBold"
+                                                                   TextAlignment="Left"
+                                                                   VerticalAlignment="Center"
+                                                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                                                   TextTrimming="CharacterEllipsis" />
+                                                    </DockPanel>
+                                                    <DockPanel Grid.Row="1" Margin="0,5,0,0" LastChildFill="True">
+                                                        <TextBlock DockPanel.Dock="Right"
+                                                                   Text="{Binding UnreadLabel}"
+                                                                   Margin="8,0,0,0"
+                                                                   FontSize="11"
+                                                                   Foreground="{StaticResource AccentBrush}"
+                                                                   Visibility="{Binding UnreadVisibility}"
+                                                                   VerticalAlignment="Center" />
+                                                        <TextBlock Text="{Binding Preview}"
+                                                                   FontSize="12"
+                                                                   TextAlignment="Left"
+                                                                   Foreground="{StaticResource TextMutedBrush}"
+                                                                   TextTrimming="CharacterEllipsis" />
+                                                    </DockPanel>
+                                                </Grid>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <ListBox ItemsSource="{Binding Threads}"
+                                     SelectedItem="{Binding SelectedThread}"
+                                     Visibility="{Binding TopicsVisibility}"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                     Foreground="{StaticResource TextPrimaryBrush}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        <Setter Property="Padding" Value="4,2" />
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource BgElevatedBrush}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Height="68"
+                                        Padding="8,6"
+                                        CornerRadius="8">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding Title}"
+                                                   FontWeight="SemiBold"
+                                                   TextAlignment="Left"
+                                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   TextWrapping="NoWrap" />
+                                        <TextBlock Grid.Row="1"
+                                                   Text="{Binding Preview}"
+                                                   TextAlignment="Left"
+                                                   Margin="0,4,0,0"
+                                                   FontSize="12"
+                                                   Height="18"
+                                                   Foreground="{StaticResource TextMutedBrush}"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   TextWrapping="NoWrap" />
+                                        <TextBlock Grid.Row="2"
+                                                   Text="{Binding UnreadCount, StringFormat='خوانده‌نشده: {0}'}"
+                                                   Margin="0,2,0,0"
+                                                   TextAlignment="Left"
+                                                   FontSize="11"
+                                                   Foreground="{StaticResource TextMutedBrush}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                        </Grid>
+                    </Border>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Background="{StaticResource BgSurfaceBrush}"
+                    BorderBrush="{StaticResource BorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+                        <Grid Width="40" Height="40" Margin="0,0,10,0" VerticalAlignment="Center">
+                            <Ellipse Fill="{StaticResource BgElevatedBrush}" />
+                            <TextBlock Text="{Binding SelectedThread.PeerDisplayName, Converter={StaticResource DisplayInitialsConverter}}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       Visibility="{Binding SelectedPeerAvatarUrl, Converter={StaticResource NullToVisibleVisibilityConverter}}" />
+                            <Image Stretch="UniformToFill"
+                                   Source="{Binding SelectedPeerAvatarUrl, Converter={StaticResource StringToImageSourceConverter}}"
+                                   Visibility="{Binding SelectedPeerAvatarUrl, Converter={StaticResource NullToCollapsedVisibilityConverter}}">
+                                <Image.Clip>
+                                    <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
+                                </Image.Clip>
+                            </Image>
+                        </Grid>
+                        <TextBlock Text="{Binding SelectedThread.PeerDisplayName, TargetNullValue='مکالمه را انتخاب کنید'}"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource TextPrimaryBrush}" />
+                        <TextBlock Text=" • آنلاین"
+                                   Margin="8,4,0,0"
+                                   VerticalAlignment="Center"
+                                   Foreground="#22C55E"
+                                   Visibility="{Binding PeerIsOnline, Converter={StaticResource BoolToVis}}" />
+                    </StackPanel>
+
+                    <ScrollViewer x:Name="MessagesScrollViewer"
+                                  Grid.Row="1"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Messages}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Style="{StaticResource ChatBubbleBorderStyle}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                            <TextBlock Text="{Binding SenderName}"
+                                                       FontWeight="SemiBold"
+                                                       FontSize="12"
+                                                       Foreground="{StaticResource TextMutedBrush}">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                                        <Setter Property="Foreground" Value="{StaticResource TextMutedBrush}" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsMine}" Value="True">
+                                                                <Setter Property="Foreground" Value="#E5E7EB" />
+                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                            <Border Margin="0,4,0,6"
+                                                    Padding="8,6"
+                                                    CornerRadius="8"
+                                                    Background="#22000000"
+                                                    Visibility="{Binding ReplyQuoteVisibility}">
+                                                <TextBlock Text="{Binding ReplyQuoteText}"
+                                                           FontSize="11"
+                                                           TextWrapping="Wrap"
+                                                           Foreground="{StaticResource TextMutedBrush}" />
+                                            </Border>
+                                            <controls:ChatMessageBodyControl Html="{Binding DisplayHtml}"
+                                                                             IsMine="{Binding IsMine}"
+                                                                             Visibility="{Binding BodyVisibility}" />
+                                            <Button Cursor="Hand"
+                                                    Margin="0,6,0,0"
+                                                    Padding="0"
+                                                    BorderThickness="0"
+                                                    Background="Transparent"
+                                                    Visibility="{Binding ImageVisibility}"
+                                                    Command="{Binding DataContext.OpenImageCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="برای بزرگ‌نمایی کلیک کنید">
+                                                <Image Source="{Binding ImageUrl, Converter={StaticResource StringToImageSourceConverter}}"
+                                                       MaxWidth="280"
+                                                       MaxHeight="200"
+                                                       Stretch="Uniform" />
+                                            </Button>
+                                            <controls:ChatAudioPlayer SourceUrl="{Binding AudioUrl}"
+                                                                      Visibility="{Binding AudioVisibility}" />
+                                            <Border Margin="0,6,0,0"
+                                                    Padding="10,8"
+                                                    CornerRadius="10"
+                                                    Background="#1A000000"
+                                                    Visibility="{Binding VideoVisibility}">
+                                                <StackPanel>
+                                                    <TextBlock Text="ویدیو پیوست"
+                                                               FontSize="12"
+                                                               Margin="0,0,0,6"
+                                                               Foreground="{StaticResource TextMutedBrush}" />
+                                                    <Button Content="دانلود ویدیو"
+                                                            Padding="10,6"
+                                                            Cursor="Hand"
+                                                            HorizontalAlignment="Left"
+                                                            Command="{Binding DataContext.DownloadVideoCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                            CommandParameter="{Binding}" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Button Margin="0,6,0,0"
+                                                    Padding="10,6"
+                                                    Cursor="Hand"
+                                                    HorizontalAlignment="Left"
+                                                    Visibility="{Binding FileVisibility}"
+                                                    Command="{Binding DataContext.DownloadFileCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Content="{Binding FileLabel}"
+                                                    ToolTip="دانلود فایل" />
+                                            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                                <TextBlock Text="{Binding TimeLabel}"
+                                                           Style="{StaticResource ChatMetaTextStyle}" />
+                                                <TextBlock Text=" • ویرایش‌شده"
+                                                           Margin="6,0,0,0"
+                                                           FontSize="11"
+                                                           Foreground="{StaticResource TextMutedBrush}"
+                                                           Visibility="{Binding EditedVisibility}" />
+                                                <TextBlock Text=" • در حال ارسال"
+                                                           Margin="6,0,0,0"
+                                                           FontSize="11"
+                                                           Foreground="{StaticResource TextMutedBrush}"
+                                                           Visibility="{Binding IsPending, Converter={StaticResource BoolToVis}}" />
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding Error}"
+                                                       Margin="0,4,0,0"
+                                                       FontSize="11"
+                                                       Foreground="#FCA5A5"
+                                                       Visibility="{Binding Error, Converter={StaticResource NullToVisibilityConverter}}" />
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="1"
+                                                        Orientation="Horizontal"
+                                                        VerticalAlignment="Top"
+                                                        Margin="6,0,0,0"
+                                                        Visibility="{Binding MenuVisibility}">
+                                                <Button Style="{StaticResource MessageActionButtonStyle}"
+                                                        ToolTip="کپی پیام"
+                                                        Click="CopyMessageButton_OnClick"
+                                                        Tag="{Binding}">
+                                                    <Path Width="13" Height="13" Stretch="Uniform"
+                                                          Fill="{StaticResource TextMutedBrush}"
+                                                          Data="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+                                                </Button>
+                                                <Button Style="{StaticResource MessageActionButtonStyle}"
+                                                        ToolTip="گزینه‌های پیام"
+                                                        Click="MessageMenuButton_OnClick"
+                                                        Tag="{Binding}">
+                                                    <Button.ContextMenu>
+                                                        <ContextMenu Style="{StaticResource DarkMessageContextMenuStyle}"
+                                                                     Opened="MessageContextMenu_OnOpened">
+                                                            <MenuItem Header="کپی" Click="CopyMenuItem_OnClick">
+                                                                <MenuItem.Icon>
+                                                                    <Path Width="14" Height="14" Stretch="Uniform"
+                                                                          Fill="{StaticResource TextPrimaryBrush}"
+                                                                          Data="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+                                                                </MenuItem.Icon>
+                                                            </MenuItem>
+                                                            <MenuItem Header="پاسخ" Click="ReplyMenuItem_OnClick">
+                                                                <MenuItem.Icon>
+                                                                    <Path Width="14" Height="14" Stretch="Uniform"
+                                                                          Fill="{StaticResource TextPrimaryBrush}"
+                                                                          Data="M10,9V5L3,12L10,19V14.9C15,14.9 18.5,16.5 21,20C20,15 17,10 10,9Z" />
+                                                                </MenuItem.Icon>
+                                                            </MenuItem>
+                                                            <MenuItem Header="ویرایش" Click="EditMenuItem_OnClick">
+                                                                <MenuItem.Icon>
+                                                                    <Path Width="14" Height="14" Stretch="Uniform"
+                                                                          Fill="{StaticResource TextPrimaryBrush}"
+                                                                          Data="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+                                                                </MenuItem.Icon>
+                                                            </MenuItem>
+                                                            <MenuItem Header="حذف" Click="DeleteMenuItem_OnClick">
+                                                                <MenuItem.Icon>
+                                                                    <Path Width="14" Height="14" Stretch="Uniform"
+                                                                          Fill="#F87171"
+                                                                          Data="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
+                                                                </MenuItem.Icon>
+                                                            </MenuItem>
+                                                        </ContextMenu>
+                                                    </Button.ContextMenu>
+                                                    <Path Width="14" Height="14" Stretch="Uniform"
+                                                          Fill="{StaticResource TextMutedBrush}"
+                                                          Data="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z" />
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <StackPanel Grid.Row="2" Margin="0,12,0,0" Visibility="{Binding ComposerVisibility}">
+                        <Border Margin="0,0,0,10"
+                                Padding="10,8"
+                                CornerRadius="10"
+                                Background="{StaticResource BgElevatedBrush}"
+                                BorderBrush="{StaticResource BorderSubtleBrush}"
+                                BorderThickness="1"
+                                Visibility="{Binding ReplyBannerVisibility}">
+                            <DockPanel LastChildFill="True">
+                                <Button DockPanel.Dock="Left"
+                                        Content="✕"
+                                        Width="28"
+                                        Height="28"
+                                        Margin="0,0,8,0"
+                                        Cursor="Hand"
+                                        ToolTip="لغو"
+                                        Command="{Binding CancelReplyOrEditCommand}"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Foreground="{StaticResource TextMutedBrush}" />
+                                <StackPanel>
+                                    <TextBlock Text="{Binding ReplyBannerTitle}"
+                                               FontWeight="SemiBold"
+                                               Foreground="{StaticResource TextPrimaryBrush}" />
+                                    <TextBlock Text="{Binding ReplyBannerPreview}"
+                                               Margin="0,2,0,0"
+                                               FontSize="12"
+                                               TextTrimming="CharacterEllipsis"
+                                               Foreground="{StaticResource TextMutedBrush}" />
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+
+                        <!-- Formatting tools: separate strip above the text box -->
+                        <Border Margin="0,0,0,8"
+                                Padding="8,6"
+                                CornerRadius="10"
+                                Background="{StaticResource BgElevatedBrush}"
+                                BorderBrush="{StaticResource BorderSubtleBrush}"
+                                BorderThickness="1"
+                                IsEnabled="{Binding HasVipAccess}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="قالب‌بندی"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,10,0"
+                                           FontSize="11"
+                                           Foreground="{StaticResource TextMutedBrush}" />
+                                <Button Style="{StaticResource ComposeToolbarButtonStyle}"
+                                        Content="B"
+                                        FontWeight="Bold"
+                                        ToolTip="پررنگ"
+                                        Click="ComposeBold_OnClick" />
+                                <Button Style="{StaticResource ComposeToolbarButtonStyle}"
+                                        Content="I"
+                                        FontStyle="Italic"
+                                        ToolTip="ایتالیک"
+                                        Click="ComposeItalic_OnClick" />
+                                <Button Style="{StaticResource ComposeToolbarButtonStyle}"
+                                        Content="U"
+                                        ToolTip="زیرخط"
+                                        Click="ComposeUnderline_OnClick" />
+                                <Button Style="{StaticResource ComposeToolbarButtonStyle}"
+                                        Content="H2"
+                                        ToolTip="عنوان"
+                                        Click="ComposeHeading_OnClick" />
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Message text box only -->
+                        <Border Margin="0,0,0,10"
+                                Background="{StaticResource BgPrimaryBrush}"
+                                BorderBrush="{StaticResource BorderSubtleBrush}"
+                                BorderThickness="1"
+                                CornerRadius="14"
+                                Padding="12,10"
+                                IsEnabled="{Binding HasVipAccess}">
+                            <RichTextBox x:Name="ComposeEditor"
+                                         MinHeight="64"
+                                         MaxHeight="160"
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         Foreground="{StaticResource TextPrimaryBrush}"
+                                         CaretBrush="{StaticResource TextPrimaryBrush}"
+                                         AcceptsReturn="True"
+                                         VerticalScrollBarVisibility="Auto"
+                                         FlowDirection="RightToLeft"
+                                         TextChanged="ComposeEditor_OnTextChanged">
+                                <FlowDocument FontSize="14" TextAlignment="Right" />
+                            </RichTextBox>
+                        </Border>
+
+                        <!-- Attach chips + send: outside the text box -->
+                        <DockPanel LastChildFill="False">
+                            <Button DockPanel.Dock="Left"
+                                    MinWidth="96"
+                                    Height="40"
+                                    Content="{Binding SendButtonLabel}"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding SendCommand}"
+                                    VerticalAlignment="Center" />
+
+                            <StackPanel DockPanel.Dock="Right"
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        IsEnabled="{Binding HasVipAccess}">
+                                <Button Style="{StaticResource AttachChipButtonStyle}"
+                                        Command="{Binding AttachImageCommand}"
+                                        ToolTip="ارسال تصویر">
+                                    <Path Width="16" Height="16" Stretch="Uniform"
+                                          Fill="{StaticResource TextPrimaryBrush}"
+                                          Data="M19,19H5V5H19M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M13.96,12.29L11.21,15.83L9.25,13.47L6.5,17H17.5L13.96,12.29Z" />
+                                </Button>
+                                <Button Style="{StaticResource AttachChipButtonStyle}"
+                                        Command="{Binding AttachAudioCommand}"
+                                        ToolTip="ارسال ویس یا فایل صوتی">
+                                    <Path Width="16" Height="16" Stretch="Uniform"
+                                          Fill="{StaticResource TextPrimaryBrush}"
+                                          Data="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z" />
+                                </Button>
+                                <Button Style="{StaticResource AttachChipButtonStyle}"
+                                        Command="{Binding AttachVideoCommand}"
+                                        ToolTip="ارسال ویدیو">
+                                    <Path Width="16" Height="16" Stretch="Uniform"
+                                          Fill="{StaticResource TextPrimaryBrush}"
+                                          Data="M17,10.5V7A1,1 0 0,0 16,6H4A1,1 0 0,0 3,7V17A1,1 0 0,0 4,18H16A1,1 0 0,0 17,17V13.5L21,17.5V6.5L17,10.5Z" />
+                                </Button>
+                                <Button Style="{StaticResource AttachChipButtonStyle}"
+                                        Margin="0"
+                                        Command="{Binding AttachFileCommand}"
+                                        ToolTip="ارسال فایل پیوست">
+                                    <Path Width="16" Height="16" Stretch="Uniform"
+                                          Fill="{StaticResource TextPrimaryBrush}"
+                                          Data="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M15,18V16H6V18H15M18,14V12H6V14H18Z" />
+                                </Button>
+                            </StackPanel>
+                        </DockPanel>
+                    </StackPanel>
+                    <Border Grid.Row="2"
+                            Margin="0,12,0,0"
+                            Padding="12"
+                            CornerRadius="8"
+                            Background="{StaticResource BgElevatedBrush}"
+                            Visibility="{Binding VipGateVisibility}">
+                        <TextBlock TextWrapping="Wrap"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   Text="ارسال پیام غیرفعال است. برای فعال‌سازی پشتیبانی از دکمه بالای صفحه وارد سایت شوید." />
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

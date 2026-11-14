@@ -1,0 +1,263 @@
+.flatpickrPicker {
+  position: relative;
+  width: 100%;
+}
+
+.trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  border: 1px solid hsl(var(--input));
+  border-radius: calc(var(--radius) - 2px);
+  background: hsl(var(--background));
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  font-size: 0.875rem;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.trigger:hover {
+  border-color: hsl(var(--primary) / 0.35);
+}
+
+.triggerOpen,
+.trigger:focus-visible {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.15);
+  outline: none;
+}
+
+.triggerMuted {
+  color: hsl(var(--muted-foreground));
+}
+
+.triggerIcon {
+  height: 1rem;
+  width: 1rem;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.triggerLabel {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: inherit;
+}
+
+.popover {
+  z-index: 9999;
+  pointer-events: auto;
+  width: min(20rem, calc(100vw - 1rem));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.65rem;
+  background: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  box-shadow:
+    0 16px 34px -10px hsl(var(--foreground) / 0.22),
+    0 6px 14px -6px hsl(var(--foreground) / 0.1);
+  animation: popIn 0.16s ease;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  padding: 0.65rem 0.55rem 0.35rem;
+}
+
+.navBtn {
+  display: inline-flex;
+  height: 1.75rem;
+  width: 1.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0.4rem;
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+}
+
+.navBtn:hover {
+  background: hsl(var(--muted) / 0.65);
+  color: hsl(var(--foreground));
+}
+
+.monthYear {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+  flex: 1;
+  justify-content: center;
+}
+
+.monthSelect,
+.yearSelect {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  padding: 0.15rem 0.25rem;
+  border-radius: 0.35rem;
+}
+
+.monthSelect:hover,
+.yearSelect:hover {
+  background: hsl(var(--muted) / 0.5);
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  padding: 0.25rem 0.5rem 0;
+}
+
+.weekday {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  padding: 0.2rem 0;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.1rem;
+  padding: 0.25rem 0.5rem 0.5rem;
+}
+
+.dayBtn {
+  display: inline-flex;
+  height: 2rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: 0.82rem;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+}
+
+.dayBtn:hover:not(:disabled) {
+  background: hsl(var(--accent));
+}
+
+.dayOutside {
+  color: hsl(var(--muted-foreground) / 0.55);
+}
+
+.dayToday {
+  border: 1px solid hsl(var(--primary) / 0.45);
+}
+
+.daySelected {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 1px 4px hsl(var(--primary) / 0.35);
+}
+
+.daySelected:hover:not(:disabled) {
+  background: hsl(var(--primary) / 0.92);
+  color: hsl(var(--primary-foreground));
+}
+
+.dayDisabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.timeRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border-top: 1px solid hsl(var(--border));
+  padding: 0.65rem 0.75rem;
+}
+
+.timeInput {
+  width: 2.4rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.4rem;
+  background: hsl(var(--background));
+  padding: 0.25rem 0.15rem;
+  text-align: center;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.timeSep {
+  font-weight: 700;
+  color: hsl(var(--muted-foreground));
+}
+
+.periodBtn {
+  min-width: 2.2rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.4rem;
+  background: hsl(var(--muted) / 0.35);
+  padding: 0.25rem 0.35rem;
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.periodBtn:hover {
+  background: hsl(var(--muted) / 0.65);
+}
+
+.hint {
+  border-top: 1px solid hsl(var(--border));
+  padding: 0.45rem 0.75rem;
+  font-size: 0.72rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.rtl .header {
+  flex-direction: row-reverse;
+}
+
+.rtl .monthYear {
+  flex-direction: row-reverse;
+}
+
+.rtl .trigger {
+  flex-direction: row-reverse;
+}
+
+.rtl .triggerLabel {
+  text-align: right;
+}
+
+.timeRow {
+  direction: ltr;
+}

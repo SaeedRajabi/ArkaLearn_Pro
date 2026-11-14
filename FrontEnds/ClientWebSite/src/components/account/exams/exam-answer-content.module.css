@@ -1,0 +1,74 @@
+/* Highlights content the student pasted into an exam answer (copied-text flag). */
+.answerContent :global([data-pasted]) {
+  background-color: rgb(253 224 71 / 0.5); /* amber-200 */
+  color: rgb(153 27 27); /* red-800 */
+  border-bottom: 1px dashed rgb(234 88 12 / 0.9); /* orange-600 */
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* Code answers are always read left-to-right regardless of page direction. */
+.answerContent :global(pre.rich-code-block),
+.answerContent :global(pre code) {
+  direction: ltr;
+  text-align: left;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  background-color: hsl(var(--muted));
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+}
+
+/* highlight.js token colors (scoped to exam answer content) */
+.answerContent :global(.hljs-keyword),
+.answerContent :global(.hljs-selector-tag),
+.answerContent :global(.hljs-literal),
+.answerContent :global(.hljs-section),
+.answerContent :global(.hljs-doctag),
+.answerContent :global(.hljs-type),
+.answerContent :global(.hljs-name),
+.answerContent :global(.hljs-strong) {
+  color: #c678dd;
+  font-weight: 600;
+}
+
+.answerContent :global(.hljs-string),
+.answerContent :global(.hljs-regexp),
+.answerContent :global(.hljs-addition),
+.answerContent :global(.hljs-attribute),
+.answerContent :global(.hljs-meta .hljs-string) {
+  color: #98c379;
+}
+
+.answerContent :global(.hljs-number),
+.answerContent :global(.hljs-symbol),
+.answerContent :global(.hljs-bullet),
+.answerContent :global(.hljs-variable),
+.answerContent :global(.hljs-template-variable),
+.answerContent :global(.hljs-attr) {
+  color: #d19a66;
+}
+
+.answerContent :global(.hljs-comment),
+.answerContent :global(.hljs-quote),
+.answerContent :global(.hljs-deletion) {
+  color: #7f848e;
+  font-style: italic;
+}
+
+.answerContent :global(.hljs-title),
+.answerContent :global(.hljs-title.function_),
+.answerContent :global(.hljs-title.class_),
+.answerContent :global(.hljs-function),
+.answerContent :global(.hljs-built_in),
+.answerContent :global(.hljs-class) {
+  color: #61afef;
+}
+
+.answerContent :global(.hljs-meta),
+.answerContent :global(.hljs-selector-id),
+.answerContent :global(.hljs-selector-class),
+.answerContent :global(.hljs-emphasis) {
+  color: #e5c07b;
+}

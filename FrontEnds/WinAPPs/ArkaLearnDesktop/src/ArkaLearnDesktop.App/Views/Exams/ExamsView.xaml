@@ -1,0 +1,251 @@
+<UserControl x:Class="ArkaLearnDesktop.App.Views.Exams.ExamsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BgPrimaryBrush}">
+    <Grid>
+        <Grid Visibility="{Binding ListVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,16">
+                <TextBlock Text="آزمون‌های من"
+                           FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextPrimaryBrush}" />
+                <TextBlock Margin="0,6,0,12"
+                           Text="آزمون‌های اختصاص‌یافته، شرکت در آزمون و مشاهده نتیجه"
+                           Foreground="{StaticResource TextMutedBrush}"
+                           TextWrapping="Wrap" />
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="بروزرسانی"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding RefreshCommand}"
+                            Margin="0,0,8,0" />
+                    <Button Content="شرکت / ادامه"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding OpenExamCommand}"
+                            Margin="0,0,8,0" />
+                    <Button Content="مشاهده نتیجه"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding ViewResultCommand}" />
+                </StackPanel>
+                <TextBlock Margin="0,10,0,0"
+                           Text="{Binding StatusMessage}"
+                           TextWrapping="Wrap"
+                           Foreground="{StaticResource TextMutedBrush}" />
+            </StackPanel>
+
+            <Border Grid.Row="1"
+                    Margin="0,0,0,12"
+                    Background="{StaticResource BgSurfaceBrush}"
+                    BorderBrush="{StaticResource BorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="12"
+                    Visibility="{Binding HasSatisfactionItems, Converter={StaticResource BoolToVisibilityConverter}}">
+                <StackPanel>
+                    <TextBlock Text="رضایت استاد"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               Margin="0,0,0,8" />
+                    <ItemsControl ItemsSource="{Binding SatisfactionItems}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,6">
+                                    <TextBlock FontWeight="SemiBold"
+                                               Foreground="{StaticResource TextPrimaryBrush}">
+                                        <Run Text="{Binding CourseTitle, Mode=OneWay}" />
+                                        <Run Text=" — امتیاز: " />
+                                        <Run Text="{Binding Score, Mode=OneWay}" />
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding Note}"
+                                               TextWrapping="Wrap"
+                                               Foreground="{StaticResource TextMutedBrush}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="2"
+                    Background="{StaticResource BgSurfaceBrush}"
+                    BorderBrush="{StaticResource BorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="12">
+                <ListBox ItemsSource="{Binding AssignedExams}"
+                         SelectedItem="{Binding SelectedExam}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         Foreground="{StaticResource TextPrimaryBrush}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" />
+                                    <TextBlock FontSize="12"
+                                               Foreground="{StaticResource TextMutedBrush}">
+                                        <Run Text="{Binding CourseTitle, Mode=OneWay}" />
+                                        <Run Text=" — " />
+                                        <Run Text="{Binding Level, Mode=OneWay}" />
+                                    </TextBlock>
+                                    <TextBlock FontSize="11"
+                                               Foreground="{StaticResource TextMutedBrush}">
+                                        <Run Text="پایان: " />
+                                        <Run Text="{Binding EndsAtLabel, Mode=OneWay}" />
+                                        <Run Text=" — مدت: " />
+                                        <Run Text="{Binding DurationMinutes, Mode=OneWay}" />
+                                        <Run Text=" دقیقه" />
+                                    </TextBlock>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding StatusLabel}"
+                                           Foreground="{StaticResource AccentBrush}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </Grid>
+
+        <Grid Visibility="{Binding TakingVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,12">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="بازگشت"
+                            Command="{Binding BackToListCommand}"
+                            Margin="0,0,8,0" />
+                    <Button Content="شروع آزمون"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding StartAttemptCommand}"
+                            Margin="0,0,8,0" />
+                    <TextBlock VerticalAlignment="Center"
+                               Margin="12,0,0,0"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               Text="{Binding RemainingTimeLabel, StringFormat=زمان باقی‌مانده: {0}}" />
+                </StackPanel>
+                <TextBlock Margin="0,8,0,0"
+                           Text="{Binding QuestionProgressLabel}"
+                           Foreground="{StaticResource TextPrimaryBrush}" />
+            </StackPanel>
+
+            <Border Grid.Row="1"
+                    Background="{StaticResource BgSurfaceBrush}"
+                    BorderBrush="{StaticResource BorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="16"
+                    DataContext="{Binding CurrentQuestion}">
+                <StackPanel>
+                    <TextBlock Text="{Binding TypeLabel}"
+                               Foreground="{StaticResource AccentBrush}"
+                               Margin="0,0,0,8" />
+                    <TextBlock Text="{Binding Prompt}"
+                               TextWrapping="Wrap"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               Margin="0,0,0,8" />
+                    <TextBlock Text="{Binding CodeSnippet}"
+                               FontFamily="Consolas"
+                               TextWrapping="Wrap"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               Margin="0,0,0,12"
+                               Visibility="{Binding CodeSnippetVisibility}" />
+
+                    <ItemsControl ItemsSource="{Binding Options}"
+                                  Visibility="{Binding OptionsVisibility}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="ExamOptions"
+                                             Content="{Binding Text}"
+                                             IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                             Margin="0,4"
+                                             Foreground="{StaticResource TextPrimaryBrush}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBox Text="{Binding TextAnswer, UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True"
+                             MinHeight="120"
+                             TextWrapping="Wrap"
+                             Visibility="{Binding ShortAnswerVisibility}"
+                             Background="{StaticResource BgPrimaryBrush}"
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             BorderBrush="{StaticResource BorderSubtleBrush}" />
+                </StackPanel>
+            </Border>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,12,0,0">
+                <Button Content="سؤال قبل"
+                        Command="{Binding PreviousQuestionCommand}"
+                        Margin="0,0,8,0" />
+                <Button Content="سؤال بعد"
+                        Command="{Binding NextQuestionCommand}"
+                        Margin="0,0,8,0" />
+                <Button Content="ذخیره پاسخ‌ها"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding SaveAnswersCommand}"
+                        Margin="0,0,8,0" />
+                <Button Content="ارسال نهایی"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding SubmitAttemptCommand}" />
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Visibility="{Binding ResultVisibility}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    MaxWidth="520">
+            <TextBlock Text="نتیجه آزمون"
+                       FontSize="24"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"
+                       Foreground="{StaticResource TextPrimaryBrush}" />
+            <TextBlock Margin="0,12,0,0"
+                       Text="{Binding ResultTitle}"
+                       FontSize="18"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"
+                       Foreground="{StaticResource TextPrimaryBrush}" />
+            <TextBlock Margin="0,6,0,0"
+                       Text="{Binding ResultCourseTitle}"
+                       HorizontalAlignment="Center"
+                       Foreground="{StaticResource TextMutedBrush}" />
+            <TextBlock Margin="0,16,0,0"
+                       Text="{Binding ResultScoreLabel, StringFormat=نمره: {0}}"
+                       FontSize="20"
+                       HorizontalAlignment="Center"
+                       Foreground="{StaticResource AccentBrush}" />
+            <TextBlock Margin="0,8,0,0"
+                       Text="{Binding ResultStatusLabel, StringFormat=وضعیت: {0}}"
+                       HorizontalAlignment="Center"
+                       Foreground="{StaticResource TextMutedBrush}" />
+            <TextBlock Margin="0,16,0,0"
+                       Text="{Binding ResultFeedback}"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       Foreground="{StaticResource TextPrimaryBrush}" />
+            <Button Content="بازگشت به فهرست"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Command="{Binding BackToListCommand}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

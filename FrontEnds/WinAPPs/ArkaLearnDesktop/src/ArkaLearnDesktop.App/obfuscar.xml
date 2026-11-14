@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<!--
+  Obfuscar config — run AFTER a non-single-file Release build, THEN re-publish single-file
+  or use publish-hardened.ps1. Renames types/members to hinder casual decompilation (dnSpy/ILSpy).
+  This does NOT make reverse-engineering impossible.
+-->
+<Obfuscator>
+  <Var name="InPath" value=".\bin\Release\net10.0-windows" />
+  <Var name="OutPath" value=".\bin\Release\net10.0-windows\obfuscated" />
+  <Var name="KeepPublicApi" value="false" />
+  <Var name="HidePrivateApi" value="true" />
+  <Var name="RenameProperties" value="true" />
+  <Var name="RenameEvents" value="true" />
+  <Var name="RenameFields" value="true" />
+  <Var name="UseUnicodeNames" value="true" />
+  <Var name="HideStrings" value="true" />
+  <Module file="$(InPath)\ArkaLearnDesktop.dll" />
+</Obfuscator>

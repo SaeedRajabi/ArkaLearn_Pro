@@ -1,0 +1,72 @@
+.professor-profile-settings__tabs-list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  height: auto;
+  gap: 0.25rem;
+  border-radius: 0.75rem;
+  background: transparent;
+  padding: 0;
+}
+
+.professor-profile-settings__tab {
+  border-radius: 0.5rem 0.5rem 0 0;
+  border: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+}
+
+.professor-profile-settings__tab[data-state='active'] {
+  border-color: hsl(var(--border));
+  border-bottom-color: hsl(var(--primary));
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+  box-shadow: none;
+}
+
+.professor-profile-settings__panel {
+  margin-top: 0;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0 0.75rem 0.75rem 0.75rem;
+  background: hsl(var(--card));
+  padding: 1.5rem;
+}
+
+.professor-profile-settings__upload-zone {
+  display: flex;
+  min-height: 10rem;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  border: 2px dashed hsl(var(--border));
+  background: hsl(var(--muted) / 0.25);
+  padding: 1.5rem;
+  text-align: center;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.professor-profile-settings__upload-zone:hover {
+  border-color: hsl(var(--primary) / 0.5);
+  background: hsl(var(--muted) / 0.4);
+}
+
+.professor-profile-settings__skill-row {
+  display: grid;
+  gap: 1rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .professor-profile-settings__skill-row {
+    grid-template-columns: 1fr 1.5fr auto;
+    align-items: end;
+  }
+}

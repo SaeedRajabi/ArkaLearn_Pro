@@ -1,0 +1,32 @@
+
+{
+  "trainingPlans": [
+    {
+      "id": "PLAN-001",
+      "title": "Basic Web Dev Coaching",
+      "hourlyRate": 40,
+      "totalHours": 10,
+      "totalAmount": 400,
+      "description": "<p>A 10-hour coaching plan for beginners to get started with web development fundamentals, including HTML, CSS, and basic JavaScript.</p>",
+      "createdAt": "2024-07-01T10:00:00Z"
+    },
+    {
+      "id": "PLAN-002",
+      "title": "React Deep Dive",
+      "hourlyRate": 60,
+      "totalHours": 20,
+      "totalAmount": 1100,
+      "description": "<p>A comprehensive 20-hour plan focusing on advanced React concepts like state management, hooks, performance optimization, and testing.</p>",
+      "createdAt": "2024-07-05T11:00:00Z"
+    },
+    {
+      "id": "PLAN-003",
+      "title": "Full-Stack Mentorship",
+      "hourlyRate": 75,
+      "totalHours": 40,
+      "totalAmount": 2800,
+      "description": "<p>A 40-hour intensive mentorship program covering both frontend (React/Next.js) and backend (Node.js/Express) development to build a complete application from scratch.</p>",
+      "createdAt": "2024-07-10T09:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,405 @@
+<UserControl x:Class="ArkaLearnDesktop.App.Views.RemoteAssist.RemoteAssistView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BgPrimaryBrush}">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Padding="0,0,4,0">
+            <StackPanel MaxWidth="760" Margin="0,0,0,24">
+                <TextBlock Text="کمک از راه دور"
+                           FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextPrimaryBrush}" />
+                <TextBlock Margin="0,6,0,16"
+                           Text="دانشجو یک شناسه، نام‌کاربری و رمز دارد. استاد یا ادمین با همان اطلاعات درخواست اتصال می‌فرستد و دانشجو دسترسی‌ها را تأیید می‌کند."
+                           TextWrapping="Wrap"
+                           Foreground="{StaticResource TextMutedBrush}" />
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                    <Button Style="{StaticResource RefreshIconButtonStyle}"
+                            Command="{Binding RefreshCommand}"
+                            Margin="0,0,8,0" />
+                    <Button Content="آماده‌سازی نشست"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding EnsureSessionCommand}"
+                            Visibility="{Binding IsStudent, Converter={StaticResource BoolToVis}}"
+                            Margin="0,0,8,0" />
+                    <Button Content="تغییر رمز نشست"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding ChangePasswordCommand}"
+                            Visibility="{Binding IsStudent, Converter={StaticResource BoolToVis}}"
+                            Margin="0,0,8,0" />
+                    <Button Content="پایان جلسه"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding EndCommand}" />
+                </StackPanel>
+
+                <TextBlock Text="{Binding StatusMessage}"
+                           TextWrapping="Wrap"
+                           Margin="0,0,0,16"
+                           Foreground="{StaticResource TextMutedBrush}" />
+
+                <Border Background="{StaticResource BgSurfaceBrush}"
+                        BorderBrush="{StaticResource BorderSubtleBrush}"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="20"
+                        Margin="0,0,0,16"
+                        Visibility="{Binding HasActiveSession, Converter={StaticResource BoolToVis}}">
+                    <StackPanel>
+                        <TextBlock Text="نشست شما"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextPrimaryBrush}" />
+
+                        <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                            <TextBlock Text="وضعیت:"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       Margin="0,0,8,0"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding ActiveSessionStatusFa}"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="شناسه ورود:"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       Margin="0,0,8,0"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding ActiveSession.OneTimeSessionCode}"
+                                       Style="{StaticResource LtrTextBlockStyle}"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center" />
+                            <Button Content="کپی"
+                                    Margin="12,0,0,0"
+                                    Padding="10,4"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding CopySessionCodeCommand}" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                            <TextBlock Text="نام کاربری:"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       Margin="0,0,8,0"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding ActiveSession.SessionUsername}"
+                                       Style="{StaticResource LtrTextBlockStyle}"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       FontSize="16"
+                                       VerticalAlignment="Center" />
+                            <Button Content="کپی"
+                                    Margin="12,0,0,0"
+                                    Padding="10,4"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding CopyUsernameCommand}" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                            <TextBlock Text="رمز:"
+                                       Foreground="{StaticResource TextMutedBrush}"
+                                       Margin="0,0,8,0"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding DisplayedPassword}"
+                                       Style="{StaticResource LtrTextBlockStyle}"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       FontSize="16"
+                                       VerticalAlignment="Center" />
+                            <Button Content="کپی"
+                                    Margin="12,0,0,0"
+                                    Padding="10,4"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding CopyPasswordCommand}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="{StaticResource BgSurfaceBrush}"
+                        BorderBrush="{StaticResource BorderSubtleBrush}"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="20"
+                        Margin="0,0,0,16"
+                        Visibility="{Binding ShowScreenPreview, Converter={StaticResource BoolToVis}}">
+                    <StackPanel>
+                        <DockPanel LastChildFill="True">
+                            <Button DockPanel.Dock="Left"
+                                    Content="بزرگ‌نمایی"
+                                    Margin="0,0,12,0"
+                                    Padding="10,4"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding ExpandPreviewCommand}" />
+                            <TextBlock FontWeight="SemiBold"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource TextPrimaryBrush}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                        <Setter Property="Text" Value="پیش‌نمایش صفحه‌نمایش شما" />
+                                        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsHelper}" Value="True">
+                                                <Setter Property="Text" Value="صفحه‌نمایش دانشجو" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DockPanel>
+                        <Border x:Name="ScreenPreviewHost"
+                                Margin="0,12,0,0"
+                                CornerRadius="8"
+                                Background="{StaticResource BgPrimaryBrush}"
+                                BorderBrush="{StaticResource BorderSubtleBrush}"
+                                BorderThickness="1"
+                                Focusable="True"
+                                PreviewKeyDown="ScreenPreviewHost_OnPreviewKeyDown"
+                                PreviewKeyUp="ScreenPreviewHost_OnPreviewKeyUp">
+                            <Image x:Name="ScreenPreviewImage"
+                                   Source="{Binding ScreenPreview}"
+                                   Stretch="Uniform"
+                                   MaxHeight="360"
+                                   MouseMove="ScreenPreviewImage_OnMouseMove"
+                                   MouseLeftButtonDown="ScreenPreviewImage_OnMouseLeftButtonDown"
+                                   MouseLeftButtonUp="ScreenPreviewImage_OnMouseLeftButtonUp"
+                                   MouseRightButtonDown="ScreenPreviewImage_OnMouseRightButtonDown"
+                                   MouseRightButtonUp="ScreenPreviewImage_OnMouseRightButtonUp" />
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="{StaticResource BgSurfaceBrush}"
+                        BorderBrush="{StaticResource BorderSubtleBrush}"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="20"
+                        Margin="0,0,0,16"
+                        Visibility="{Binding IsHelper, Converter={StaticResource BoolToVis}}">
+                    <StackPanel>
+                        <TextBlock Text="اتصال به سیستم دانشجو"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextPrimaryBrush}" />
+                        <TextBlock Margin="0,6,0,12"
+                                   TextWrapping="Wrap"
+                                   Text="شناسه، نام کاربری و رمزی که دانشجو به شما داده است را وارد کنید."
+                                   Foreground="{StaticResource TextMutedBrush}" />
+                        <TextBlock Text="شناسه ورود"
+                                   Margin="0,0,0,4"
+                                   Foreground="{StaticResource TextPrimaryBrush}" />
+                        <TextBox Text="{Binding AcceptCode, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource LtrTextBoxStyle}"
+                                 Padding="10,8"
+                                 Background="{StaticResource BgPrimaryBrush}"
+                                 Foreground="{StaticResource TextPrimaryBrush}"
+                                 BorderBrush="{StaticResource BorderSubtleBrush}"
+                                 CaretBrush="{StaticResource TextPrimaryBrush}" />
+                        <TextBlock Text="نام کاربری"
+                                   Margin="0,10,0,4"
+                                   Foreground="{StaticResource TextPrimaryBrush}" />
+                        <TextBox Text="{Binding AcceptUsername, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource LtrTextBoxStyle}"
+                                 Padding="10,8"
+                                 Background="{StaticResource BgPrimaryBrush}"
+                                 Foreground="{StaticResource TextPrimaryBrush}"
+                                 BorderBrush="{StaticResource BorderSubtleBrush}"
+                                 CaretBrush="{StaticResource TextPrimaryBrush}" />
+                        <TextBlock Text="رمز"
+                                   Margin="0,10,0,4"
+                                   Foreground="{StaticResource TextPrimaryBrush}" />
+                        <TextBox Text="{Binding AcceptPassword, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource LtrTextBoxStyle}"
+                                 Padding="10,8"
+                                 Background="{StaticResource BgPrimaryBrush}"
+                                 Foreground="{StaticResource TextPrimaryBrush}"
+                                 BorderBrush="{StaticResource BorderSubtleBrush}"
+                                 CaretBrush="{StaticResource TextPrimaryBrush}" />
+                        <Button Margin="0,14,0,0"
+                                Content="ارسال درخواست اتصال"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                HorizontalAlignment="Left"
+                                Command="{Binding AcceptCommand}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Background="{StaticResource BgSurfaceBrush}"
+                        BorderBrush="{StaticResource BorderSubtleBrush}"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="20">
+                    <StackPanel>
+                        <DockPanel LastChildFill="True" Margin="0,0,0,12">
+                            <Button DockPanel.Dock="Left"
+                                    Content="حذف همه"
+                                    Margin="0,0,12,0"
+                                    Padding="10,4"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding ClearHistoryCommand}" />
+                            <TextBlock Text="تاریخچه نشست‌ها"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource TextPrimaryBrush}" />
+                        </DockPanel>
+                        <ItemsControl ItemsSource="{Binding HistoryItems}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="0,10"
+                                            BorderBrush="{StaticResource BorderSubtleBrush}"
+                                            BorderThickness="0,0,0,1">
+                                        <DockPanel LastChildFill="True">
+                                            <Button DockPanel.Dock="Left"
+                                                    Content="حذف"
+                                                    Margin="0,0,12,0"
+                                                    Padding="10,4"
+                                                    VerticalAlignment="Top"
+                                                    Command="{Binding DataContext.DeleteHistoryItemCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                    CommandParameter="{Binding}" />
+                                            <StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                                <TextBlock Text="شناسه:"
+                                                           Foreground="{StaticResource TextMutedBrush}"
+                                                           Margin="0,0,8,0"
+                                                           VerticalAlignment="Center" />
+                                                <TextBlock Text="{Binding OneTimeSessionCode}"
+                                                           Style="{StaticResource LtrTextBlockStyle}"
+                                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                                           VerticalAlignment="Center" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                                <TextBlock Text="وضعیت:"
+                                                           Foreground="{StaticResource TextMutedBrush}"
+                                                           Margin="0,0,8,0"
+                                                           VerticalAlignment="Center" />
+                                                <TextBlock Text="{Binding Status, Converter={StaticResource RemoteAssistStatusConverter}}"
+                                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                                           VerticalAlignment="Center" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="ایجاد:"
+                                                           Foreground="{StaticResource TextMutedBrush}"
+                                                           Margin="0,0,8,0"
+                                                           VerticalAlignment="Center"
+                                                           FontSize="12" />
+                                                <TextBlock Text="{Binding CreatedAtUtc, StringFormat={}{0:yyyy/MM/dd HH:mm}}"
+                                                           Style="{StaticResource LtrTextBlockStyle}"
+                                                           Foreground="{StaticResource TextMutedBrush}"
+                                                           FontSize="12"
+                                                           VerticalAlignment="Center" />
+                                            </StackPanel>
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Expanded remote preview -->
+        <Grid Background="#EE000000"
+              Panel.ZIndex="50"
+              Visibility="{Binding IsPreviewExpanded, Converter={StaticResource BoolToVis}}">
+            <DockPanel Margin="16">
+                <Button DockPanel.Dock="Top"
+                        Content="بستن بزرگ‌نمایی"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,0,12"
+                        Padding="14,8"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding CollapsePreviewCommand}" />
+                <Border Background="Black" CornerRadius="8">
+                    <Image Source="{Binding ScreenPreview}"
+                           Stretch="Uniform"
+                           RenderOptions.BitmapScalingMode="HighQuality" />
+                </Border>
+            </DockPanel>
+        </Grid>
+
+        <!-- Consent modal -->
+        <Grid Background="#88000000"
+              Panel.ZIndex="60"
+              Visibility="{Binding ShowConsentDialog, Converter={StaticResource BoolToVis}}">
+            <Border Background="{StaticResource BgSurfaceBrush}"
+                    BorderBrush="{StaticResource BorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="16"
+                    Padding="28"
+                    MaxWidth="440"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="درخواست دسترسی از راه دور"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}" />
+                    <TextBlock Margin="0,8,0,16"
+                               TextWrapping="Wrap"
+                               Text="یک استاد یا پشتیبان درخواست اتصال دارد. دسترسی‌های مجاز و مانیتور اشتراک‌گذاری را انتخاب و تأیید کنید."
+                               Foreground="{StaticResource TextMutedBrush}" />
+                    <StackPanel Margin="0,0,0,12"
+                                Visibility="{Binding HasMultipleMonitors, Converter={StaticResource BoolToVis}}">
+                        <TextBlock Text="مانیتور برای اشتراک‌گذاری"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   Margin="0,0,0,8" />
+                        <ComboBox ItemsSource="{Binding AvailableMonitors}"
+                                  SelectedValuePath="Index"
+                                  SelectedValue="{Binding SelectedMonitorIndex, Mode=TwoWay}"
+                                  DisplayMemberPath="DisplayName"
+                                  Style="{StaticResource DarkComboBoxStyle}"
+                                  Padding="8,6" />
+                    </StackPanel>
+                    <TextBlock Text="سطح دسترسی استاد"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               Margin="0,0,0,8" />
+                    <ComboBox ItemsSource="{Binding AccessPresets}"
+                              SelectedValuePath="Id"
+                              SelectedValue="{Binding SelectedAccessPresetId, Mode=TwoWay}"
+                              DisplayMemberPath="DisplayName"
+                              Style="{StaticResource DarkComboBoxStyle}"
+                              Padding="8,6"
+                              Margin="0,0,0,12" />
+                    <CheckBox Content="کنترل موس و صفحه‌کلید"
+                              IsChecked="{Binding PermRemoteControl}"
+                              Foreground="{StaticResource TextPrimaryBrush}"
+                              Margin="0,0,0,8" />
+                    <CheckBox Content="دسترسی کلیپ‌بورد (کپی و چسباندن)"
+                              IsChecked="{Binding PermClipboard}"
+                              Foreground="{StaticResource TextPrimaryBrush}"
+                              Margin="0,0,0,8" />
+                    <CheckBox Content="انتقال فایل"
+                              IsChecked="{Binding PermFileTransfer}"
+                              Foreground="{StaticResource TextPrimaryBrush}"
+                              Margin="0,0,0,8" />
+                    <CheckBox Content="صدا و گفت‌وگوی صوتی"
+                              IsChecked="{Binding PermAudio}"
+                              Foreground="{StaticResource TextPrimaryBrush}"
+                              Margin="0,0,0,8" />
+                    <CheckBox Content="قفل کردن ورودی محلی دانشجو"
+                              IsChecked="{Binding PermLockLocalInput}"
+                              Foreground="{StaticResource TextPrimaryBrush}"
+                              Margin="0,0,0,16" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Button Content="رد کردن"
+                                Command="{Binding DenyConsentCommand}"
+                                Foreground="{StaticResource TextPrimaryBrush}"
+                                Margin="0,0,8,0"
+                                Padding="14,8" />
+                        <Button Content="تأیید و اتصال"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Command="{Binding GrantConsentCommand}"
+                                Padding="14,8" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,18 @@
+{
+  "review_date": "2026-11-11",
+  "files_missing_EF_discovery_metadata": [
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20260709120000_AddUserActivityEvents.cs",
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20260714200000_AddCacheSettings.cs",
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20260714210000_AddDatabaseConnectionSettings.cs",
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20260720190000_CacheSettingsIsEnabledNoDefault.cs",
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20260916120000_AddSecuritySettings.cs",
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20261008140000_AddMediaContentKeys.cs",
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20261015120000_AddDesktopLicenseDelivery.cs",
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20261018120000_ExpandRemoteAssistSessions.cs",
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20261024120000_AddMediaUploadSettings.cs",
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20261025120000_ExtendCourseVideoPathLength.cs",
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20261026120000_AddLiveMediaTransportSettings.cs",
+    "BackEnd/ArkaSoftware/SRC/02.Infrastructure/Data/MSSQL/ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Commands/Migrations/20261027120000_AddCourseCurriculumMaterials.cs"
+  ],
+  "note": "Static review only. Historical migration IDs and actual database history must be reconciled before changing these files."
+}

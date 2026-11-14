@@ -1,0 +1,295 @@
+
+# =========================================================
+# ARKA SOFTWARE - GLOBAL GITIGNORE
+# .NET / ASP.NET Core / React / Next.js / WPF
+# =========================================================
+
+
+# =========================================================
+# 1. .NET BUILD OUTPUTS
+# =========================================================
+
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+artifacts/
+CodeCoverage/
+
+project.lock.json
+project.fragment.lock.json
+ScaffoldingReadMe.txt
+
+*.nupkg
+*.snupkg
+*.binlog
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+
+# =========================================================
+# 2. VISUAL STUDIO
+# =========================================================
+
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+*.sln.ide
+*.cache
+
+# Visual Studio generated files
+Generated Files/
+ipch/
+*.VC.db
+*.VC.VC.opendb
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Rider
+.idea/
+*.sln.iml
+
+
+# =========================================================
+# 3. WPF / WINDOWS APPLICATIONS
+# =========================================================
+
+# Build outputs are covered by the .NET section
+
+# ClickOnce
+publish/
+AppPackages/
+BundleArtifacts/
+
+# MSIX
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+
+# Application installers
+*.msi
+*.exe
+
+# NOTE:
+# Remove the *.exe rule if your repository intentionally
+# stores executable tools or installers.
+
+
+# =========================================================
+# 4. NODE.JS / REACT / NEXT.JS
+# =========================================================
+
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Next.js
+.next/
+**/.next/
+out/
+**/out/
+
+# Next.js build output
+.next-build/
+.vercel/
+
+# React / Vite / Webpack build outputs
+dist/
+**/dist/
+build/
+**/build/
+
+# Cache
+.npm/
+.eslintcache
+.stylelintcache
+.parcel-cache/
+.turbo/
+.cache/
+**/.cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Environment variables
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+!.yarn/sdks
+
+# pnpm
+.pnpm-store/
+
+# Package manager temporary files
+.npmrc.local
+
+
+# =========================================================
+# 5. FRONTEND PROJECTS - ARKA
+# =========================================================
+
+# Admin Dashboard
+/FrontEnds/AdminDashboard/node_modules/
+/FrontEnds/AdminDashboard/.next/
+/FrontEnds/AdminDashboard/out/
+/FrontEnds/AdminDashboard/dist/
+/FrontEnds/AdminDashboard/build/
+/FrontEnds/AdminDashboard/.env
+/FrontEnds/AdminDashboard/.env.*
+!/FrontEnds/AdminDashboard/.env.example
+
+# Client Website
+/FrontEnds/ClientWebSite/node_modules/
+/FrontEnds/ClientWebSite/.next/
+/FrontEnds/ClientWebSite/out/
+/FrontEnds/ClientWebSite/dist/
+/FrontEnds/ClientWebSite/build/
+/FrontEnds/ClientWebSite/.env
+/FrontEnds/ClientWebSite/.env.*
+!/FrontEnds/ClientWebSite/.env.example
+
+
+# =========================================================
+# 6. BACKEND PROJECTS - ARKA
+# =========================================================
+
+/BackEnd/ArkaSoftware/bin/
+/BackEnd/ArkaSoftware/obj/
+/BackEnd/ArkaSoftware/logs/
+/BackEnd/ArkaSoftware/Logs/
+
+/BackEnd/Framework/bin/
+/BackEnd/Framework/obj/
+/BackEnd/Framework/logs/
+/BackEnd/Framework/Logs/
+
+
+# =========================================================
+# 7. WPF PROJECT - ARKA LEARN DESKTOP
+# =========================================================
+
+/FrontEnds/WinAPPs/ArkaLearnDesktop/bin/
+/FrontEnds/WinAPPs/ArkaLearnDesktop/obj/
+/FrontEnds/WinAPPs/ArkaLearnDesktop/.vs/
+/FrontEnds/WinAPPs/ArkaLearnDesktop/publish/
+
+
+# =========================================================
+# 8. ENVIRONMENT / SECRETS
+# =========================================================
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+secrets.json
+appsettings.*.local.json
+
+# User secrets should never be committed
+# Keep appsettings.json and appsettings.Development.json
+# tracked only if they contain no credentials.
+
+
+# =========================================================
+# 9. OPERATING SYSTEM
+# =========================================================
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+
+
+# =========================================================
+# 10. TEMPORARY FILES
+# =========================================================
+
+~$*
+*~
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.swp
+*.swo
+*.pid
+*.seed
+
+# Coverage
+coverage/
+.nyc_output/
+*.lcov
+
+
+# =========================================================
+# 11. DOCKER / DEPLOYMENT TEMPORARY FILES
+# =========================================================
+
+docker-compose.override.yml
+.docker/
+
+# Keep Dockerfile and docker-compose.yml tracked.
+
+
+# =========================================================
+# 12. MISCELLANEOUS
+# =========================================================
+
+*.stackdump
+*.dmp
+*.core

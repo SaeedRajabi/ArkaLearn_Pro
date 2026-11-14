@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" role="img" aria-label="Java">
+  <defs>
+    <linearGradient id="java-bg" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEF2FF"/>
+      <stop offset="0.55" stop-color="#F5F3FF"/>
+      <stop offset="1" stop-color="#FFF7ED"/>
+    </linearGradient>
+    <linearGradient id="java-cup" x1="38" y1="48" x2="82" y2="92" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDBA74"/>
+      <stop offset="1" stop-color="#EA580C"/>
+    </linearGradient>
+    <linearGradient id="java-accent" x1="34" y1="28" x2="86" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#4F46E5"/>
+    </linearGradient>
+    <linearGradient id="java-steam" x1="48" y1="18" x2="72" y2="42" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#818CF8"/>
+      <stop offset="1" stop-color="#6366F1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="120" height="120" rx="20" fill="url(#java-bg)"/>
+
+  <!-- Arka triangle motif (subtle brand mark) -->
+  <path
+    d="M60 22 L72 42 L48 42 Z"
+    fill="url(#java-accent)"
+    opacity="0.18"
+  />
+
+  <!-- Steam -->
+  <path
+    d="M52 34c0-4 2-7 4-7s4 3 4 7-2 7-4 7-4-3-4-7Z"
+    fill="url(#java-steam)"
+    opacity="0.85"
+  />
+  <path
+    d="M60 28c0-4.5 2.2-8 5-8s5 3.5 5 8-2.2 8-5 8-5-3.5-5-8Z"
+    fill="url(#java-steam)"
+  />
+  <path
+    d="M68 34c0-4 2-7 4-7s4 3 4 7-2 7-4 7-4-3-4-7Z"
+    fill="url(#java-steam)"
+    opacity="0.85"
+  />
+
+  <!-- Coffee cup -->
+  <path
+    d="M38 52h38c3.3 0 6 2.7 6 6v18c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V52Z"
+    fill="url(#java-cup)"
+  />
+  <path
+    d="M82 58h4c4.4 0 8 3.6 8 8s-3.6 8-8 8h-4"
+    stroke="#EA580C"
+    stroke-width="4"
+    stroke-linecap="round"
+  />
+  <rect x="42" y="58" width="30" height="5" rx="2.5" fill="#FFF7ED" fill-opacity="0.55"/>
+
+  <!-- Code brackets -->
+  <path
+    d="M30 64h-6M30 72h-6M24 68h4"
+    stroke="#4F46E5"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M90 64h6M90 72h6M92 68h-4"
+    stroke="#4F46E5"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- J letter hint -->
+  <path
+    d="M57 78h6v8c0 3.3-2.7 6-6 6"
+    stroke="white"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    opacity="0.92"
+  />
+</svg>

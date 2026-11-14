@@ -1,0 +1,168 @@
+<UserControl x:Class="ArkaLearnDesktop.App.Views.Settings.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BgPrimaryBrush}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  Padding="0,0,4,0">
+        <StackPanel MaxWidth="640" Margin="0,8,0,0">
+            <TextBlock Text="تنظیمات"
+                       FontSize="24"
+                       FontWeight="SemiBold"
+                       Foreground="{StaticResource TextPrimaryBrush}" />
+            <TextBlock Text="تنظیمات محلی دستگاه، تم و اتصال API"
+                       Margin="0,6,0,20"
+                       Foreground="{StaticResource TextMutedBrush}" />
+
+            <Border Background="{StaticResource BgSurfaceBrush}"
+                    BorderBrush="{StaticResource BorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="20"
+                    Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="کاربر فعلی"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}" />
+                    <TextBlock Margin="0,8,0,0"
+                               Text="{Binding UserDisplayName}"
+                               FontSize="16"
+                               Foreground="{StaticResource TextPrimaryBrush}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                        <TextBlock Text="نقش:"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   Margin="0,0,8,0" />
+                        <TextBlock Text="{Binding UserRole}"
+                                   Foreground="{StaticResource TextMutedBrush}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Background="{StaticResource BgSurfaceBrush}"
+                    BorderBrush="{StaticResource BorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="20"
+                    Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="ظاهر برنامه"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}" />
+                    <TextBlock Margin="0,6,0,12"
+                               Text="تم روشن، تیره یا پیروی از تنظیمات ویندوز"
+                               Foreground="{StaticResource TextMutedBrush}" />
+                    <StackPanel>
+                        <RadioButton Content="مطابق سیستم"
+                                     GroupName="ThemeMode"
+                                     IsChecked="{Binding IsThemeSystem, Mode=TwoWay}"
+                                     Foreground="{StaticResource TextPrimaryBrush}"
+                                     Margin="0,0,0,8" />
+                        <RadioButton Content="تم روشن"
+                                     GroupName="ThemeMode"
+                                     IsChecked="{Binding IsThemeLight, Mode=TwoWay}"
+                                     Foreground="{StaticResource TextPrimaryBrush}"
+                                     Margin="0,0,0,8" />
+                        <RadioButton Content="تم تیره"
+                                     GroupName="ThemeMode"
+                                     IsChecked="{Binding IsThemeDark, Mode=TwoWay}"
+                                     Foreground="{StaticResource TextPrimaryBrush}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Background="{StaticResource BgSurfaceBrush}"
+                    BorderBrush="{StaticResource BorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="20"
+                    Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="اجرای خودکار"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}" />
+                    <TextBlock Margin="0,6,0,12"
+                               Text="با روشن بودن ویندوز، برنامه در پس‌زمینه (سینی سیستم) اجرا می‌شود تا کمک از راه دور آماده بماند."
+                               TextWrapping="Wrap"
+                               Foreground="{StaticResource TextMutedBrush}" />
+                    <CheckBox Content="اجرای خودکار همراه ویندوز"
+                              IsChecked="{Binding StartWithWindows, Mode=TwoWay}"
+                              Foreground="{StaticResource TextPrimaryBrush}" />
+                </StackPanel>
+            </Border>
+
+            <Border Background="{StaticResource BgSurfaceBrush}"
+                    BorderBrush="{StaticResource BorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="20"
+                    Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="آدرس API"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}" />
+                    <TextBox Margin="0,10,0,0"
+                             Style="{StaticResource LtrTextBoxStyle}"
+                             Text="{Binding ApiBaseUrl, UpdateSourceTrigger=PropertyChanged}"
+                             IsReadOnly="{Binding IsApiUrlReadOnly}"
+                             Padding="10,8"
+                             Background="{StaticResource BgPrimaryBrush}"
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             BorderBrush="{StaticResource BorderSubtleBrush}"
+                             CaretBrush="{StaticResource TextPrimaryBrush}" />
+                    <TextBlock Margin="0,8,0,0"
+                               Text="{Binding ApiUrlHint}"
+                               FontSize="12"
+                               TextWrapping="Wrap"
+                               Foreground="{StaticResource TextMutedBrush}" />
+                    <Button Margin="0,14,0,0"
+                            Content="ذخیره آدرس API"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            HorizontalAlignment="Left"
+                            Command="{Binding SaveCommand}"
+                            Visibility="{Binding CanEditApiBaseUrl, Converter={StaticResource BoolToVis}}" />
+                </StackPanel>
+            </Border>
+
+            <Border Background="{StaticResource BgSurfaceBrush}"
+                    BorderBrush="{StaticResource BorderSubtleBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="20"
+                    Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="شناسه دستگاه"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}" />
+                    <TextBlock Margin="0,10,0,0"
+                               Style="{StaticResource LtrTextBlockStyle}"
+                               Text="{Binding DeviceId}"
+                               TextWrapping="Wrap"
+                               Foreground="{StaticResource TextMutedBrush}" />
+                    <TextBlock Margin="0,8,0,0"
+                               Text="شناسه سخت‌افزاری این سیستم است. لایسنس هر دوره فقط روی همین سیستم فعال می‌شود؛ نصب مجدد ویندوز روی همین کامپیوتر مشکلی ایجاد نمی‌کند."
+                               TextWrapping="Wrap"
+                               FontSize="12"
+                               Foreground="{StaticResource TextMutedBrush}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock Text="نسخه برنامه:"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   Margin="0,0,8,0" />
+                        <TextBlock Text="{Binding AppVersion}"
+                                   Style="{StaticResource LtrTextBlockStyle}"
+                                   Foreground="{StaticResource TextMutedBrush}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Button Content="خروج از حساب"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    HorizontalAlignment="Left"
+                    Command="{Binding LogoutCommand}" />
+
+            <TextBlock Margin="0,16,0,0"
+                       Text="{Binding StatusMessage}"
+                       TextWrapping="Wrap"
+                       Foreground="{StaticResource TextMutedBrush}" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

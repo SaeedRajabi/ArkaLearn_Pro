@@ -1,0 +1,154 @@
+@import 'highlight.js/styles/atom-one-dark.min.css';
+
+.rich-html-content {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.rich-html-content img,
+.rich-html-content video,
+.rich-html-content iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+.rich-html-content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.925rem;
+  line-height: 1.6;
+  overflow: hidden;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid hsl(var(--border));
+}
+
+.rich-html-content thead th {
+  background: hsl(var(--muted));
+}
+
+.rich-html-content th,
+.rich-html-content td {
+  border: 1px solid hsl(var(--border));
+  padding: 0.625rem 0.875rem;
+  vertical-align: top;
+  text-align: inherit;
+}
+
+.rich-html-content th {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.rich-html-content tbody tr:nth-child(even) {
+  background: hsl(var(--muted) / 0.35);
+}
+
+.rich-html-content .rich-code-block pre {
+  margin: 1.25rem 0;
+  border-radius: calc(var(--radius));
+  overflow-x: auto;
+  border: 1px solid hsl(var(--border));
+  background: #282c34 !important;
+  color: #abb2bf !important;
+  padding: 0;
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: plaintext;
+  box-shadow: 0 8px 24px -18px rgb(0 0 0 / 0.65);
+}
+
+.rich-html-content .rich-code-block pre code,
+.rich-html-content .rich-code-block pre code.hljs {
+  display: block;
+  padding: 1rem 1.125rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  background: transparent !important;
+  border: 0;
+  font-weight: 400;
+}
+
+.rich-html-content .rich-code-block .hljs {
+  background: transparent !important;
+  color: #abb2bf;
+}
+
+.rich-html-content .rich-code-block .hljs-comment,
+.rich-html-content .rich-code-block .hljs-quote {
+  color: #5c6370 !important;
+  font-style: italic;
+}
+
+.rich-html-content .rich-code-block .hljs-keyword,
+.rich-html-content .rich-code-block .hljs-doctag,
+.rich-html-content .rich-code-block .hljs-formula {
+  color: #c678dd !important;
+}
+
+.rich-html-content .rich-code-block .hljs-string,
+.rich-html-content .rich-code-block .hljs-regexp,
+.rich-html-content .rich-code-block .hljs-addition,
+.rich-html-content .rich-code-block .hljs-attribute,
+.rich-html-content .rich-code-block .hljs-meta .hljs-string {
+  color: #98c379 !important;
+}
+
+.rich-html-content .rich-code-block .hljs-number,
+.rich-html-content .rich-code-block .hljs-literal,
+.rich-html-content .rich-code-block .hljs-variable,
+.rich-html-content .rich-code-block .hljs-template-variable,
+.rich-html-content .rich-code-block .hljs-type,
+.rich-html-content .rich-code-block .hljs-selector-class,
+.rich-html-content .rich-code-block .hljs-selector-attr,
+.rich-html-content .rich-code-block .hljs-selector-pseudo,
+.rich-html-content .rich-code-block .hljs-attr {
+  color: #d19a66 !important;
+}
+
+.rich-html-content .rich-code-block .hljs-title,
+.rich-html-content .rich-code-block .hljs-title.class_,
+.rich-html-content .rich-code-block .hljs-built_in,
+.rich-html-content .rich-code-block .hljs-class .hljs-title {
+  color: #e6c07b !important;
+}
+
+.rich-html-content .rich-code-block .hljs-name,
+.rich-html-content .rich-code-block .hljs-section,
+.rich-html-content .rich-code-block .hljs-selector-tag,
+.rich-html-content .rich-code-block .hljs-deletion,
+.rich-html-content .rich-code-block .hljs-subst {
+  color: #e06c75 !important;
+}
+
+.rich-html-content .rich-code-block .hljs-symbol,
+.rich-html-content .rich-code-block .hljs-bullet,
+.rich-html-content .rich-code-block .hljs-link,
+.rich-html-content .rich-code-block .hljs-meta,
+.rich-html-content .rich-code-block .hljs-selector-id {
+  color: #61aeee !important;
+}
+
+.rich-html-content :not(pre) > code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875em;
+  padding: 0.15em 0.4em;
+  border-radius: calc(var(--radius) - 4px);
+  background: hsl(var(--muted));
+  color: hsl(var(--foreground));
+}
+
+.rich-html-content[dir='rtl'] table {
+  direction: rtl;
+}
+
+.rich-html-content[dir='rtl'] th,
+.rich-html-content[dir='rtl'] td {
+  text-align: right;
+}

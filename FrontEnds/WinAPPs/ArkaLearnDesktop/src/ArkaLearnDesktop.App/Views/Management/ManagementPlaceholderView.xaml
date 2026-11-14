@@ -1,0 +1,19 @@
+<UserControl x:Class="ArkaLearnDesktop.App.Views.Management.ManagementPlaceholderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BgPrimaryBrush}">
+    <StackPanel VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                MaxWidth="520">
+        <TextBlock Text="{Binding Title}"
+                   FontSize="28"
+                   FontWeight="SemiBold"
+                   TextAlignment="Center"
+                   Foreground="{StaticResource TextPrimaryBrush}" />
+        <TextBlock Text="{Binding Subtitle}"
+                   Margin="0,12,0,0"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   Foreground="{StaticResource TextMutedBrush}" />
+    </StackPanel>
+</UserControl>

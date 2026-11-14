@@ -1,0 +1,80 @@
+<UserControl x:Class="ArkaLearnDesktop.App.Views.Downloads.DownloadsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BgPrimaryBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="دانلودهای رمزنگاری‌شده"
+                       FontSize="24"
+                       FontWeight="SemiBold"
+                       Foreground="{StaticResource TextPrimaryBrush}" />
+            <TextBlock Margin="0,6,0,12"
+                       Text="فایل‌های کش‌شده در پوشه encrypted-cache داخل AppData محلی"
+                       Foreground="{StaticResource TextMutedBrush}"
+                       TextWrapping="Wrap" />
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource RefreshIconButtonStyle}"
+                        Command="{Binding RefreshCommand}"
+                        Margin="0,0,8,0" />
+                <Button Content="حذف انتخاب‌شده"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding DeleteSelectedCommand}" />
+                <TextBlock Margin="16,6,0,0"
+                           VerticalAlignment="Center"
+                           Text="{Binding TotalSizeLabel, StringFormat=حجم کل: {0}}"
+                           Foreground="{StaticResource TextMutedBrush}" />
+            </StackPanel>
+            <TextBlock Margin="0,10,0,0"
+                       Text="{Binding StatusMessage}"
+                       TextWrapping="Wrap"
+                       Foreground="{StaticResource TextMutedBrush}" />
+        </StackPanel>
+
+        <Border Grid.Row="1"
+                Background="{StaticResource BgSurfaceBrush}"
+                BorderBrush="{StaticResource BorderSubtleBrush}"
+                BorderThickness="1"
+                CornerRadius="12"
+                Padding="12">
+            <ListBox ItemsSource="{Binding Items}"
+                     SelectedItem="{Binding Selected}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Foreground="{StaticResource TextPrimaryBrush}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}" FontWeight="SemiBold" />
+                                <TextBlock FontSize="12"
+                                           Foreground="{StaticResource TextMutedBrush}">
+                                    <Run Text="شناسه مدیا:" />
+                                    <Run Text="{Binding MediaAssetId, Mode=OneWay}" />
+                                    <Run Text=" — نوع: " />
+                                    <Run Text="{Binding MimeType, Mode=OneWay}" />
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Left">
+                                <TextBlock Text="{Binding FileSizeLabel}"
+                                           HorizontalAlignment="Left" />
+                                <TextBlock Text="{Binding DownloadedAtUtc, StringFormat=yyyy/MM/dd HH:mm}"
+                                           FontSize="11"
+                                           HorizontalAlignment="Left"
+                                           Foreground="{StaticResource TextMutedBrush}" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+    </Grid>
+</UserControl>

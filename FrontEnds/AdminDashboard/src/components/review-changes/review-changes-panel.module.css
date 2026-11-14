@@ -1,0 +1,110 @@
+.panel {
+  margin-bottom: 1rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.9rem;
+  background: hsl(var(--card));
+  overflow: hidden;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid hsl(var(--border) / 0.7);
+  background: hsl(var(--muted) / 0.35);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.summary {
+  padding: 0.85rem 1rem;
+  margin: 0;
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.loading {
+  padding: 1rem;
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.list {
+  margin: 0;
+  padding: 0.75rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.item {
+  border: 1px solid hsl(var(--border) / 0.75);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  background: hsl(var(--background));
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.itemTitle {
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.diffText {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.diffSame {
+  color: hsl(var(--foreground));
+}
+
+.diffAdd {
+  background: hsl(142 76% 36% / 0.18);
+  color: hsl(142 76% 28%);
+  border-radius: 0.2rem;
+  padding: 0 0.1rem;
+}
+
+.diffRemove {
+  background: hsl(0 84% 60% / 0.16);
+  color: hsl(0 72% 42%);
+  text-decoration: line-through;
+  border-radius: 0.2rem;
+  padding: 0 0.1rem;
+}
+
+.emptyDiff {
+  margin: 0;
+  color: hsl(var(--muted-foreground));
+}
+
+.badgeAdd {
+  background: hsl(142 76% 36% / 0.15);
+  color: hsl(142 76% 28%);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.badgeRemove {
+  background: hsl(0 84% 60% / 0.12);
+  color: hsl(0 72% 42%);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}

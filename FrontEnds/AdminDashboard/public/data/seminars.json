@@ -1,0 +1,60 @@
+
+{
+  "seminars": [
+    {
+      "id": "SEM-001",
+      "title": "The State of Frontend in 2024",
+      "date": "2024-08-15T10:00:00Z",
+      "location": "Online",
+      "attendees": 150,
+      "status": "Upcoming",
+      "description": "<p>Join us for a comprehensive overview of the current frontend landscape. We'll cover the latest trends in frameworks, tooling, and best practices that are shaping the future of web development. This seminar is perfect for developers looking to stay ahead of the curve.</p><h2>Topics Covered:</h2><ul><li><p>React 19 and the impact of the new compiler</p></li><li><p>The rise of Svelte and SolidJS</p></li><li><p>Modern CSS techniques: Container Queries, :has(), and more</p></li><li><p>The state of build tools: Vite, Turbopack, and Rspack</p></li><li><p>WebAssembly's growing role in performance-critical applications</p></li></ul>",
+      "category": "Web Development",
+      "level": "Intermediate"
+    },
+    {
+      "id": "SEM-002",
+      "title": "AI in Education Summit",
+      "date": "2024-09-05T09:00:00Z",
+      "location": "San Francisco, CA",
+      "attendees": 300,
+      "status": "Upcoming",
+      "description": "<p>A full-day summit dedicated to exploring the intersection of Artificial Intelligence and education. Hear from leading experts, researchers, and practitioners on how AI is transforming learning, teaching, and administrative processes in educational institutions.</p><p>Keynote speakers include pioneers in AI-driven personalized learning platforms and ethical AI development.</p>",
+      "category": "Productivity",
+      "level": "Advanced"
+    },
+    {
+      "id": "SEM-003",
+      "title": "Next.js 15 Deep Dive",
+      "date": "2024-07-20T14:00:00Z",
+      "location": "Online",
+      "attendees": 250,
+      "status": "Completed",
+      "description": "<p>This seminar provided a deep dive into the features of Next.js 15, focusing on performance optimizations and the latest developments in the App Router. Attendees learned how to leverage new capabilities to build faster, more scalable applications.</p>",
+      "category": "Web Development",
+      "level": "Advanced"
+    },
+    {
+      "id": "SEM-004",
+      "title": "Cybersecurity Workshop",
+      "date": "2024-06-10T11:00:00Z",
+      "location": "New York, NY",
+      "attendees": 80,
+      "status": "Completed",
+      "description": "<p>A hands-on workshop covering the fundamentals of web application security. Participants engaged in practical exercises to identify and mitigate common vulnerabilities, such as XSS, CSRF, and SQL injection.</p>",
+      "category": "DevOps",
+      "level": "Beginner"
+    },
+    {
+      "id": "SEM-005",
+      "title": "The Future of Remote Work",
+      "date": "2024-08-01T13:00:00Z",
+      "location": "Online",
+      "attendees": 0,
+      "status": "Cancelled",
+      "description": "<p>This seminar was planned to discuss the evolving landscape of remote work, focusing on tools, culture, and strategies for success in a distributed team environment. It was unfortunately cancelled due to unforeseen circumstances.</p>",
+      "category": "Productivity",
+      "level": "Beginner"
+    }
+  ]
+}

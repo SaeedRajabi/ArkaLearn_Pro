@@ -1,0 +1,52 @@
+
+{
+  "header": {
+    "courses": "دوره ها",
+    "seminars": "سمینارها",
+    "articles": "مقالات",
+    "projects": "پروژه‌ها",
+    "about": "درباره ما",
+    "login": "ورود",
+    "register": "ثبت نام",
+    "dashboard": "داشبورد",
+    "logout": "خروج"
+  },
+  "hero": {
+    "headline1": "آینده خود را با",
+    "highlight": "آرکالرن پرو",
+    "headline2": "بسازید",
+    "subheadline": "با دوره‌های تخصصی ما، پرتقاضاترین زبان‌های برنامه‌نویسی و فناوری‌ها را فرا بگیرید. سفر شما برای تبدیل شدن به یک متخصص فناوری از اینجا شروع می‌شود.",
+    "ctaPrimary": "مشاهده دوره ها",
+    "ctaSecondary": "مشاهده سمینارها"
+  },
+  "home": {
+    "featuredCourses": "Featured Courses",
+    "featuredCoursesSubtitle": "Hand-picked courses to kickstart your learning journey.",
+    "free": "رایگان"
+  },
+  "footer": {
+    "about": "آرکالرن پرو محصولی از آرکاسافت است که به ارائه آموزش آنلاین با کیفیت بالا در زمینه فناوری اختصاص دارد.",
+    "rights": "تمامی حقوق محفوظ است."
+  },
+  "projectsPage": {
+    "title": "پروژه‌ها",
+    "subtitle": "نمونه کارها و محصولات نرم‌افزاری تیم آرکا را با فناوری‌های مدرن کاوش کنید.",
+    "home": "خانه",
+    "searchPlaceholder": "جستجو در پروژه‌ها، تگ‌ها یا فناوری‌ها...",
+    "filterByTag": "فیلتر بر اساس برچسب",
+    "filterByTechnology": "فیلتر بر اساس فناوری",
+    "allTags": "همه برچسب‌ها",
+    "allTechnologies": "همه فناوری‌ها",
+    "showingResults": "نمایش {count} نتیجه",
+    "clearFilters": "پاک کردن فیلترها",
+    "filters": "فیلترها",
+    "noResults": "پروژه‌ای با این معیارها یافت نشد."
+  },
+  "coursesSection": {
+    "title": "دوره های ما را کاوش کنید",
+    "subtitle": "بهترین منابع یادگیری متناسب با خود را بیابید. از بین جدیدترین، محبوب ترین یا پرفروش ترین دوره های ما انتخاب کنید.",
+    "newest": "جدیدترین",
+    "popular": "محبوب ترین",
+    "bestsellers": "پرفروش ترین ها"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "name": "آرکا نرم افزار | ArkaSoftware",
+  "short_name": "آرکا نرم افزار",
+  "description": "پلتفرم آنلاین یادگیری برنامه‌نویسی و فناوری. دوره‌ها، سمینارها و مقالات تخصصی.",
+  "start_url": "/",
+  "scope": "/",
+  "id": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0f172a",
+  "background_color": "#ffffff",
+  "lang": "fa",
+  "dir": "rtl",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "دوره‌ها",
+      "short_name": "دوره‌ها",
+      "description": "مشاهده لیست دوره‌ها",
+      "url": "/courses",
+      "icons": [{ "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "سمینارها",
+      "short_name": "سمینارها",
+      "description": "مشاهده سمینارها",
+      "url": "/seminars",
+      "icons": [{ "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "مقالات",
+      "short_name": "مقالات",
+      "description": "مطالعه مقالات",
+      "url": "/articles",
+      "icons": [{ "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

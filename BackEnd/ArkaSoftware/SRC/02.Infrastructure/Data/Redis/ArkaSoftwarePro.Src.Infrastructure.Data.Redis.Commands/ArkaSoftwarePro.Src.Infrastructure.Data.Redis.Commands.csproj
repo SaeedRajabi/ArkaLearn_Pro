@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ArkaSoftware.Extensions.Caching.Distributed.Redis" Version="1.0.1" />
+
+	</ItemGroup>
+
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\01.Core\ArkaSoftwarePro.Src.Core.Contracts\ArkaSoftwarePro.Src.Core.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

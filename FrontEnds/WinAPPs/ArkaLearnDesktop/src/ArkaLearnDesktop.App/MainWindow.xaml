@@ -1,0 +1,13 @@
+<Window x:Class="ArkaLearnDesktop.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="آرکانرم افزار — مدیریت و امنیت دوره ها"
+        FlowDirection="LeftToRight"
+        Height="720"
+        Width="1200"
+        MinHeight="560"
+        MinWidth="900"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BgPrimaryBrush}">
+    <ContentControl x:Name="RootHost" />
+</Window>

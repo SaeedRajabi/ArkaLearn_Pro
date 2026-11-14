@@ -1,0 +1,137 @@
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Configurations.OutBoxEventConfigure;
+using Framework.Src.Infrastructure.Data.MSSQL.Queries.QueryDbContext;
+using Microsoft.EntityFrameworkCore;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Users;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Courses;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Tags;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Categories;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Rooms;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.EducationPlans;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Baskets;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Orders;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.OutBoxEvents;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Students;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Teachers;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Articles;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Projects;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Enrollments;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Invoices;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Seminars;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.AboutUs;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.ContactUs;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.SiteAnnouncement;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.NotificationSettings;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.EmailSettings;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.GoogleAuthSettings;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.CacheSettings;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.DatabaseConnectionSettings;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.SecuritySettings;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.MediaUploadSettings;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.LiveMediaTransportSettings;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.EmailTemplates;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Sessions;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.UserFiles;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Dashboard;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.ProjectOrders;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.ProjectQuestions;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.CommunityDiscussions;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.UserNotifications;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Exams;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.MediaAssets;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.CalendarEvents;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Finance;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.PlatformSupportTopics;
+using ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Entities.Desktop;
+
+namespace ArkaSoftwarePro.Src.Infrastructure.Data.MSSQL.Queries.Common
+{
+    public partial class ArkaSoftwareQueryDbContext(DbContextOptions<ArkaSoftwareQueryDbContext> options) : BaseQueryDbContext(options)
+    {
+        public virtual DbSet<EnrollmentQueryModel> Enrollments { get; set; } = null!;
+        public virtual DbSet<StudentQueryModel> Students { get; set; } = null!;
+        public virtual DbSet<UserQueryModel> Users { get; set; } = null!;
+        public virtual DbSet<CourseQueryModel> Courses { get; set; } = null!;
+        public virtual DbSet<CourseLessonQueryModel> CourseLessons { get; set; } = null!;
+        public virtual DbSet<CourseLessonWatchProgressQueryModel> CourseLessonWatchProgress { get; set; } = null!;
+        public virtual DbSet<CourseDependencyQueryModel> CourseDependencies { get; set; } = null!;
+        public virtual DbSet<TagQueryModel> Tags { get; set; } = null!;
+        public virtual DbSet<CategoryQueryModel> Categories { get; set; } = null!;
+        public virtual DbSet<RoomQueryModel> Rooms { get; set; } = null!;
+        public virtual DbSet<RoomFileQueryModel> RoomFiles { get; set; } = null!;
+        public virtual DbSet<EducationPlanQueryModel> EducationPlans { get; set; } = null!;
+        public virtual DbSet<EducationPlanInstallmentQueryModel> EducationPlanInstallments { get; set; } = null!;
+        public virtual DbSet<RoomUserQueryModel> RoomUsers { get; set; } = null!;
+        public virtual DbSet<ManagedRoomStudentQueryModel> ManagedRoomStudents { get; set; } = null!;
+        public virtual DbSet<BasketQueryModel> Baskets { get; set; } = null!;
+        public virtual DbSet<OrderQueryModel> Orders { get; set; } = null!;
+        public virtual DbSet<TeacherQueryModel> Teachers { get; set; } = null!;
+        public virtual DbSet<TeacherTeachingCategoryQueryModel> TeacherTeachingCategories { get; set; } = null!;
+        public virtual DbSet<TeacherFollowQueryModel> TeacherFollows { get; set; } = null!;
+        public virtual DbSet<ArticleQueryModel> Articles { get; set; } = null!;
+        public virtual DbSet<ArticleReactionQueryModel> ArticleReactions { get; set; } = null!;
+        public virtual DbSet<ProjectQueryModel> Projects { get; set; } = null!;
+        public virtual DbSet<SeminarQueryModel> Seminars { get; set; } = null!;
+        public virtual DbSet<InvoiceQueryModel> Invoices { get; set; } = null!;
+        public virtual DbSet<TransactionQueryModel> Transactions { get; set; } = null!;
+        public virtual DbSet<FavoriteCourseQueryModel> FavoriteCourses { get; set; } = null!;
+        public virtual DbSet<FavoriteSeminarQueryModel> FavoriteSeminars { get; set; } = null!;
+        public virtual DbSet<FavoriteArticleQueryModel> FavoriteArticles { get; set; } = null!;
+        public virtual DbSet<AboutUsPageQueryModel> AboutUsPages { get; set; } = null!;
+        public virtual DbSet<AboutUsTeamMemberQueryModel> AboutUsTeamMembers { get; set; } = null!;
+        public virtual DbSet<ContactUsPageQueryModel> ContactUsPages { get; set; } = null!;
+        public virtual DbSet<SiteAnnouncementQueryModel> SiteAnnouncements { get; set; } = null!;
+        public virtual DbSet<NotificationSettingsQueryModel> NotificationSettings { get; set; } = null!;
+        public virtual DbSet<EmailSettingsQueryModel> EmailSettings { get; set; } = null!;
+        public virtual DbSet<GoogleAuthSettingsQueryModel> GoogleAuthSettings { get; set; } = null!;
+        public virtual DbSet<SecuritySettingsQueryModel> SecuritySettings { get; set; } = null!;
+        public virtual DbSet<MediaUploadSettingsQueryModel> MediaUploadSettings { get; set; } = null!;
+        public virtual DbSet<LiveMediaTransportSettingsQueryModel> LiveMediaTransportSettings { get; set; } = null!;
+        public virtual DbSet<CacheSettingsQueryModel> CacheSettings { get; set; } = null!;
+        public virtual DbSet<DatabaseConnectionSettingsQueryModel> DatabaseConnectionSettings { get; set; } = null!;
+        public virtual DbSet<IPBlacklistQueryModel> IPBlacklists { get; set; } = null!;
+        public virtual DbSet<EmailTemplateQueryModel> EmailTemplates { get; set; } = null!;
+        public virtual DbSet<RoomSessionQueryModel> RoomSessions { get; set; } = null!;
+        public virtual DbSet<UserFileQueryModel> UserFiles { get; set; } = null!;
+        public virtual DbSet<PlatformSupportTopicQueryModel> PlatformSupportTopics { get; set; } = null!;
+        public virtual DbSet<SupportTicketQueryModel> SupportTickets { get; set; } = null!;
+        public virtual DbSet<SupportTicketMessageQueryModel> SupportTicketMessages { get; set; } = null!;
+        public virtual DbSet<AdminAnnouncementQueryModel> AdminAnnouncements { get; set; } = null!;
+        public virtual DbSet<ProjectOrderQueryModel> ProjectOrders { get; set; } = null!;
+        public virtual DbSet<UserNotificationQueryModel> UserNotifications { get; set; } = null!;
+        public virtual DbSet<ProjectQuestionQueryModel> ProjectQuestions { get; set; } = null!;
+        public virtual DbSet<ProjectAnswerQueryModel> ProjectAnswers { get; set; } = null!;
+        public virtual DbSet<ProjectAnswerLikeQueryModel> ProjectAnswerLikes { get; set; } = null!;
+        public virtual DbSet<CommunityThreadQueryModel> CommunityThreads { get; set; } = null!;
+        public virtual DbSet<CommunityReplyQueryModel> CommunityReplies { get; set; } = null!;
+        public virtual DbSet<CommunityReplyLikeQueryModel> CommunityReplyLikes { get; set; } = null!;
+        public virtual DbSet<CommunityThreadReactionQueryModel> CommunityThreadReactions { get; set; } = null!;
+        public virtual DbSet<CommunityThreadSubscriptionQueryModel> CommunityThreadSubscriptions { get; set; } = null!;
+        public virtual DbSet<ExamQueryModel> Exams { get; set; } = null!;
+        public virtual DbSet<ExamQuestionQueryModel> ExamQuestions { get; set; } = null!;
+        public virtual DbSet<ExamQuestionOptionQueryModel> ExamQuestionOptions { get; set; } = null!;
+        public virtual DbSet<ExamAssignmentQueryModel> ExamAssignments { get; set; } = null!;
+        public virtual DbSet<ExamAttemptQueryModel> ExamAttempts { get; set; } = null!;
+        public virtual DbSet<ExamAnswerQueryModel> ExamAnswers { get; set; } = null!;
+        public virtual DbSet<BankQuestionQueryModel> BankQuestions { get; set; } = null!;
+        public virtual DbSet<BankQuestionOptionQueryModel> BankQuestionOptions { get; set; } = null!;
+        public virtual DbSet<MediaAssetQueryModel> MediaAssets { get; set; } = null!;
+        public virtual DbSet<CalendarEventQueryModel> CalendarEvents { get; set; } = null!;
+        public virtual DbSet<CalendarEventParticipantQueryModel> CalendarEventParticipants { get; set; } = null!;
+        public virtual DbSet<UserWalletQueryModel> UserWallets { get; set; } = null!;
+        public virtual DbSet<DesktopAppReleaseQueryModel> DesktopAppReleases { get; set; } = null!;
+        public virtual DbSet<OfflinePlaybackGrantQueryModel> OfflinePlaybackGrants { get; set; } = null!;
+        public virtual DbSet<CourseDesktopWatermarkPolicyQueryModel> CourseDesktopWatermarkPolicies { get; set; } = null!;
+        public virtual DbSet<CourseCurriculumMaterialQueryModel> CourseCurriculumMaterials { get; set; } = null!;
+        public virtual DbSet<DesktopLicenseDeviceBindingQueryModel> DesktopLicenseDeviceBindings { get; set; } = null!;
+        public virtual DbSet<DesktopLicenseLessonAccessQueryModel> DesktopLicenseLessonAccesses { get; set; } = null!;
+        public virtual DbSet<DesktopPlaybackEventQueryModel> DesktopPlaybackEvents { get; set; } = null!;
+        public virtual DbSet<TeacherStudentSatisfactionQueryModel> TeacherStudentRatings { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ArkaSoftwareQueryDbContext).Assembly);
+            base.OnModelCreating(modelBuilder);
+        }
+
+    }
+}
