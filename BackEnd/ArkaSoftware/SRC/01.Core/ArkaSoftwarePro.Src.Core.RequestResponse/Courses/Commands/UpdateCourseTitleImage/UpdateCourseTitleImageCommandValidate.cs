@@ -1,9 +1,9 @@
-using Extensions.Translations.Abstractions;
+using ArkaSoftware.Extensions.Translations.Abstractions;
 using FluentValidation;
 
 namespace ArkaSoftwarePro.Src.Core.RequestResponse.Courses.Commands.UpdateCourseTitleImage;
 
-public class UpdateCourseTitleImageCommandValidate:AbstractValidator<UpdateCourseTitleImageCommand>
+public class UpdateCourseTitleImageCommandValidate : AbstractValidator<UpdateCourseTitleImageCommand>
 {
     public UpdateCourseTitleImageCommandValidate(ITranslator translator)
     {

@@ -1,11 +1,11 @@
-﻿using Framework.Src.Endpoints.Web.Extensions.Common;
-using Extensions.Serializers.Abstractions;
+﻿using ArkaSoftware.Extensions.Serializers.Abstractions;
 using Framework.Src.Core.Contracts.ApplicationService.Commands;
 using Framework.Src.Core.Contracts.ApplicationService.Events;
 using Framework.Src.Core.Contracts.ApplicationService.Queries;
 using Framework.Src.Core.RequestResponse.Commands;
 using Framework.Src.Core.RequestResponse.Common;
 using Framework.Src.Core.RequestResponse.Queries;
+using Framework.Src.Endpoints.Web.Extensions.Common;
 using Framework.Src.Utilities.OutService.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

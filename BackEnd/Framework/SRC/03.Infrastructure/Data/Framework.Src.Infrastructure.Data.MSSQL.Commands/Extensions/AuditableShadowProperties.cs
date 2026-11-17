@@ -1,9 +1,9 @@
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore;
-using Extensions.UsersManagement.Abstractions;
-using System.Data;
+using ArkaSoftware.Extensions.UsersManagement.Abstractions;
 using Framework.Src.Core.Domain.Entities;
 using Framework.Src.Utilities.OutService.ContextCarriers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Data;
 
 
 namespace Framework.Src.Infrastructure.Data.MSSQL.Commands.Extensions
@@ -44,7 +44,7 @@ namespace Framework.Src.Infrastructure.Data.MSSQL.Commands.Extensions
 
         public static void SetAuditableEntityPropertyValues(
             this ChangeTracker changeTracker,
-            IUserInfoService userInfoService , ICurrentUserContext currentUserContext)
+            IUserInfoService userInfoService, ICurrentUserContext currentUserContext)
         {
             string userId = string.Empty;
             try
@@ -53,7 +53,7 @@ namespace Framework.Src.Infrastructure.Data.MSSQL.Commands.Extensions
                 if (!string.IsNullOrWhiteSpace(currentUserContext?.UserId))
                     userId = currentUserContext.UserId!;
                 else
-                    userId = userInfoService.UserIdOrDefault() ?? string.Empty;
+                    userId = userInfoService.GetUserIdOrDefault() ?? string.Empty;
                 _ = userInfoService.GetUserIp();
             }
             catch (NullReferenceException)
@@ -66,7 +66,7 @@ namespace Framework.Src.Infrastructure.Data.MSSQL.Commands.Extensions
             }
             var now = DateTime.UtcNow;
             var modifiedEntries = changeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Modified);
-            
+
             foreach (var modifiedEntry in modifiedEntries)
             {
                 modifiedEntry.Property(ModifiedDateTime).CurrentValue = now;

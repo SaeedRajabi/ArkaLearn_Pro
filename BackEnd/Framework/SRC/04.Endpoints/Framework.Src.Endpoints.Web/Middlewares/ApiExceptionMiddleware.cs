@@ -1,6 +1,5 @@
-﻿using Framework.Src.Endpoints.Web.Middlewares;
-using Extensions.Serializers.Abstractions;
-using Extensions.Translations.Abstractions;
+﻿using ArkaSoftware.Extensions.Serializers.Abstractions;
+using ArkaSoftware.Extensions.Translations.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Net;

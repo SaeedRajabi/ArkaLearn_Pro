@@ -1,9 +1,9 @@
-using Extensions.Translations.Abstractions;
+using ArkaSoftware.Extensions.Translations.Abstractions;
 using FluentValidation;
 
 namespace ArkaSoftwarePro.Src.Core.RequestResponse.Users.Commands.LoginByGoogleAccount
 {
-    public class LoginByGoogleAccountCommandValidator:AbstractValidator<LoginByGoogleAccountCommand>
+    public class LoginByGoogleAccountCommandValidator : AbstractValidator<LoginByGoogleAccountCommand>
     {
         public LoginByGoogleAccountCommandValidator(ITranslator translator)
         {

@@ -1,11 +1,11 @@
-using Extensions.Translations.Abstractions;
+using ArkaSoftware.Extensions.Translations.Abstractions;
 using FluentValidation;
 
 namespace ArkaSoftwarePro.Src.Core.RequestResponse.Rooms.Commands.AddRoomUsers
 {
     public class AddRoomUserCommandValidator : AbstractValidator<AddRoomUserCommand>
     {
-        public AddRoomUserCommandValidator(ITranslator translator) 
+        public AddRoomUserCommandValidator(ITranslator translator)
         {
 
             RuleFor(x => x.RoomId)

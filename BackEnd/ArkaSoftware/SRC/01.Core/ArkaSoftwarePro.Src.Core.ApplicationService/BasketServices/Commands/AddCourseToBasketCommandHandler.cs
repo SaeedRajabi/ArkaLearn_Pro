@@ -1,10 +1,8 @@
 using ArkaSoftwarePro.Src.Core.Contracts.Baskets.BasketRepositoryContracts.Commands;
 using ArkaSoftwarePro.Src.Core.Contracts.Courses.CourseRepositoryContracts.Commands;
-using ArkaSoftwarePro.Src.Core.Domain.CoursesAggregate.Enumerations;
-using ArkaSoftwarePro.Src.Core.Domain.CoursesAggregate.Services;
 using ArkaSoftwarePro.Src.Core.Domain.BasketAggregate.Entities;
+using ArkaSoftwarePro.Src.Core.Domain.CoursesAggregate.Services;
 using ArkaSoftwarePro.Src.Core.RequestResponse.Baskets.Commands.AddCoursesToBasket;
-using Extensions.Chaching.Abstractions;
 using Framework.Src.Core.ApplicationService.Commands;
 using Framework.Src.Core.RequestResponse.Commands;
 using Framework.Src.Core.RequestResponse.Common;
@@ -12,7 +10,6 @@ using Framework.Src.Utilities.OutService.Generator;
 using Framework.Src.Utilities.OutService.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
-using System.Linq;
 
 namespace ArkaSoftwarePro.Src.Core.ApplicationService.BasketServices.Commands
 {
@@ -65,14 +62,14 @@ namespace ArkaSoftwarePro.Src.Core.ApplicationService.BasketServices.Commands
                     basket.Add(course, command.Quantity);
                     await basketCommandRepository.InsertAsync(basket);
                     await basketCommandRepository.CommitAsync();
-                    
+
                     // افزودن به cache
                     var items = new List<(long, int)> { (command.CourseId, command.Quantity) };
                     cache.Set(basketId, items, TimeSpan.FromDays(7));
-                    
+
                     return await OkAsync("Add Course To Basket Success");
                 }
-                
+
                 var basketDefined = await basketCommandRepository.GetGraphAsync(Convert.ToInt64(basketId));
                 if (basketDefined == null)
                 {
@@ -81,24 +78,24 @@ namespace ArkaSoftwarePro.Src.Core.ApplicationService.BasketServices.Commands
                     newBasket.Add(course, command.Quantity);
                     await basketCommandRepository.InsertAsync(newBasket);
                     await basketCommandRepository.CommitAsync();
-                    
+
                     // افزودن به cache
                     var newItems = new List<(long, int)> { (command.CourseId, command.Quantity) };
                     cache.Set(basketId, newItems, TimeSpan.FromDays(7));
-                    
+
                     return await OkAsync("Add Course To Basket Success");
                 }
-                
+
                 // اگر سبد وجود داشت، دوره را اضافه می‌کنیم
                 basketDefined.Add(course, command.Quantity);
-                
+
                 // به‌روزرسانی cache
                 var cachedItems = cache.GetOrCreate(basketId, entry =>
                 {
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(7);
                     return new List<(long, int)>();
                 });
-                
+
                 var existingItem = cachedItems.FirstOrDefault(x => x.Item1 == command.CourseId);
                 if (existingItem.Item1 != 0 && existingItem.Item1 == command.CourseId)
                 {
@@ -111,7 +108,7 @@ namespace ArkaSoftwarePro.Src.Core.ApplicationService.BasketServices.Commands
                     // اگر دوره جدید است، اضافه می‌کنیم
                     cachedItems.Add((command.CourseId, command.Quantity));
                 }
-                
+
                 cache.Set(basketId, cachedItems, TimeSpan.FromDays(7));
                 await basketCommandRepository.CommitAsync();
                 return await OkAsync("Add Course To Basket Success");

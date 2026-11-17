@@ -1,0 +1,9 @@
+# رفتار خودکار برای همه فایل‌های متنی
+* text=auto
+
+# فایل‌های متنی پروژه‌های دات‌نت به شکل استاندارد
+*.cs text diff=csharp
+*.csproj text merge=union
+*.sln text eol=crlf
+*.json text
+*.md text

@@ -1,5 +1,5 @@
+using ArkaSoftware.Extensions.ObjectMappers.Abstractions;
 using AutoMapper;
-using Extensions.ObjectMappers.Abstractions;
 
 namespace ArkaSoftwarePro.Src.Infrastructure.Integrations.Mapping;
 

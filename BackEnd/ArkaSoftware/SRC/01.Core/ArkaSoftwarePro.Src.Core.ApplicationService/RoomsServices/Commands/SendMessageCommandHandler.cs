@@ -1,3 +1,4 @@
+using ArkaSoftware.Extensions.Caching.Abstractions;
 using ArkaSoftwarePro.Src.Core.Contracts.Messages.IHubs;
 using ArkaSoftwarePro.Src.Core.Contracts.Rooms.RoomRepositoriesContract.Commands;
 using ArkaSoftwarePro.Src.Core.RequestResponse.Messages.Commands.SendMessage;
@@ -8,18 +9,17 @@ using Framework.Src.Core.RequestResponse.Common;
 using Framework.Src.Utilities.OutService.Services;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
-using Extensions.Chaching.Abstractions;
 
 namespace ArkaSoftwarePro.Src.Core.ApplicationService.RoomsServices.Commands
 {
     public class SendMessageCommandHandler(
         ArkaSoftwareCMPOutServices mafiaOuterServices,
-        IRoomCommandRepository roomCommandRepository, 
+        IRoomCommandRepository roomCommandRepository,
         IChatMessageHub chatMessageHub,
         IHttpContextAccessor httpContextAccessor,
         ICacheAdapter cacheAdapter,
         ArkaSoftwarePro.Src.Core.Contracts.Rooms.IRoomAccessService roomAccess
-        ) : CommandHandler<SendMessageCommand, string>(mafiaOuterServices) , IScopeLifetime
+        ) : CommandHandler<SendMessageCommand, string>(mafiaOuterServices), IScopeLifetime
     {
         public override async Task<CommandResult<string>> Handle(SendMessageCommand command)
         {
@@ -34,13 +34,13 @@ namespace ArkaSoftwarePro.Src.Core.ApplicationService.RoomsServices.Commands
                 {
                     text = command.Text,
                     roomId = command.RoomId,
-                    isOnline=true,
+                    isOnline = true,
                     sendTime = DateTime.Now.ToString("yyyy MMMM dd")
                 };
 
-                var redisKey = $"chats:{command.RoomId}:{Guid.NewGuid().ToString().Substring(0,5)}";
+                var redisKey = $"chats:{command.RoomId}:{Guid.NewGuid().ToString().Substring(0, 5)}";
 
-                cacheAdapter.Add(
+                await cacheAdapter.AddAsync(
                     redisKey,
                     dataToCache,
                     DateTime.Now.AddHours(5),
@@ -48,7 +48,7 @@ namespace ArkaSoftwarePro.Src.Core.ApplicationService.RoomsServices.Commands
                 );
                 var roomResult = await roomCommandRepository.GetAsync(command.RoomId);
                 if (roomResult == null!)
-                    return await ResultAsync(null! , ApplicationServiceStatus.NotFound);
+                    return await ResultAsync(null!, ApplicationServiceStatus.NotFound);
                 roomResult.SendMessage(command.Text);
                 await roomCommandRepository.CommitAsync();
                 var fullName = user!.FindFirst(ClaimTypes.GivenName)?.Value;

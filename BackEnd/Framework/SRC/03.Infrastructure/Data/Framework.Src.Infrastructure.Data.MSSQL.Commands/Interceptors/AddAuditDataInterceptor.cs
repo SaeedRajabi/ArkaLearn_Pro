@@ -1,14 +1,14 @@
-﻿using Framework.Src.Infrastructure.Data.MSSQL.Commands.Extensions;
-using Extensions.UsersManagement.Abstractions;
+﻿using ArkaSoftware.Extensions.UsersManagement.Abstractions;
+using Framework.Src.Infrastructure.Data.MSSQL.Commands.Extensions;
+using Framework.Src.Utilities.OutService.ContextCarriers;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Framework.Src.Utilities.OutService.ContextCarriers;
 
 namespace Framework.Src.Infrastructure.Data.MSSQL.Commands.Interceptors
 {
     public class AddAuditDataInterceptor : SaveChangesInterceptor
     {
-        
+
         public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
         {
             AddShadowProperties(eventData);

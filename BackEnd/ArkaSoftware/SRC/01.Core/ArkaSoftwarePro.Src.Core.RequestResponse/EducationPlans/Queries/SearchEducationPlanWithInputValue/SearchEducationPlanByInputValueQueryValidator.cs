@@ -1,4 +1,4 @@
-using Extensions.Translations.Abstractions;
+using ArkaSoftware.Extensions.Translations.Abstractions;
 using FluentValidation;
 
 namespace ArkaSoftwarePro.Src.Core.RequestResponse.EducationPlans.Queries.SearchEducationPlanWithInputValue

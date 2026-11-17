@@ -1,4 +1,4 @@
-using Extensions.Translations.Abstractions;
+using ArkaSoftware.Extensions.Translations.Abstractions;
 using FluentValidation;
 
 namespace ArkaSoftwarePro.Src.Core.RequestResponse.Teachers.Commands.AddTeacher;
@@ -20,6 +20,6 @@ public class AddTeacherCommandValidate : AbstractValidator<AddTeacherCommand>
             .MinimumLength(2).WithMessage(translator["MinimumLength", "LongDescription", "2"])
             .MaximumLength(100).WithMessage(translator["MaximumLength", "LongDescription", "100"]);
 
-            
+
     }
 }

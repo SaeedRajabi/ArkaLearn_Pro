@@ -1,12 +1,21 @@
+using ArkaSoftware.Extensions.ObjectMappers.Abstractions;
 using ArkaSoftwarePro.Src.Infrastructure.Integrations.Mapping;
-using AutoMapper;
-using Extensions.ObjectMappers.Abstractions;
 using System.Reflection;
 
 namespace ArkaSoftwarePro.Src.Endpoints.API.Extensions;
 
+/// <summary>
+/// 
+/// </summary>
 public static class MappingRegistration
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <param name="additionalAssemblies"></param>
+    /// <returns></returns>
     public static IServiceCollection AddApplicationMapping(this IServiceCollection services, IConfiguration configuration,
         params Assembly[] additionalAssemblies)
     {

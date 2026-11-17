@@ -1,9 +1,9 @@
-using Extensions.Translations.Abstractions;
+using ArkaSoftware.Extensions.Translations.Abstractions;
 using FluentValidation;
 
 namespace ArkaSoftwarePro.Src.Core.RequestResponse.EducationPlans.Commands.AddEducationPlans
 {
-    public class AddEducationPlanCommandValidator:AbstractValidator<AddEducationPlanCommand>
+    public class AddEducationPlanCommandValidator : AbstractValidator<AddEducationPlanCommand>
     {
         public AddEducationPlanCommandValidator(ITranslator translator)
         {

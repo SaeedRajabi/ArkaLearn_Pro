@@ -1,11 +1,10 @@
 using ArkaSoftwarePro.Src.Core.ApplicationService.EmailServices;
-using System.Net;
 using ArkaSoftwarePro.Src.Core.Contracts.Email;
 using ArkaSoftwarePro.Src.Core.Contracts.Services;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using Microsoft.Extensions.Configuration;
 using MimeKit;
+using System.Net;
 
 namespace ArkaSoftwarePro.Src.Infrastructure.Integrations.Email;
 

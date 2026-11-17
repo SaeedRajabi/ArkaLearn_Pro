@@ -1,7 +1,7 @@
-﻿using Framework.Src.Core.Domain.Exceptions;
+﻿using ArkaSoftware.Extensions.Translations.Abstractions;
+using Framework.Src.Core.Domain.Exceptions;
 using Framework.Src.Core.RequestResponse.Common;
 using Framework.Src.Core.RequestResponse.Queries;
-using Extensions.Translations.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 

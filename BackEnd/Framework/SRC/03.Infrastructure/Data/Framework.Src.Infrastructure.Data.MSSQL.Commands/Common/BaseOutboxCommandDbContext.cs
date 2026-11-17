@@ -1,11 +1,11 @@
+using ArkaSoftware.Extensions.Serializers.Abstractions;
+using ArkaSoftware.Extensions.UsersManagement.Abstractions;
 using Framework.Src.Infrastructure.Data.MSSQL.Commands.Extensions;
 using Framework.Src.Infrastructure.Data.MSSQL.Commands.OutBoxEventItems;
-using Extensions.Serializers.Abstractions;
-using Extensions.UsersManagement.Abstractions;
+using Framework.Src.Utilities.OutService.ContextCarriers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Framework.Src.Utilities.OutService.ContextCarriers;
 
 namespace Framework.Src.Infrastructure.Data.MSSQL.Commands.Common
 {
@@ -54,7 +54,7 @@ namespace Framework.Src.Infrastructure.Data.MSSQL.Commands.Common
                 {
                     if (_pendingEvents.TryGetValue(@event, out var existing) && Entry(existing).State != EntityState.Detached)
                         continue;
-                    var outBoxEventItemCreated = new OutBoxEventItem() 
+                    var outBoxEventItemCreated = new OutBoxEventItem()
                     {
                         EventId = Guid.NewGuid(),
                         AccruedByUserId = _currentUserIdContextValue,
@@ -97,7 +97,7 @@ namespace Framework.Src.Infrastructure.Data.MSSQL.Commands.Common
                 if (userInfo == null)
                     return string.Empty;
 
-                var fromClaims = userInfo.UserIdOrDefault();
+                var fromClaims = userInfo.GetUserIdOrDefault();
                 if (!string.IsNullOrWhiteSpace(fromClaims))
                     return fromClaims;
             }

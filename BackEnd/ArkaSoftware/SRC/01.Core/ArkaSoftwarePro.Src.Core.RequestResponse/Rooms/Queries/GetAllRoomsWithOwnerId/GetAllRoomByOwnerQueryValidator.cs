@@ -1,9 +1,9 @@
-using Extensions.Translations.Abstractions;
+using ArkaSoftware.Extensions.Translations.Abstractions;
 using FluentValidation;
 
 namespace ArkaSoftwarePro.Src.Core.RequestResponse.Rooms.Queries.GetAllRoomsWithOwnerId
 {
-    public class GetAllRoomByOwnerQueryValidator:AbstractValidator<GetAllRoomsByOwnerIdQuery>
+    public class GetAllRoomByOwnerQueryValidator : AbstractValidator<GetAllRoomsByOwnerIdQuery>
     {
         public GetAllRoomByOwnerQueryValidator(ITranslator translator)
         {

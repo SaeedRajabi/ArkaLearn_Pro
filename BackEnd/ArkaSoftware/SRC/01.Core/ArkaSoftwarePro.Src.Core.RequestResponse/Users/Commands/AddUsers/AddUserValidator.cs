@@ -1,5 +1,4 @@
-using ArkaSoftwarePro.Src.Core.RequestResponse.Users;
-using Extensions.Translations.Abstractions;
+using ArkaSoftware.Extensions.Translations.Abstractions;
 using FluentValidation;
 using System.Text.RegularExpressions;
 

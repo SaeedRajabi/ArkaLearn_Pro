@@ -1,7 +1,6 @@
 using ArkaSoftwarePro.Src.Core.Contracts.Email;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 
 namespace ArkaSoftwarePro.Src.Infrastructure.Integrations.Email;

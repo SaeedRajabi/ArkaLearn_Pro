@@ -45,6 +45,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArkaSoftwarePro.Tests", "Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArkaSoftwarePro.Tests.Integration", "Tests\ArkaSoftwarePro.Tests.Integration\ArkaSoftwarePro.Tests.Integration.csproj", "{19277713-D473-4E28-9728-B28E4334B858}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrations", "Integrations", "{75805705-8210-4D37-B221-289A3C8C7397}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArkaSoftwarePro.Src.Infrastructure.Integrations", "SRC\02.Infrastructure\Integrations\ArkaSoftwarePro.Src.Infrastructure.Integrations\ArkaSoftwarePro.Src.Infrastructure.Integrations.csproj", "{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -199,6 +203,18 @@ Global
 		{19277713-D473-4E28-9728-B28E4334B858}.Release|x64.Build.0 = Release|Any CPU
 		{19277713-D473-4E28-9728-B28E4334B858}.Release|x86.ActiveCfg = Release|Any CPU
 		{19277713-D473-4E28-9728-B28E4334B858}.Release|x86.Build.0 = Release|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Debug|x64.Build.0 = Debug|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Debug|x86.Build.0 = Debug|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Release|x64.ActiveCfg = Release|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Release|x64.Build.0 = Release|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Release|x86.ActiveCfg = Release|Any CPU
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -223,6 +239,8 @@ Global
 		{770726AD-C1E2-40D1-B1AC-679CFAD56DFE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{C89A4CAA-1380-40A7-BDBA-7F7C1320C9D2} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{19277713-D473-4E28-9728-B28E4334B858} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{75805705-8210-4D37-B221-289A3C8C7397} = {0DDB42A8-63C2-4F81-847C-27AF49EBD80B}
+		{DE7FCCD1-2798-4F6C-3FDA-D909762EDBB8} = {75805705-8210-4D37-B221-289A3C8C7397}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0B1802D-E09C-4040-81E6-24FAABB77A7B}

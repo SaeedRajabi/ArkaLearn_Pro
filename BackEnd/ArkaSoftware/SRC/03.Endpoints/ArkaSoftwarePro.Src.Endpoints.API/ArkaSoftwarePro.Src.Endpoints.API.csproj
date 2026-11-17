@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -9,35 +9,40 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ArkaSoftware.Extensions.Caching.Distributed.InMemory" Version="1.0.2" />
-		<PackageReference Include="ArkaSoftware.Extensions.Caching.Distributed.Redis" Version="1.0.1" />
-		<PackageReference Include="ArkaSoftware.Extensions.DependentyInjection.Abstractions" Version="1.0.1" />
-		<PackageReference Include="ArkaSoftware.Extensions.Serializers.Microsoft" Version="1.0.1" />
-		<PackageReference Include="ArkaSoftware.Extensions.UsersManagement" Version="1.0.0" />
-		<PackageReference Include="ArkaSoftware.Extensions.Translations.Parrot" Version="2.0.0" />
-		<PackageReference Include="ArkaSoftware.Utilities.Authentication.APIAuthentication" Version="1.0.0" />
+		<PackageReference Include="ArkaSoftware.Extensions.Caching.Distributed.InMemory" Version="4.0.0" />
+		<PackageReference Include="ArkaSoftware.Extensions.Caching.Distributed.Redis" Version="4.0.0" />
+		<PackageReference Include="ArkaSoftware.Extensions.DependentyInjection.Abstractions" Version="2.0.0" />
+		<PackageReference Include="ArkaSoftware.Extensions.Serializers.Microsoft" Version="4.0.0" />
+		<PackageReference Include="ArkaSoftware.Extensions.UsersManagement" Version="4.0.0" />
+		<PackageReference Include="ArkaSoftware.Extensions.Translations.Parrot" Version="4.0.0" />
+		<PackageReference Include="ArkaSoftware.Utilities.Authentication.APIAuthentication" Version="4.0.0" />
 		<PackageReference Include="ArkaSoftware.Utilities.SeriLogRegisteration" Version="1.0.0" />
-		<PackageReference Include="ArkaSoftware.Utilities.Swagger.Registration" Version="1.0.0" />
-		<PackageReference Include="Dapper" Version="2.1.66" />
-		<PackageReference Include="FluentFTP" Version="52.1.0" />
-		<PackageReference Include="MailKit" Version="4.17.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="9.0.3" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
+		<PackageReference Include="ArkaSoftware.Utilities.Swagger.Registration" Version="4.0.0" />
+		<PackageReference Include="Dapper" Version="2.1.89" />
+		<PackageReference Include="FluentFTP" Version="55.1.0" />
+		<PackageReference Include="MailKit" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="10.0.15" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.15">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.15" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.15">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.2" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
-		<PackageReference Include="Serilog" Version="4.2.0" />
-		<PackageReference Include="Scrutor" Version="6.0.1" />
-		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-		<PackageReference Include="StackExchange.Redis" Version="2.8.31" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.15" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.23.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+		<PackageReference Include="Serilog" Version="4.4.0" />
+		<PackageReference Include="Scrutor" Version="7.0.0" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
+		<PackageReference Include="StackExchange.Redis" Version="3.4.35" />
+		<PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.156.1" />
+		<PackageReference Include="AutoMapper" Version="17.0.0" />
+		<!-- Parrot 2.0 declares this obsolete DI package transitively. It is never loaded or used. -->
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" ExcludeAssets="all" PrivateAssets="all" />
+		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.15" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -86,16 +91,4 @@
 
 
 	<ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
-
-  <ItemGroup>
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.155.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.13" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="16.2.0" />
-    <!-- Parrot 2.0 declares this obsolete DI package transitively. It is never loaded or used. -->
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" ExcludeAssets="all" PrivateAssets="all" />
-  </ItemGroup>
 </Project>

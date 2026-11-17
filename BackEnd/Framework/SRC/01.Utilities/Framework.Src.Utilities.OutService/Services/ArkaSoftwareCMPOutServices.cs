@@ -1,7 +1,7 @@
-﻿using Extensions.ObjectMappers.Abstractions;
-using Extensions.Serializers.Abstractions;
-using Extensions.Translations.Abstractions;
-using Extensions.UsersManagement.Abstractions;
+﻿using ArkaSoftware.Extensions.ObjectMappers.Abstractions;
+using ArkaSoftware.Extensions.Serializers.Abstractions;
+using ArkaSoftware.Extensions.Translations.Abstractions;
+using ArkaSoftware.Extensions.UsersManagement.Abstractions;
 using Framework.Src.Utilities.OutService.ContextCarriers;
 
 namespace Framework.Src.Utilities.OutService.Services

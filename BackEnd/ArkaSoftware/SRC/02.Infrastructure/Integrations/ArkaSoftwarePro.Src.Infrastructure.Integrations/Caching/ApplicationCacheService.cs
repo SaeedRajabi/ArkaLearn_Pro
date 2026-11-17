@@ -1,11 +1,11 @@
-using System.Collections.Concurrent;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
 using ArkaSoftwarePro.Src.Core.Contracts.Caching;
 using ArkaSoftwarePro.Src.Core.Domain.Caching;
 using Microsoft.Extensions.Caching.Memory;
 using StackExchange.Redis;
+using System.Collections.Concurrent;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
 
 namespace ArkaSoftwarePro.Src.Infrastructure.Integrations.Caching;
 
@@ -127,15 +127,15 @@ public sealed class ApplicationCacheService(
             var storageKey = CacheKeyBuilder.BuildStorageKey(region, key, settings.RedisInstanceName);
             if (string.Equals(settings.Provider, CacheProviderType.Redis, StringComparison.Ordinal))
             {
-                var redis = await redisConnectionManager.GetOrConnectAsync(settings, cancellationToken);
+                IConnectionMultiplexer? redis = await redisConnectionManager.GetOrConnectAsync(settings, cancellationToken);
                 if (redis is null)
                     return default;
 
-                var value = await redis.GetDatabase().StringGetAsync(storageKey);
+                RedisValue value = await redis.GetDatabase().StringGetAsync(storageKey);
                 if (value.IsNullOrEmpty)
                     return default;
 
-                return JsonSerializer.Deserialize<T>(value!, JsonOptions);
+                return JsonSerializer.Deserialize<T>((byte[])value!, JsonOptions);
             }
 
             return memoryCache.TryGetValue(storageKey, out T? cached) ? cached : default;

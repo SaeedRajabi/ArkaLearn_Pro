@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
 
   <ItemGroup>
     <Folder Include="BasketAggregate\Events\" />
@@ -15,9 +14,10 @@
     <Folder Include="StudentAggregate\Events\" />
   </ItemGroup>
 
-
-	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.Domain\Framework.Src.Core.Domain.csproj" />
-	</ItemGroup>
-
+  <ItemGroup>
+    <Reference Include="Framework.Src.Core.Domain">
+      <HintPath>..\..\..\..\Framework\SRC\02.Core\Framework.Src.Core.Domain\bin\Debug\net10.0\Framework.Src.Core.Domain.dll</HintPath>
+    </Reference>
+  </ItemGroup>	
+	
 </Project>
