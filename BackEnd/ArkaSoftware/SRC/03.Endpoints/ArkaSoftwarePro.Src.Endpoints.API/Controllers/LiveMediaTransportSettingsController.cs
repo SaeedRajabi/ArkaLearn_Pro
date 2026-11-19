@@ -9,16 +9,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ArkaSoftwarePro.Src.Endpoints.API.Controllers;
 
+/// <summary>مرز HTTP برای تنظیمات مدیریتی، پیکربندی مرورگر و صدور توکن رسانه زنده.</summary>
+/// <remarks>احراز هویت با Cookie یا JWT انجام می‌شود؛ مجوز مدیریتی ذخیره در CommandHandler بررسی می‌شود.</remarks>
 [Route("api/Service/[controller]")]
 public class LiveMediaTransportSettingsController(
     LiveMediaTransportSettingsLoader loader,
     LiveKitAccessTokenService tokenService) : BaseController
 {
+    /// <summary>تنظیمات فرم را از QueryHandler می‌گیرد؛ رمزها با پرچم وجود رمز جایگزین می‌شوند.</summary>
     [HttpGet("Get")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
     public async Task<IActionResult> Get([FromQuery] GetLiveMediaTransportSettingsQuery query)
         => await Query<GetLiveMediaTransportSettingsQuery, LiveMediaTransportSettingsQri>(query);
 
+    /// <summary>درخواست ذخیره را به مسیر اعتبارسنجی مجوز مدیر، رمزگذاری و ثبت در مخزن می‌فرستد.</summary>
     [HttpPost("Upsert")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
     public async Task<IActionResult> Upsert([FromBody] UpsertLiveMediaTransportSettingsCommand command)
@@ -43,6 +47,11 @@ public class LiveMediaTransportSettingsController(
         });
     }
 
+    /// <summary>با تنظیمات جاری، توکن شش‌ساعته برای اتاق و هویت درخواست‌شده صادر می‌کند.</summary>
+    /// <remarks>
+    /// پیاده‌سازی فعلی پس از احراز هویت و بررسی فیلدها، عضویت اتاق یا نقش منتشرکننده را از Ticket استخراج نمی‌کند.
+    /// CanPublish ارسال‌شده توسط کلاینت مبنای grant است؛ محدودیت رابط کاربری جایگزین مجوز سرور نیست.
+    /// </remarks>
     [HttpPost("CreateLiveKitToken")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
     public async Task<IActionResult> CreateLiveKitToken(
@@ -80,10 +89,15 @@ public class LiveMediaTransportSettingsController(
     }
 }
 
+/// <summary>داده ورودی صدور توکن؛ مقادیر این مدل توسط کلاینت ارسال می‌شوند.</summary>
 public sealed class CreateLiveKitTokenRequest
 {
+    /// <summary>نام اتاق مقصد در LiveKit.</summary>
     public string RoomName { get; set; } = string.Empty;
+    /// <summary>هویت شرکت‌کننده در اتاق رسانه.</summary>
     public string Identity { get; set; } = string.Empty;
+    /// <summary>نام نمایشی اختیاری شرکت‌کننده.</summary>
     public string? DisplayName { get; set; }
+    /// <summary>در مسیر فعلی فقط false انتشار را منع می‌کند؛ null نیز به true تبدیل می‌شود.</summary>
     public bool? CanPublish { get; set; }
 }

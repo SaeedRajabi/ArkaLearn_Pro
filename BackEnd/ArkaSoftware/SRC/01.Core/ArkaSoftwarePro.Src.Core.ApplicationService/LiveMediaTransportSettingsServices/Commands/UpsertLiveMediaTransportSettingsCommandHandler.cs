@@ -12,6 +12,7 @@ using LiveMediaTransportSettingsEntity = ArkaSoftwarePro.Src.Core.Domain.LiveMed
 
 namespace ArkaSoftwarePro.Src.Core.ApplicationService.LiveMediaTransportSettingsServices.Commands;
 
+/// <summary>تنظیمات رسانه را با کنترل نقش مدیر، بررسی فیلدهای لازم و رمزگذاری اعتبارنامه‌ها ذخیره می‌کند.</summary>
 public class UpsertLiveMediaTransportSettingsCommandHandler(
     ArkaSoftwareCMPOutServices outer,
     ILiveMediaTransportSettingsCommandRepository repository,
@@ -19,6 +20,9 @@ public class UpsertLiveMediaTransportSettingsCommandHandler(
     IHttpContextAccessor httpContextAccessor)
     : CommandHandler<UpsertLiveMediaTransportSettingsCommand, string>(outer)
 {
+    /// <summary>رکورد تنظیمات را ایجاد یا به‌روز می‌کند؛ موفقیت ذخیره به معنی موفقیت اتصال رسانه نیست.</summary>
+    /// <param name="command">تنظیمات فرم؛ null برای رمز یعنی حفظ مقدار قبلی و رشته خالی یعنی پاک کردن آن.</param>
+    /// <returns>نتیجه اعتبارسنجی یا پیام ثبت موفق پس از Commit.</returns>
     public override async Task<CommandResult<string>> Handle(UpsertLiveMediaTransportSettingsCommand command)
     {
         if (!DashboardAdminRoleChecker.IsDashboardAdminRole(httpContextAccessor.HttpContext?.User))
@@ -81,6 +85,8 @@ public class UpsertLiveMediaTransportSettingsCommandHandler(
         var turnUsername = command.TurnUsername?.Trim();
         if (string.IsNullOrWhiteSpace(turnUrl) || string.IsNullOrWhiteSpace(turnUsername))
         {
+            // وارد کردن فقط آدرس TURN کافی نیست: بدون نام کاربری، آدرس و رمز نیز پاک می‌شوند.
+            // این شاخه خطای اعتبارسنجی برنمی‌گرداند؛ در نتیجه فرم همچنان می‌تواند پیام ذخیره موفق نشان دهد.
             // Half-configured TURN is worse than no TURN: clear the credential too.
             turnUrl = null;
             turnUsername = null;

@@ -8,12 +8,18 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace ArkaSoftwarePro.Src.Endpoints.API.RealTimes.Rooms;
 
+/// <summary>پایان پایدار جلسه، اعلان به کلاینت‌ها و پاک‌سازی حضور و گروه‌های SignalR را هماهنگ می‌کند.</summary>
 public sealed class MeetingLifecycleService(
     IHubContext<MeetingHub> hubContext,
     ICommandDispatcher commandDispatcher,
     IRoomCommandRepository rooms,
     IRoomSeatLivePresence presence) : IMeetingLifecycleService
 {
+    /// <summary>ابتدا پایان جلسه را ثبت، سپس اعضا را آفلاین و پس از اعلان، وضعیت درون‌حافظه‌ای اتاق را حذف می‌کند.</summary>
+    /// <param name="roomId">شناسه عددی اتاق.</param>
+    /// <param name="reason">علت پایان که همراه رویداد MeetingEnded برای کلاینت‌ها ارسال می‌شود.</param>
+    /// <param name="cancellationToken">توکن لغو ارسال رویدادها و حذف عضویت گروه‌ها.</param>
+    /// <remarks>ارسال رویداد منتظر اجرای cleanup مرورگر نمی‌ماند؛ LeaveMeeting آن ممکن است پس از پاک‌شدن رجیستری برسد.</remarks>
     public async Task EndRoomMeetingAsync(long roomId, string reason, CancellationToken cancellationToken = default)
     {
         var meetingId = roomId.ToString(System.Globalization.CultureInfo.InvariantCulture);

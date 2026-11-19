@@ -67,6 +67,7 @@ export function setRuntimeIceServers(config: RuntimeIceServerConfig): void {
 
   const username = config.turnUsername?.trim();
   const password = config.turnPassword?.trim();
+  // آدرس TURN بدون هر دو اعتبارنامه وارد RTCConfiguration نمی‌شود؛ وارد کردن URL به تنهایی کافی نیست.
   if (turnUrls.length > 0 && username && password) {
     servers.push({
       urls: turnUrls.length === 1 ? turnUrls[0] : turnUrls,
@@ -88,6 +89,7 @@ export const EXAMPLE_TURN_ICE_SERVER: RTCIceServer = {
   credential: 'your_turn_password',
 };
 
+/** آدرس‌های جداشده با کاما یا خط جدید را پاک‌سازی می‌کند؛ اعتبار شبکه یا DNS را بررسی نمی‌کند. */
 function parseCommaSeparatedUrls(raw: string | undefined | null): string[] {
   if (!raw?.trim()) return [];
   return raw
@@ -96,6 +98,7 @@ function parseCommaSeparatedUrls(raw: string | undefined | null): string[] {
     .filter(Boolean);
 }
 
+/** fallback زمان build را می‌سازد؛ تغییر NEXT_PUBLIC در سرور به تنهایی بسته مرورگر موجود را تغییر نمی‌دهد. */
 function buildTurnIceServer(): RTCIceServer | null {
   const urls = parseCommaSeparatedUrls(process.env.NEXT_PUBLIC_TURN_URL);
   const username = process.env.NEXT_PUBLIC_TURN_USERNAME?.trim();
@@ -156,6 +159,7 @@ export function getWebRtcPeerConnectionConfig(): RTCConfiguration {
 
 /** Whether a dedicated TURN server is configured (admin runtime config or env). */
 export function isTurnConfigured(): boolean {
+  // این تابع وجود تنظیم TURN را می‌سنجد، نه موفقیت تخصیص relay یا عبور ترافیک از آن.
   return getWebRtcIceServers().some((server) =>
     (Array.isArray(server.urls) ? server.urls : [server.urls]).some((url) => /^turns?:/i.test(url))
   );

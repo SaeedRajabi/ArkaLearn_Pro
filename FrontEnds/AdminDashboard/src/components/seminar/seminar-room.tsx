@@ -1062,6 +1062,8 @@ export function SeminarRoomComponent({
   useEffect(() => {
     if (isConnected && !isHubReconnecting) void refreshRoomFilesRef.current();
   }, [isConnected, isHubReconnecting]);
+  // SFU نیز به حضور SignalR وابسته است؛ قطع Hub این Hook را غیرفعال و اتصال رسانه را cleanup می‌کند.
+  // خروجی isConnected مربوط به LiveKit در این صفحه مصرف نمی‌شود؛ اتصال Hub معیار سلامت رسانه نیست.
   const { peers: liveKitPeers } = useLiveKitRoom({
     enabled: useLiveKitSfu && !!hubConnectionId && isConnected && !waitingForTeacher,
     meetingId: String(room.id),
@@ -1217,6 +1219,10 @@ export function SeminarRoomComponent({
   const endLiveSessionRef = useRef(false);
   waitingForTeacherRef.current = waitingForTeacher;
 
+  /**
+   * رسانه محلی را متوقف، خروج Hub را درخواست و نشست/مسیر کاربر را پاک می‌کند.
+   * قفل endLiveSessionRef تکرار همین تابع را مهار می‌کند؛ cleanup مستقل useWebRTC همچنان می‌تواند LeaveMeeting بفرستد.
+   */
   const finalizeRoomExit = useCallback(
     async (options?: { redirect?: boolean; kicked?: boolean }) => {
       if (endLiveSessionRef.current) return;

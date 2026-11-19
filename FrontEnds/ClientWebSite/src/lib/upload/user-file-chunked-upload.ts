@@ -249,7 +249,7 @@ export class UserFileChunkedUploadTask {
   get progress(): ChunkedUploadProgress {
     const total = Math.max(0, this.file.size);
     const uploaded = Math.min(total, this.uploadedBytes);
-    const percentage = total > 0 ? Math.min(100, Math.round((uploaded / total) * 100)) : 0;
+    const percentage = this.status === 'completed' ? 100 : total > 0 ? Math.min(99, Math.floor((uploaded / total) * 100)) : 0;
     return {
       status: this.status,
       uploadedBytes: uploaded,

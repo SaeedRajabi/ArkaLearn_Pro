@@ -34,6 +34,7 @@ export type LiveKitTokenResponse = {
   identity: string;
 };
 
+/** تفاوت پاسخ مستقیم و پوشش data/Data بک‌اند را برای نگاشت بعدی یکسان می‌کند. */
 function unwrap<T>(raw: unknown): T | null {
   if (!raw || typeof raw !== 'object') return null;
   const root = raw as Record<string, unknown>;
@@ -41,6 +42,7 @@ function unwrap<T>(raw: unknown): T | null {
   return (typeof layer === 'object' && layer !== null ? layer : root) as T;
 }
 
+/** نام‌گذاری camelCase/PascalCase را می‌پذیرد؛ فرم رمز واقعی ذخیره‌شده را دریافت نمی‌کند. */
 function mapSettings(raw: Record<string, unknown> | null): LiveMediaTransportSettingsPayload {
   const modeRaw = String(raw?.transportMode ?? raw?.TransportMode ?? 'Mesh');
   const mode: LiveMediaTransportMode =
@@ -70,11 +72,16 @@ const DEFAULTS: LiveMediaTransportSettingsPayload = {
   stunUrls: '',
 };
 
+/** داده اولیه فرم مدیر را با پیش‌فرض‌های فیلدهای غایب می‌گیرد. */
 export async function getLiveMediaTransportSettings(): Promise<LiveMediaTransportSettingsPayload> {
   const res = await apiClient.get<unknown>('/LiveMediaTransportSettings/Get');
   return { ...DEFAULTS, ...mapSettings(unwrap<Record<string, unknown>>(res.data)) };
 }
 
+/**
+ * تنظیمات فرم را ذخیره می‌کند. رمز خالی LiveKit در این کلاینت به null (حفظ رمز قبلی) تبدیل می‌شود.
+ * برای TURN، undefined فیلد را نمی‌فرستد، رشته خالی رمز را پاک می‌کند و مقدار جدید جایگزین می‌شود.
+ */
 export async function upsertLiveMediaTransportSettings(
   payload: LiveMediaTransportSettingsPayload
 ): Promise<void> {
@@ -98,6 +105,10 @@ export async function upsertLiveMediaTransportSettings(
   await apiClient.post('/LiveMediaTransportSettings/Upsert', body);
 }
 
+/**
+ * تنظیمات لازم ورود کلاس را می‌گیرد؛ رمز TURN برای استفاده ICE مرورگر در پاسخ وجود دارد.
+ * هر خطای دریافت فعلاً به Mesh بدون تنظیم runtime تبدیل می‌شود؛ این fallback ممکن است خطای API را پنهان کند.
+ */
 export async function getLiveMediaRuntimeConfig(): Promise<LiveMediaRuntimeConfig> {
   try {
     const res = await apiClient.get<unknown>('/LiveMediaTransportSettings/GetRuntimeConfig');
@@ -127,6 +138,7 @@ export async function getLiveMediaRuntimeConfig(): Promise<LiveMediaRuntimeConfi
   }
 }
 
+/** توکن ورود اتاق و آدرس اتصال SFU را از بک‌اند می‌گیرد؛ این تابع خود به SFU وصل نمی‌شود. */
 export async function createLiveKitToken(input: {
   roomName: string;
   identity: string;

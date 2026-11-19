@@ -9,7 +9,7 @@ public sealed record DownloadStorageUsage(long CapacityBytes, long UsedBytes, Da
 public interface IRemoteUploadStorage : IFileStorage
 {
     Task InitializeUploadAsync(string scope, string uploadId, CancellationToken cancellationToken = default);
-    Task PutChunkAsync(string scope, string uploadId, int index, Stream content, long expectedSize,
+    Task PutChunkAsync(string scope, string uploadId, int index, Stream content, long expectedSize, int chunkSize, long fileSize,
         CancellationToken cancellationToken = default);
     Task<int[]> GetMissingChunksAsync(string scope, string uploadId, int count, int chunkSize, long fileSize,
         CancellationToken cancellationToken = default);

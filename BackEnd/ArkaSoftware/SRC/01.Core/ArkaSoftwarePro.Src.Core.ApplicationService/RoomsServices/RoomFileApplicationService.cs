@@ -168,7 +168,7 @@ public sealed class RoomFileApplicationService(IRemoteUploadStorage fileStorage,
         {
             if (session.Aborted || session.Completed) return FileOperationResult.Conflict(new { message = "Upload session is closed." });
             await using var input = request.Chunk.OpenReadStream();
-            await fileStorage.PutChunkAsync("rooms", session.UploadId, request.ChunkIndex, input, expected, actor.CancellationToken);
+            await fileStorage.PutChunkAsync("rooms", session.UploadId, request.ChunkIndex, input, expected, session.ChunkSize, session.FileSize, actor.CancellationToken);
             session.ReceivedChunks[request.ChunkIndex] = 1;
             session.Touch();
             return FileOperationResult.Success(new { uploadId, chunkIndex = request.ChunkIndex,

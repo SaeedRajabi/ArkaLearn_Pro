@@ -20,10 +20,12 @@ public class LiveMediaTransportSettings : AggregateRoot
     /// <summary>Optional comma-separated STUN urls; public defaults apply when empty.</summary>
     public string? StunUrls { get; private set; }
 
+    /// <summary>سازنده بدون پارامتر برای بازسازی موجودیت توسط نگاشت داده.</summary>
     private LiveMediaTransportSettings()
     {
     }
 
+    /// <summary>تنظیمات اولیه را با همان قواعد نرمال‌سازی Update ایجاد می‌کند؛ رمزها باید از قبل رمزگذاری شده باشند.</summary>
     public LiveMediaTransportSettings(
         string transportMode,
         string? liveKitUrl,
@@ -37,6 +39,8 @@ public class LiveMediaTransportSettings : AggregateRoot
         Update(transportMode, liveKitUrl, liveKitApiKey, liveKitApiSecretEncrypted, turnUrl, turnUsername, turnPasswordEncrypted, stunUrls);
     }
 
+    /// <summary>مقادیر را جایگزین و رشته‌های خالی را null می‌کند؛ بررسی دسترسی مدیر و رمزگذاری در لایه کاربرد انجام می‌شود.</summary>
+    /// <remarks>این متد URL، نسخه LiveKit، صحت اعتبارنامه یا دسترس‌پذیری سرور را آزمایش نمی‌کند.</remarks>
     public void Update(
         string transportMode,
         string? liveKitUrl,
@@ -61,11 +65,13 @@ public class LiveMediaTransportSettings : AggregateRoot
         StunUrls = string.IsNullOrWhiteSpace(stunUrls) ? null : stunUrls.Trim();
     }
 
+    /// <summary>وجود فیلدهای TURN ذخیره‌شده را می‌سنجد؛ با سلامت واقعی relay یکسان نیست.</summary>
     public bool IsTurnReady =>
         !string.IsNullOrWhiteSpace(TurnUrl) &&
         !string.IsNullOrWhiteSpace(TurnUsername) &&
         !string.IsNullOrWhiteSpace(TurnPasswordEncrypted);
 
+    /// <summary>LiveKit را بدون حساسیت به حروف تشخیص می‌دهد؛ هر مقدار دیگر، از جمله مقدار ناشناخته، Mesh می‌شود.</summary>
     public static string NormalizeMode(string? mode)
     {
         var value = (mode ?? string.Empty).Trim();
@@ -74,5 +80,6 @@ public class LiveMediaTransportSettings : AggregateRoot
             : ModeMesh;
     }
 
+    /// <summary>فقط انتخاب حالت SFU را نشان می‌دهد، مستقل از کامل بودن فیلدهای اتصال.</summary>
     public bool IsLiveKit => string.Equals(TransportMode, ModeLiveKit, StringComparison.OrdinalIgnoreCase);
 }

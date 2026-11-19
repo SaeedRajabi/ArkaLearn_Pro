@@ -17,6 +17,8 @@ using Framework.Src.Core.RequestResponse.Common;
 
 namespace ArkaSoftwarePro.Src.Endpoints.API.Hubs
 {
+    /// <summary>مدیریت حضور، نقش‌ها، پیام‌ها و سیگنالینگ کلاس؛ رسانه Mesh توسط اتصال همتای مرورگر منتقل می‌شود.</summary>
+    /// <remarks>رجیستری‌های static متعلق به همین فرایند API هستند و با راه‌اندازی مجدد آن از بین می‌روند.</remarks>
     public class MeetingHub(
         IServiceProvider serviceProvider,
         ArkaSoftwarePro.Src.Core.Contracts.Rooms.RoomRepositoriesContract.Commands.IRoomCommandRepository roomRepository,
@@ -43,6 +45,8 @@ namespace ArkaSoftwarePro.Src.Endpoints.API.Hubs
                 .Select(x => (x.Key, TryGetRoomSeatJoinContext(meetingId, x.Value.UserName, out _, out var seat)
                     ? (long?)seat : null)).ToList();
 
+        /// <summary>وضعیت درون‌حافظه‌ای جلسه و عضویت اتصال‌های آن را حذف می‌کند.</summary>
+        /// <remarks>پس از این عملیات، LeaveMeeting اتصال‌های قبلی دیگر عضویت معتبری در رجیستری پیدا نمی‌کند.</remarks>
         public static void ClearMeetingState(string meetingId)
         {
             MeetingParticipants.TryRemove(meetingId, out _);
@@ -795,6 +799,15 @@ namespace ArkaSoftwarePro.Src.Endpoints.API.Hubs
             }
         }
 
+        /// <summary>عضویت اتصال فراخواننده را حذف کرده و خروج را به مسیر پاک‌سازی و مدیریت خروج میزبان می‌سپارد.</summary>
+        /// <param name="meetingId">شناسه جلسه‌ای که باید با رجیستری همین اتصال تطبیق داشته باشد.</param>
+        /// <param name="userName">پارامتر سازگاری کلاینت؛ نام معتبر از رجیستری گرفته می‌شود.</param>
+        /// <param name="isHostTeacher">پارامتر سازگاری کلاینت؛ نقش معتبر از رجیستری گرفته می‌شود.</param>
+        /// <exception cref="HubException">اتصال عضو نیست یا شناسه جلسه با عضویت فعلی تطبیق ندارد.</exception>
+        /// <remarks>
+        /// این متد فعلاً در برابر خروج تکراری idempotent نیست: خروج موفق قبلی، قطع اتصال یا ClearMeetingState
+        /// می‌تواند باعث خطای خروج بعدی شود. بررسی اولیه عضویت پیش از ورود به قفل هماهنگ‌کننده است.
+        /// </remarks>
         public async Task LeaveMeeting(string meetingId, string userName, bool isHostTeacher)
         {
             if (!ConnectionRegistry.TryGetValue(Context.ConnectionId, out var info) || info.MeetingId != meetingId)
@@ -1534,6 +1547,8 @@ namespace ArkaSoftwarePro.Src.Endpoints.API.Hubs
             await Clients.Group(meetingId).SendAsync("HandLowered", targetConnectionId);
         }
 
+        /// <summary>پس از بررسی عضویت و مجوز مدیریت، پایان جلسه را زیر قفل اتاق به سرویس چرخه جلسه واگذار می‌کند.</summary>
+        /// <remarks>سرویس پایان جلسه رجیستری اعضا را پاک می‌کند؛ پیام خروج بعدی کلاینت ممکن است دیگر عضوی پیدا نکند.</remarks>
         public async Task EndMeeting(string meetingId)
         {
             RequireMainRoomMember(meetingId);
@@ -1544,6 +1559,8 @@ namespace ArkaSoftwarePro.Src.Endpoints.API.Hubs
             await meetingLifecycle.EndRoomMeetingAsync(long.Parse(meetingId), "host_ended");
         }
 
+        /// <summary>عضویت اتصال قطع‌شده را در صورت وجود پاک می‌کند و برای خروج میزبان امکان بازگشت را لحاظ می‌کند.</summary>
+        /// <remarks>برخلاف LeaveMeeting، نبود عضویت در این مسیر خطا نیست.</remarks>
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
             try
