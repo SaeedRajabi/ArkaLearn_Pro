@@ -6,8 +6,8 @@ using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Commands.RegisterDeskt
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Commands.ReportDesktopPlaybackTelemetry;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Commands.RequestDesktopLicense;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Commands.RequestOfflinePlaybackGrant;
-using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Commands.RevokeDesktopLicenseDevice;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Commands.ResetDesktopLicenseDevices;
+using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Commands.RevokeDesktopLicenseDevice;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Commands.SetDesktopLicenseLessonAccess;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Commands.UpdateCourseDesktopWatermarkPolicy;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Commands.UpdateDesktopLicenseLimits;
@@ -15,9 +15,6 @@ using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Commands.UpsertTeacher
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetCourseDesktopAnalytics;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetCourseDesktopLicenses;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetCourseDesktopWatermarkPolicy;
-using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetDesktopWatermarkForPlayback;
-using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetTeacherStudentSatisfaction;
-using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.ListDesktopLicenseDevices;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetDesktopAccessBlocks;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetDesktopAccessStatus;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetDesktopCourseCurriculum;
@@ -25,7 +22,10 @@ using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetDesktopDevi
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetDesktopEncryptedMedia;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetDesktopLicensedCourses;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetDesktopPlaybackPackage;
+using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetDesktopWatermarkForPlayback;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetStudentDesktopLicenses;
+using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.GetTeacherStudentSatisfaction;
+using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.ListDesktopLicenseDevices;
 using ArkaSoftwarePro.Src.Core.RequestResponse.DesktopDrm.Queries.ValidateDesktopLicense;
 using Framework.Src.Endpoints.Web.Controllers;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -36,6 +36,10 @@ using System.Security.Claims;
 
 namespace ArkaSoftwarePro.Src.Endpoints.API.Controllers;
 
+
+/// <summary>
+/// 
+/// </summary>
 [Route("api/Service/[controller]")]
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + CookieAuthenticationDefaults.AuthenticationScheme)]
 public class DesktopDrmController : BaseController

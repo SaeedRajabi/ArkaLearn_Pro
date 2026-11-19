@@ -8,7 +8,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArkaSoftwarePro.Src.Endpoints.API.Controllers;
-
+/// <summary>
+/// 
+/// </summary>
+/// <param name="loader"></param>
+/// <param name="tokenService"></param>
 [Route("api/Service/[controller]")]
 public class LiveMediaTransportSettingsController(
     LiveMediaTransportSettingsLoader loader,

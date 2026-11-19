@@ -15,8 +15,9 @@
 		<PackageReference Include="ArkaSoftware.Extensions.Serializers.Microsoft" Version="4.0.0" />
 		<PackageReference Include="ArkaSoftware.Extensions.UsersManagement" Version="4.0.0" />
 		<PackageReference Include="ArkaSoftware.Extensions.Translations.Parrot" Version="4.0.0" />
+		<PackageReference Include="ArkaSoftware.Extensions.UsersManagement.Abstractions" Version="4.0.0" />
 		<PackageReference Include="ArkaSoftware.Utilities.Authentication.APIAuthentication" Version="4.0.0" />
-		<PackageReference Include="ArkaSoftware.Utilities.SeriLogRegisteration" Version="1.0.0" />
+		<PackageReference Include="ArkaSoftware.Utilities.SerilogRegistration" Version="4.0.0" />
 		<PackageReference Include="ArkaSoftware.Utilities.Swagger.Registration" Version="4.0.0" />
 		<PackageReference Include="Dapper" Version="2.1.89" />
 		<PackageReference Include="FluentFTP" Version="55.1.0" />

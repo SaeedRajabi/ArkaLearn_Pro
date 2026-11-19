@@ -1,5 +1,5 @@
-using ArkaSoftware.Utilities.SeriLogRegisteration.Extensions;
-using ArkaSoftware.Utilities.SeriLogRegisteration.Extensions.DependencyInjection;
+using ArkaSoftware.Utilities.SerilogRegistration.Extensions;
+using ArkaSoftware.Utilities.SerilogRegistration.Extensions.DI;
 using ArkaSoftwarePro.Src.Endpoints.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 SerilogExtensions.RunWithSerilogExceptionHandling(() =>
 {
     var applicationBuilder = WebApplication.CreateBuilder(args);
-    var app = applicationBuilder.AddZaminSerilog(options =>
+    var app = applicationBuilder.AddArkaSoftwareSerilog(options =>
     {
         options.ApplicationName = applicationBuilder.Configuration.GetValue<string>("ApplicationName")!;
         options.ServiceId = applicationBuilder.Configuration.GetValue<string>("ServiceId")!;

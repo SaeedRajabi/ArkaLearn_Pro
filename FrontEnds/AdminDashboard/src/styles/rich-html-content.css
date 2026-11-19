@@ -10,7 +10,6 @@
   border-radius: calc(var(--radius) - 2px);
   border: 1px solid hsl(var(--border));
 }
-
 .rich-html-content thead th {
   background: hsl(var(--muted));
 }
