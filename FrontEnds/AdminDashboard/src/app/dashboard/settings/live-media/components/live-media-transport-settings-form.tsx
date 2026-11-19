@@ -36,6 +36,10 @@ const DEFAULT_FORM: LiveMediaTransportSettingsPayload = {
   stunUrls: '',
 };
 
+/**
+ * فرم انتخاب Mesh/SFU و اعتبارنامه‌های رسانه. دریافت مجدد پس از ذخیره، مقادیر نرمال‌شده سرور را نشان می‌دهد.
+ * پیام ذخیره موفق فقط ثبت تنظیمات را تأیید می‌کند؛ این فرم تست WebSocket، ICE یا relay انجام نمی‌دهد.
+ */
 export function LiveMediaTransportSettingsForm() {
   const { t } = useLanguage();
   const { toast } = useToast();
@@ -53,6 +57,7 @@ export function LiveMediaTransportSettingsForm() {
       .finally(() => setLoading(false));
   }, [t, toast]);
 
+  /** ذخیره تنظیمات و تازه‌سازی وضعیت وجود رمزها، بدون نمایش مجدد متن رمز در ورودی‌ها. */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);

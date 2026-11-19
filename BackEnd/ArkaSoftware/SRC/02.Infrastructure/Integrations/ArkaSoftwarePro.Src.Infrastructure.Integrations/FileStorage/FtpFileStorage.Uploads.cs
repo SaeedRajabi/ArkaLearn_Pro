@@ -31,10 +31,12 @@ public sealed partial class FtpFileStorage
             throw new IOException("Could not update download-host upload activity.");
     }
 
-    public async Task PutChunkAsync(string scope, string uploadId, int index, Stream content, long expectedSize,
+    public async Task PutChunkAsync(string scope, string uploadId, int index, Stream content, long expectedSize, int chunkSize, long fileSize,
         CancellationToken cancellationToken = default)
     {
-        if (index < 0 || expectedSize <= 0) throw new ArgumentOutOfRangeException(nameof(index));
+        if (index < 0 || expectedSize <= 0 || chunkSize <= 0 || fileSize <= 0 ||
+            (long)index * chunkSize >= fileSize || expectedSize != Math.Min(chunkSize, fileSize - (long)index * chunkSize))
+            throw new ArgumentOutOfRangeException(nameof(index));
         var directory = ToRemotePath(UploadKey(scope, uploadId));
         var target = directory + "/" + PartName(index);
         var temporary = target + "." + Guid.NewGuid().ToString("N") + ".uploading";
@@ -42,12 +44,37 @@ public sealed partial class FtpFileStorage
         try
         {
             await client.CreateDirectory(directory, true, cancellationToken);
+            // A retry can replace an already incorporated part. Invalidate the cached
+            // assembly before changing that part so it can never contain stale bytes.
+            var assembled = directory + "/assembled.uploading";
+            var assembledSize = await client.GetFileSize(assembled, -1, cancellationToken);
+            if (assembledSize > (long)index * chunkSize)
+            {
+                await ClearAssemblyCheckpointAsync(client, directory, cancellationToken);
+                await client.DeleteFile(assembled, cancellationToken);
+            }
             var status = await client.UploadStream(content, temporary, FtpRemoteExists.Overwrite, token: cancellationToken);
             if (status != FtpStatus.Success || await client.GetFileSize(temporary, -1, cancellationToken) != expectedSize)
                 throw new IOException("The download-host chunk did not pass size verification.");
             if (!await client.MoveFile(temporary, target, FtpRemoteExists.Overwrite, cancellationToken))
                 throw new IOException("Could not finalize the download-host chunk.");
             await TouchUploadAsync(client, directory, cancellationToken);
+            try
+            {
+                await AppendAvailableChunksAsync(client, directory, chunkSize, fileSize, cancellationToken);
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
+            catch (Exception ex)
+            {
+                // Parts remain authoritative. A later chunk or completion can rebuild.
+                logger.LogWarning(ex, "Could not incrementally assemble upload {UploadId}", uploadId);
+                try
+                {
+                    await ClearAssemblyCheckpointAsync(client, directory, CancellationToken.None);
+                    await client.DeleteFile(assembled, CancellationToken.None);
+                }
+                catch { }
+            }
         }
         catch
         {
@@ -55,6 +82,77 @@ public sealed partial class FtpFileStorage
             catch { }
             throw;
         }
+    }
+
+    // Called under the upload session gate. Keep individual parts until finalization
+    // so interrupted transfers and out-of-order arrivals can always be recovered.
+    private async Task AppendAvailableChunksAsync(AsyncFtpClient writer, string directory, int chunkSize,
+        long fileSize, CancellationToken token)
+    {
+        var path = directory + "/assembled.uploading";
+        var size = Math.Max(0, await writer.GetFileSize(path, -1, token));
+        var committed = await ReadAssemblyCheckpointAsync(writer, directory, token);
+        if (size != committed || size > fileSize || (size != fileSize && size % chunkSize != 0))
+        {
+            await ClearAssemblyCheckpointAsync(writer, directory, token);
+            if (size > 0) await writer.DeleteFile(path, token);
+            size = 0;
+        }
+        if (size == fileSize) return;
+
+        var listing = await writer.GetListing(directory, FtpListOption.Size, token);
+        var parts = listing.Where(item => item.Type == FtpObjectType.File)
+            .ToDictionary(item => item.Name, item => item.Size, StringComparer.Ordinal);
+        var index = (int)(size / chunkSize);
+        await using var reader = await ConnectAsync(token);
+        while (size < fileSize && parts.TryGetValue(PartName(index), out var partSize)
+               && partSize == Math.Min(chunkSize, fileSize - size))
+        {
+            await using (var input = await reader.OpenRead(directory + "/" + PartName(index), token: token))
+            await using (var output = size == 0
+                ? await writer.OpenWrite(path, token: token)
+                : await writer.OpenAppend(path, token: token))
+            {
+                var buffer = new byte[64 * 1024];
+                long copied = 0;
+                int read;
+                while ((read = await input.ReadAsync(buffer, token)) != 0)
+                {
+                    copied += read;
+                    if (copied > partSize) throw new IOException("Remote chunk exceeds its declared size.");
+                    await output.WriteAsync(buffer.AsMemory(0, read), token);
+                }
+                if (copied != partSize) throw new IOException("Remote chunk is truncated.");
+            }
+            var readReply = await reader.GetReply(token);
+            var writeReply = await writer.GetReply(token);
+            if (!readReply.Success || !writeReply.Success)
+                throw new IOException("Download host did not confirm the chunk transfer.");
+            size += partSize;
+            if (await writer.GetFileSize(path, -1, token) != size)
+                throw new IOException("Incremental assembly did not pass size verification.");
+            await using var checkpoint = new MemoryStream(Encoding.ASCII.GetBytes(size.ToString(CultureInfo.InvariantCulture)));
+            if (await writer.UploadStream(checkpoint, directory + "/assembly.size", FtpRemoteExists.Overwrite, token: token) != FtpStatus.Success)
+                throw new IOException("Could not commit incremental assembly checkpoint.");
+            index++;
+        }
+    }
+
+    private static async Task ClearAssemblyCheckpointAsync(AsyncFtpClient client, string directory, CancellationToken token)
+    {
+        var path = directory + "/assembly.size";
+        if (await client.FileExists(path, token)) await client.DeleteFile(path, token);
+    }
+
+    private static async Task<long> ReadAssemblyCheckpointAsync(AsyncFtpClient client, string directory, CancellationToken token)
+    {
+        var path = directory + "/assembly.size";
+        var length = await client.GetFileSize(path, -1, token);
+        if (length is <= 0 or > 20) return 0;
+        using var content = new MemoryStream();
+        if (!await client.DownloadStream(content, path, token: token, stopPosition: 20)) return 0;
+        return long.TryParse(Encoding.ASCII.GetString(content.ToArray()), NumberStyles.None,
+            CultureInfo.InvariantCulture, out var size) && size > 0 ? size : 0;
     }
 
     internal static int[] FindMissingChunks(IReadOnlyDictionary<string, long> parts, int count, int chunkSize, long fileSize)
@@ -85,6 +183,16 @@ public sealed partial class FtpFileStorage
         await using var writer = await ConnectAsync(cancellationToken);
         await writer.CreateDirectory(target[..target.LastIndexOf('/')], true, cancellationToken);
         await TouchUploadAsync(reader, directory, cancellationToken);
+        // Most uploads are already assembled as chunks arrive; completion then only
+        // needs a verified server-side rename.
+        if (await writer.GetFileSize(temporary, -1, cancellationToken) == fileSize &&
+            await ReadAssemblyCheckpointAsync(writer, directory, cancellationToken) == fileSize)
+        {
+            if (!await writer.MoveFile(temporary, target, FtpRemoteExists.Overwrite, cancellationToken))
+                throw new IOException("Could not finalize the download-host file.");
+            return;
+        }
+        await ClearAssemblyCheckpointAsync(writer, directory, cancellationToken);
         long copied = 0;
         try
         {

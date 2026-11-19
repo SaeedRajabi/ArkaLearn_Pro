@@ -14,6 +14,7 @@ import {
 import type { PeerConnectionState } from '@/hooks/use-webrtc';
 import { createLiveKitToken } from '@/services/live-media-transport-settings-api.service';
 
+/** ورودی پل رسانه SFU؛ identity از اتصال SignalR می‌آید و با اتصال مجدد آن تغییر می‌کند. */
 type UseLiveKitRoomArgs = {
   enabled: boolean;
   meetingId: string;
@@ -25,6 +26,7 @@ type UseLiveKitRoomArgs = {
   screenStream: MediaStream | null;
 };
 
+/** متادیتای نمایشی شرکت‌کننده را می‌خواند؛ JSON نامعتبر مانع نمایش سایر شرکت‌کنندگان نمی‌شود. */
 function parseMeta(participant: Participant): { userId?: string; avatar?: string } {
   try {
     const raw = participant.metadata;
@@ -36,6 +38,7 @@ function parseMeta(participant: Participant): { userId?: string; avatar?: string
   }
 }
 
+/** قالب مشترک نمایش همتا را برای SFU می‌سازد؛ RTCPeerConnection در این حالت در اختیار SDK است. */
 function emptyPeer(
   connectionId: string,
   userName: string,
@@ -53,6 +56,12 @@ function emptyPeer(
   };
 }
 
+/**
+ * اتصال به LiveKit، نگاشت trackهای دریافتی به مدل نمایش کلاس و انتشار رسانه محلی.
+ * کنترل حضور و مجوزهای رابط همچنان از SignalR می‌آید؛ این Hook جایگزین MeetingHub نیست.
+ * isConnected فعلی فقط پس از connect و cleanup/خطای اولیه تنظیم می‌شود و وضعیت رویدادهای
+ * Reconnecting، Reconnected و Disconnected سرور LiveKit را دنبال نمی‌کند.
+ */
 export function useLiveKitRoom({
   enabled,
   meetingId,
@@ -71,6 +80,7 @@ export function useLiveKitRoom({
   const publishedScreenRef = useRef<LocalTrack | null>(null);
   const publishedScreenAudioRef = useRef<LocalTrack | null>(null);
 
+  /** trackهای زنده را جمع می‌کند؛ صدای دریافتی در stream اصلی و تصویر اشتراک صفحه جدا قرار می‌گیرد. */
   const upsertPeerTracks = useCallback((participant: Participant) => {
     const connectionId = participant.identity;
     if (!connectionId) return;
@@ -126,6 +136,7 @@ export function useLiveKitRoom({
     });
   }, []);
 
+  /** شرکت‌کننده خارج‌شده را از فهرست قابل نمایش حذف می‌کند. */
   const removePeer = useCallback((connectionId: string) => {
     setPeers((prev) => {
       if (!prev[connectionId]) return prev;
@@ -142,6 +153,7 @@ export function useLiveKitRoom({
       return;
     }
 
+    // هر تغییر هویت یا وابستگی این effect، اتاق قبلی را می‌بندد و توکن/اتصال جدید می‌سازد.
     let cancelled = false;
     const roomOptions: RoomOptions = {
       adaptiveStream: true,
@@ -192,6 +204,8 @@ export function useLiveKitRoom({
           console.error('[LiveKit] token endpoint returned empty credentials');
           return;
         }
+        // آدرس مستقیماً از API می‌آید؛ مسیر پروتکل سیگنالینگ را SDK به آن اضافه می‌کند.
+        // تنظیمات TURN مربوط به Mesh به این فراخوانی تزریق نشده‌اند؛ ICE این اتصال را LiveKit مدیریت می‌کند.
         await room.connect(tokenRes.url, tokenRes.token);
         if (cancelled) {
           await room.disconnect();
@@ -204,6 +218,7 @@ export function useLiveKitRoom({
         setIsConnected(true);
         room.remoteParticipants.forEach((p) => upsertPeerTracks(p));
       } catch (err) {
+        // این لایه برای شکست اتصال اولیه دکمه retry یا تلاش مجدد مستقل ندارد؛ خطا فقط ثبت می‌شود.
         console.error('[LiveKit] connect failed', err);
         setIsConnected(false);
       }
@@ -235,6 +250,7 @@ export function useLiveKitRoom({
   ]);
 
   // Publish / unpublish camera + mic from localStream
+  // canPublish فقط gate محلی است. false شدن آن در این effect باعث return می‌شود، نه لغو انتشار trackهای قبلی.
   useEffect(() => {
     const room = roomRef.current;
     if (!enabled || !room || !isConnected || !canPublish) return;
@@ -280,6 +296,7 @@ export function useLiveKitRoom({
   }, [enabled, isConnected, canPublish, localStream]);
 
   // Publish / unpublish screen share
+  // تصویر و صدای اشتراک صفحه publicationهای جدا با source مشخص دارند و مستقل نگهداری می‌شوند.
   useEffect(() => {
     const room = roomRef.current;
     if (!enabled || !room || !isConnected || !canPublish) return;

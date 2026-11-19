@@ -3,6 +3,7 @@ import * as signalR from '@microsoft/signalr';
 const HUB_INVOKE_MAX_ATTEMPTS = 4;
 const HUB_INVOKE_RETRY_MS = 350;
 
+/** خطاهای متنی منتخب شبکه را برای retry تشخیص می‌دهد؛ این نام به معنی بی‌اهمیت بودن علت قطع نیست. */
 export function isBenignSignalTransportError(message: string): boolean {
   const m = message.toLowerCase();
   return (
@@ -18,6 +19,7 @@ export function isBenignSignalTransportError(message: string): boolean {
   );
 }
 
+/** فاصله تلاش اتصال مجدد را تا ۳۰ ثانیه افزایش می‌دهد؛ چون null برنمی‌گرداند سقف تعداد تلاش خودکار ندارد. */
 export function createMeetingHubReconnectDelays(): signalR.IRetryPolicy {
   return {
     nextRetryDelayInMilliseconds(retryContext) {
@@ -37,10 +39,15 @@ type InvokeChain = {
   tail: Promise<void>;
 };
 
+/** صف وعده‌ها را برای اجرای مرتب درخواست‌های یک Hook مقداردهی می‌کند. */
 export function createHubInvokeChain(): InvokeChain {
   return { tail: Promise.resolve() };
 }
 
+/**
+ * فراخوانی‌ها را پشت سر هم اجرا می‌کند و خطاهای منتخب انتقال را حداکثر چهار بار امتحان می‌کند.
+ * خطای درخواست قبلی صف را مسدود نمی‌کند. retry تضمین اجرای دقیقاً یک‌باره متد در سرور نیست.
+ */
 export async function enqueueHubInvoke(
   chain: InvokeChain,
   getConnection: () => signalR.HubConnection | null,
@@ -83,10 +90,15 @@ export async function enqueueHubInvoke(
   return next;
 }
 
+/** مکث غیرمسدودکننده میان تلاش‌های ارسال. */
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+/**
+ * تا رویداد اتصال مجدد یا پایان مهلت منتظر می‌ماند؛ خودش connection.start را فراخوانی نمی‌کند.
+ * ثبت callback از onreconnected است؛ off('reconnected') پایین مربوط به پیام Hub است و همان callback را حذف نمی‌کند.
+ */
 function waitForHubConnected(connection: signalR.HubConnection, timeoutMs: number): Promise<void> {
   if (connection.state === signalR.HubConnectionState.Connected) {
     return Promise.resolve();

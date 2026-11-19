@@ -396,6 +396,11 @@ function parseRoomJoinInitialized(raw: unknown): RoomJoinInitializedPayload {
   };
 }
 
+/**
+ * چرخه حضور SignalR، پیام‌ها، مجوزهای کلاس و اتصال‌های رسانه Mesh را مدیریت می‌کند.
+ * user=null شروع اتصال را تا آماده شدن تنظیمات یا ورود کاربر به تعویق می‌اندازد.
+ * در حالت SFU نیز بخش حضور فعال می‌ماند؛ isConnected این Hook وضعیت ورود Hub است، نه سلامت LiveKit.
+ */
 export function useWebRTC(
   meetingId: string,
   user: SeminarUser | null,
@@ -926,6 +931,7 @@ export function useWebRTC(
     }
   }, [invokeHub]);
 
+  /** ICE همتای قطع‌شده را restart می‌کند؛ فقط آغازگر تعیین‌شده offer جدید می‌فرستد و TURN جدیدی ایجاد نمی‌شود. */
   const attemptIceRecovery = useCallback(
     async (connectionId: string, pc: RTCPeerConnection) => {
       if (!isUsablePeerConnection(pc)) return;
@@ -984,6 +990,10 @@ export function useWebRTC(
     ]
   );
 
+  /**
+   * رویدادهای ICE/SDP هر همتای Mesh را متصل می‌کند. reconnecting این بخش مخصوص رسانه همان همتاست؛
+   * با isHubReconnecting که قطع کانال کنترل SignalR و نمایش لایه تمام‌صفحه را نشان می‌دهد متفاوت است.
+   */
   const attachPeerConnectionSignaling = useCallback(
     (connectionId: string, pc: RTCPeerConnection, isInitiator: boolean) => {
       peerInitiatorRef.current.set(connectionId, isInitiator);
@@ -1860,6 +1870,7 @@ export function useWebRTC(
       }
     };
 
+    /** اتصال transport به تنهایی کافی نیست؛ ورود به اتاق باید تمام شود تا لایه اتصال مجدد برداشته شود. */
     const finishConnection = async (reconnected: boolean) => {
       await joinCurrentConnection();
       if (cancelled) return;
@@ -1885,6 +1896,7 @@ export function useWebRTC(
       extraHandlersRef?.current?.onHubConnectionFailed?.();
     };
 
+    // این رویداد از کانال SignalR می‌آید؛ شکست ICE همتا به تنهایی این callback را اجرا نمی‌کند.
     connection.onreconnecting(() => {
       setIsConnected(false);
       setIsHubReconnecting(true);
@@ -1987,6 +1999,8 @@ export function useWebRTC(
       void (async () => {
         if (conn?.state === signalR.HubConnectionState.Connected && user) {
           try {
+            // cleanup مستقل از خروج صریح اجرا می‌شود؛ ممکن است عضویت قبلاً حذف شده باشد.
+            // catch پایین فقط خطای کلاینت را می‌پوشاند و جلوی HubException سمت سرور را نمی‌گیرد.
             await conn.invoke('LeaveMeeting', meetingId, leaveDisplayName, false);
           } catch {
             /* ignore */
@@ -2025,6 +2039,7 @@ export function useWebRTC(
     [meetingId, user, isConnected, waitingForTeacher]
   );
 
+  /** درخواست خروج صریح؛ اتصال Hub را متوقف نمی‌کند و مانع ارسال خروج دوم توسط cleanup نمی‌شود. */
   const leaveLiveMeeting = useCallback(async () => {
     const conn = hubConnectionRef.current;
     if (!conn || !user) return;

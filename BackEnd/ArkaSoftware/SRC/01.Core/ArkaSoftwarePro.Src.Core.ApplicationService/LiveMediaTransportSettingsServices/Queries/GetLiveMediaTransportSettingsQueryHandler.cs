@@ -8,11 +8,14 @@ using ResponseQri = ArkaSoftwarePro.Src.Core.RequestResponse.LiveMediaTransportS
 
 namespace ArkaSoftwarePro.Src.Core.ApplicationService.LiveMediaTransportSettingsServices.Queries;
 
+/// <summary>نمای قابل نمایش تنظیمات را بدون بازگرداندن محتوای رمزهای ذخیره‌شده می‌سازد.</summary>
 public class GetLiveMediaTransportSettingsQueryHandler(
     ArkaSoftwareCMPOutServices outer,
     ILiveMediaTransportSettingsQueryRepository repository)
     : QueryHandler<GetLiveMediaTransportSettingsQuery, ResponseQri>(outer)
 {
+    /// <summary>رکورد جاری را می‌خواند؛ نبود جدول با پیام مشخص SQL یا نبود رکورد، پیش‌فرض Mesh می‌دهد.</summary>
+    /// <remarks>پرچم وجود رمز فقط وجود متن رمزگذاری‌شده را نشان می‌دهد و صحت رمز یا اتصال را تأیید نمی‌کند.</remarks>
     public override async Task<QueryResult<ResponseQri>> Handle(GetLiveMediaTransportSettingsQuery request)
     {
         ContractQri? row = null;
